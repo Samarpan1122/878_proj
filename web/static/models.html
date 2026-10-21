@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GeoCrash — Model scores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="models.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<!-- THESIS: Make model gains and limitations inspectable within each declared experiment.
+OWN-WORLD: Preserve Cobalt Workbench cool paper, native controls, ruled tables and measured typography.
+STORY: Choose frozen or monthly Omaha evaluation, compare matched metrics, inspect class support and provenance.
+FIRST VIEWPORT: Existing header followed by Omaha controls and evidence; neural comparison and historical results follow.
+FORM: Local extension of the established research document; no visual-world replacement or concept seed.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
+<header class="head">
+  <a class="back" href="/">← Map</a> · <a class="back" href="eda.html">Explore data →</a>
+  <h1>Models</h1>
+  <p>Model evidence, including weak results. Each experiment states its data and evaluation protocol. Omaha and neural comparisons have their own controls; the historical leaderboard below switches between a future test and a more optimistic random split.</p>
+  <nav class="toc"><a href="#advanced-models">Neural &amp; expert models</a><a href="#m-cls">Classification</a><a href="#m-reg">Regression</a><a href="#m-ts">Time series</a><a href="#m-clu">Clustering</a><a href="#m-omaha">Omaha study</a><a href="safety.html#model-evidence">Safety model comparison</a></nav>
+</header>
+<div class="advanced-container"><section id="m-omaha" aria-labelledby="metro-title">
+  <h2 id="metro-title">Omaha study · corrected comparisons</h2>
+  <p class="lead">Four traffic-impact classes and recorded incident duration. Compare a frozen model with validation-selected challengers, or test monthly updates using only incidents that have already ended.</p>
+  <div class="advanced-controls"><label>Evaluation<select id="metro-protocol"><option value="temporal">Frozen · later incidents</option><option value="spatial_future">Frozen · later incidents in unseen areas</option><option value="online">Monthly updates · later incidents</option></select></label><label id="metro-objective-label">Duration selection objective<select id="metro-objective"><option value="MAE_min">Error in minutes</option><option value="MSE_log">Error in log minutes</option></select></label><button type="button" id="metro-refresh">Refresh Omaha evidence</button></div>
+  <p id="metro-status" role="status" class="lead">Loading Omaha evidence…</p>
+  <p class="metro-scroll-hint">Scroll tables sideways to see all metrics.</p>
+  <div id="metro-results"></div>
+  <details class="metro-audit"><summary>Data drift, rare classes and evaluation corrections</summary><div id="metro-audit"></div></details>
+  <p class="advanced-note">These are development experiments on a previously examined, noncommercial research dataset. Severity describes reported traffic impact, not injury. <a href="#m-omaha-archive">Archived original scores and limitations</a>.</p>
+</section></div>
+<div class="advanced-container"><section id="advanced-models" aria-labelledby="advanced-title">
+  <h2 id="advanced-title">Neural networks &amp; mixture of experts</h2>
+  <p class="lead">A matched comparison of boosted trees, a residual neural network, a three-expert network and a validation-selected blend. All remain research-only models under the original dataset’s noncommercial terms.</p>
+  <div class="advanced-controls"><label>Test protocol<select id="advanced-protocol"><option value="temporal">Later incidents</option><option value="spatial_future">Later incidents in unseen areas</option></select></label><label>Reporting-source feature<select id="advanced-source"><option value="false">Excluded</option><option value="true">Included</option></select></label><button id="advanced-refresh" type="button">Refresh comparison</button></div>
+  <p id="advanced-status" role="status" class="lead">Loading advanced model evidence…</p><div id="advanced-results"></div>
+  <p class="advanced-note">Severity means reported traffic impact, not bodily injury. Duration is evaluated on the same held-out incidents. These scores use different features and splits from the historical leaderboard below; compare models within this table.</p>
+  <details><summary>Calibration, split boundaries and model details</summary><pre id="advanced-details"></pre></details>
+</section></div>
+<div class="advanced-container"><h2>Historical leaderboard</h2><p class="lead">These controls apply to the original results below.</p><div class="seg" id="proto" role="group" aria-label="Historical leaderboard protocol"><button type="button" data-p="future" aria-pressed="true">Future test</button><button type="button" data-p="random" aria-pressed="false">Random split</button></div></div>
+<main id="main"><p class="note">Loading…</p></main>
+<script src="plots.js"></script>
+<script src="models.js"></script>
+<script src="advanced-models.js"></script>
+<script src="metro-models.js"></script>
+</body>
+</html>

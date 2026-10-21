@@ -1,0 +1,17 @@
+To: founders@autotechvc.com
+Thread: 1a0f3446bfde4a99
+Attachment: /Users/smohanty13/Downloads/GeoCrash-investor-replies-2026-09-30/GeoCrash-Autotech-investment-brief.pdf
+
+Hi Autotech team,
+
+I've attached a short deck for your investment review. GeoCrash helps transportation teams build a reviewable shortlist of roads for engineering investigation, connecting each result to its crash records, exposure assumptions and source data.
+
+The deployed prototype includes 153,273 federal fatal-crash records and a Nebraska engine covering 11,048 road segments. The commercial question is whether it can fit existing engineering workflows and make a paid agency review more useful and reproducible.
+
+I'm exploring pre-seed funding for a first pilot, with no amount set. The deck lays out the data-rights work, validation milestones and current limitations.
+
+Would this fit Autotech's early-stage investment process?
+
+Working product: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty

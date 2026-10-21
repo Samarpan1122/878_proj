@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GeoCrash — Deep dive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+<script src="https://unpkg.com/leaflet.gridlayer.googlemutant@0.14.1/dist/Leaflet.GoogleMutant.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="bar">
+  <div class="wordmark">GeoCrash <span>/ explorer</span></div>
+  <form class="search" id="search" autocomplete="off" role="search">
+    <input id="q" type="text" placeholder="Search an address, intersection or place" aria-label="Search a location" aria-autocomplete="list" aria-controls="sugg">
+    <span class="kbd">⌘K</span>
+    <div class="sugg" id="sugg" role="listbox"></div>
+  </form>
+  <label class="ctl">Radius
+    <select id="radius"><option value="0.25">250 m</option><option value="0.3">300 m</option><option value="0.5">500 m</option><option value="0.6">600 m</option><option value="1" selected>1 km</option>
+      <option value="2">2 km</option><option value="5">5 km</option><option value="10">10 km</option></select>
+  </label>
+  <div class="seg" id="basemap" role="group" aria-label="Basemap">
+    <button type="button" data-b="map" aria-pressed="true">Map</button><button type="button" data-b="sat" aria-pressed="false">Satellite</button><button type="button" data-b="traffic" aria-pressed="false">Traffic</button>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+<main class="bench">
+  <div class="mapwrap">
+    <div id="map"></div>
+    <div class="maptools" id="replay" hidden>
+      <button class="btn" id="play" type="button">Replay</button><span class="t" id="month">—</span><input type="range" id="scrub" min="0" max="0" value="0" aria-label="Month">
+    </div>
+    <div class="legend" id="legend" hidden>severity <span><i style="background:var(--color-sev-1)"></i>1</span><span><i style="background:var(--color-sev-2)"></i>2</span><span><i style="background:var(--color-sev-3)"></i>3</span><span><i style="background:var(--color-sev-4)"></i>4</span></div>
+  </div>
+  <section class="report" id="report" aria-live="polite"></section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

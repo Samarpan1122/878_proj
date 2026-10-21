@@ -1,0 +1,16 @@
+FROM python:3.12-slim
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PORT=8080 GEOCRASH_PUBLIC_DATA=/app/data/public GEOCRASH_SCREENING_DATA=/app/data/safety PUBLIC_PORTAL_URL=/
+WORKDIR /app
+COPY requirements-safety.txt requirements-safety.lock ./
+RUN pip install --no-cache-dir -r requirements-safety.txt -c requirements-safety.lock && useradd --uid 10001 --create-home publicapp
+COPY --chown=publicapp:publicapp safety/ ./safety/
+COPY --chown=publicapp:publicapp web/public/ ./web/public/
+COPY --chown=publicapp:publicapp web/static/safety* ./web/static/
+COPY --chown=publicapp:publicapp web/static/tokens.css ./web/static/tokens.css
+COPY --chown=publicapp:publicapp data/public/snapshot.json ./data/public/snapshot.json
+COPY --chown=publicapp:publicapp data/safety/snapshot.json data/safety/advanced-benchmark.json data/safety/behavior.json ./data/safety/
+COPY --chown=publicapp:publicapp data/safety/road-geometry.json.gz ./data/safety/road-geometry.json.gz
+USER publicapp
+EXPOSE 8080
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/ready',timeout=3)"
+CMD ["sh", "-c", "exec uvicorn safety.public_api:app --host 0.0.0.0 --port ${PORT:-8080}"]

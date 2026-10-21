@@ -1,0 +1,28 @@
+steps:
+  - id: build-and-nonroot-route-test
+    name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -ceu
+      - |
+        docker build -f Dockerfile.ownership-fix -t ${_IMAGE} .
+        docker run -d --name routing-check ${_IMAGE}
+        for attempt in $$(seq 1 30); do
+          docker exec routing-check bash -c 'exec 3<>/dev/tcp/127.0.0.1/8080; printf "GET /route/v1/driving/-95.9345,41.2565;-96.0200,41.2600?overview=false HTTP/1.0\r\nHost: localhost\r\n\r\n" >&3; cat <&3' > /workspace/route-smoke.txt 2>/dev/null || true
+          if grep -q '"code":"Ok"' /workspace/route-smoke.txt; then break; fi
+          sleep 2
+        done
+        docker exec routing-check id
+        if ! grep -q '"code":"Ok"' /workspace/route-smoke.txt; then
+          docker logs routing-check
+          docker rm -f routing-check
+          exit 1
+        fi
+        printf 'Non-root route smoke passed; response bytes: '
+        wc -c < /workspace/route-smoke.txt
+        docker rm -f routing-check
+images: ['${_IMAGE}']
+options:
+  machineType: E2_HIGHCPU_8
+  logging: CLOUD_LOGGING_ONLY
+timeout: 900s

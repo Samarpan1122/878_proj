@@ -1,0 +1,28 @@
+{
+  "exported_at_utc": "2026-09-30T17:05:47.264277+00:00",
+  "sender": "samarpanmohanty3347@gmail.com",
+  "additional_recipients_attempted": 100,
+  "additional_confirmed_sent": 100,
+  "previous_six_included": false,
+  "note": "Gmail SENT confirms send acceptance, not delivery or readership. Published addresses were not independently deliverability verified. AI Fund received outreach at its published team inbox. Some founder contacts are public academic addresses. No automated follow-ups were scheduled.",
+  "bounce_searches": [
+    {
+      "file": "bounce-check-broad.json",
+      "successful": true,
+      "result_count": 0
+    },
+    {
+      "file": "bounce-check-final.json",
+      "successful": true,
+      "result_count": 0
+    },
+    {
+      "file": "bounce-check.json",
+      "successful": true,
+      "result_count": 0
+    }
+  ],
+  "known_bounced_recipients": [
+    "shahar.binnun@tactilemobility.com"
+  ]
+}

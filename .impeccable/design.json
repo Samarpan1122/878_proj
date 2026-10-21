@@ -1,0 +1,539 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-30T01:53:05.372997+00:00",
+  "title": "Design System: GeoCrash",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Cool paper",
+        "tonalRamp": [
+          "oklch(15% 0.004 250)",
+          "oklch(26% 0.004 250)",
+          "oklch(38% 0.004 250)",
+          "oklch(49% 0.004 250)",
+          "oklch(61% 0.004 250)",
+          "oklch(72% 0.004 250)",
+          "oklch(84% 0.004 250)",
+          "oklch(95% 0.004 250)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "paper-2": {
+        "role": "neutral",
+        "displayName": "Inset paper",
+        "tonalRamp": [
+          "oklch(15% 0.006 250)",
+          "oklch(26% 0.006 250)",
+          "oklch(38% 0.006 250)",
+          "oklch(49% 0.006 250)",
+          "oklch(61% 0.006 250)",
+          "oklch(72% 0.006 250)",
+          "oklch(84% 0.006 250)",
+          "oklch(95% 0.006 250)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Technical ink",
+        "tonalRamp": [
+          "oklch(15% 0.02 258)",
+          "oklch(26% 0.02 258)",
+          "oklch(38% 0.02 258)",
+          "oklch(49% 0.02 258)",
+          "oklch(61% 0.02 258)",
+          "oklch(72% 0.02 258)",
+          "oklch(84% 0.02 258)",
+          "oklch(95% 0.02 258)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Supporting ink",
+        "tonalRamp": [
+          "oklch(15% 0.018 257)",
+          "oklch(26% 0.018 257)",
+          "oklch(38% 0.018 257)",
+          "oklch(49% 0.018 257)",
+          "oklch(61% 0.018 257)",
+          "oklch(72% 0.018 257)",
+          "oklch(84% 0.018 257)",
+          "oklch(95% 0.018 257)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted ink",
+        "tonalRamp": [
+          "oklch(15% 0.014 257)",
+          "oklch(26% 0.014 257)",
+          "oklch(38% 0.014 257)",
+          "oklch(49% 0.014 257)",
+          "oklch(61% 0.014 257)",
+          "oklch(72% 0.014 257)",
+          "oklch(84% 0.014 257)",
+          "oklch(95% 0.014 257)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "tonalRamp": [
+          "oklch(15% 0.008 255)",
+          "oklch(26% 0.008 255)",
+          "oklch(38% 0.008 255)",
+          "oklch(49% 0.008 255)",
+          "oklch(61% 0.008 255)",
+          "oklch(72% 0.008 255)",
+          "oklch(84% 0.008 255)",
+          "oklch(95% 0.008 255)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Strong rule",
+        "tonalRamp": [
+          "oklch(15% 0.01 255)",
+          "oklch(26% 0.01 255)",
+          "oklch(38% 0.01 255)",
+          "oklch(49% 0.01 255)",
+          "oklch(61% 0.01 255)",
+          "oklch(72% 0.01 255)",
+          "oklch(84% 0.01 255)",
+          "oklch(95% 0.01 255)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Cobalt",
+        "tonalRamp": [
+          "oklch(15% 0.2 256)",
+          "oklch(26% 0.2 256)",
+          "oklch(38% 0.2 256)",
+          "oklch(49% 0.2 256)",
+          "oklch(61% 0.2 256)",
+          "oklch(72% 0.2 256)",
+          "oklch(84% 0.2 256)",
+          "oklch(95% 0.2 256)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "safety-accent": {
+        "role": "primary",
+        "displayName": "Safety cobalt",
+        "tonalRamp": [
+          "oklch(15% .2 256)",
+          "oklch(26% .2 256)",
+          "oklch(38% .2 256)",
+          "oklch(49% .2 256)",
+          "oklch(61% .2 256)",
+          "oklch(72% .2 256)",
+          "oklch(84% .2 256)",
+          "oklch(95% .2 256)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Pale cobalt",
+        "tonalRamp": [
+          "oklch(15% 0.035 256)",
+          "oklch(26% 0.035 256)",
+          "oklch(38% 0.035 256)",
+          "oklch(49% 0.035 256)",
+          "oklch(61% 0.035 256)",
+          "oklch(72% 0.035 256)",
+          "oklch(84% 0.035 256)",
+          "oklch(95% 0.035 256)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "accent-ink": {
+        "role": "neutral",
+        "displayName": "Action text",
+        "tonalRamp": [
+          "oklch(15% 0.004 250)",
+          "oklch(26% 0.004 250)",
+          "oklch(38% 0.004 250)",
+          "oklch(49% 0.004 250)",
+          "oklch(61% 0.004 250)",
+          "oklch(72% 0.004 250)",
+          "oklch(84% 0.004 250)",
+          "oklch(95% 0.004 250)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus cobalt",
+        "tonalRamp": [
+          "oklch(15% 0.2 256)",
+          "oklch(26% 0.2 256)",
+          "oklch(38% 0.2 256)",
+          "oklch(49% 0.2 256)",
+          "oklch(61% 0.2 256)",
+          "oklch(72% 0.2 256)",
+          "oklch(84% 0.2 256)",
+          "oklch(95% 0.2 256)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "tonalRamp": [
+          "oklch(15% 0.016 260)",
+          "oklch(26% 0.016 260)",
+          "oklch(38% 0.016 260)",
+          "oklch(49% 0.016 260)",
+          "oklch(61% 0.016 260)",
+          "oklch(72% 0.016 260)",
+          "oklch(84% 0.016 260)",
+          "oklch(95% 0.016 260)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "graphite-ink": {
+        "role": "neutral",
+        "displayName": "Graphite text",
+        "tonalRamp": [
+          "oklch(15% 0.008 255)",
+          "oklch(26% 0.008 255)",
+          "oklch(38% 0.008 255)",
+          "oklch(49% 0.008 255)",
+          "oklch(61% 0.008 255)",
+          "oklch(72% 0.008 255)",
+          "oklch(84% 0.008 255)",
+          "oklch(95% 0.008 255)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "risk": {
+        "role": "semantic",
+        "displayName": "Risk",
+        "tonalRamp": [
+          "oklch(15% 0.19 27)",
+          "oklch(26% 0.19 27)",
+          "oklch(38% 0.19 27)",
+          "oklch(49% 0.19 27)",
+          "oklch(61% 0.19 27)",
+          "oklch(72% 0.19 27)",
+          "oklch(84% 0.19 27)",
+          "oklch(95% 0.19 27)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "safe": {
+        "role": "semantic",
+        "displayName": "Safe",
+        "tonalRamp": [
+          "oklch(15% 0.12 160)",
+          "oklch(26% 0.12 160)",
+          "oklch(38% 0.12 160)",
+          "oklch(49% 0.12 160)",
+          "oklch(61% 0.12 160)",
+          "oklch(72% 0.12 160)",
+          "oklch(84% 0.12 160)",
+          "oklch(95% 0.12 160)"
+        ],
+        "rampProvenance": "Synthesized preview ramp; not an implemented token scale."
+      },
+      "public-muted": {
+        "role": "neutral",
+        "displayName": "Public supporting ink"
+      },
+      "public-rule-strong": {
+        "role": "neutral",
+        "displayName": "Public control outline"
+      },
+      "public-risk": {
+        "role": "semantic",
+        "displayName": "Public error text"
+      },
+      "home-paper": {
+        "displayName": "Map overlay paper",
+        "role": "neutral"
+      },
+      "home-ink": {
+        "displayName": "Map overlay ink",
+        "role": "neutral"
+      },
+      "home-muted": {
+        "displayName": "Map supporting labels",
+        "role": "neutral"
+      },
+      "home-cobalt": {
+        "displayName": "Map actions",
+        "role": "primary"
+      },
+      "home-line": {
+        "displayName": "Map overlay rules",
+        "role": "neutral"
+      },
+      "home-dark": {
+        "displayName": "Geographic canvas",
+        "role": "neutral"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Report display",
+        "purpose": "Existing report place headings."
+      },
+      "body": {
+        "displayName": "Shared body",
+        "purpose": "Incumbent explorer text."
+      },
+      "label": {
+        "displayName": "Technical label",
+        "purpose": "Compact incumbent report labels."
+      },
+      "safety-headline": {
+        "displayName": "Safety headline",
+        "purpose": "Safety page title; 27px at the mobile breakpoint."
+      },
+      "safety-title": {
+        "displayName": "Safety section title",
+        "purpose": "Safety section headings."
+      },
+      "safety-body": {
+        "displayName": "Safety body",
+        "purpose": "Dense operating workspace text; declared font may use system fallback."
+      }
+    },
+    "shadows": [
+      {
+        "name": "report-suggestions",
+        "value": "0 8px 24px oklch(24% 0.02 258 / 0.08)",
+        "purpose": "Existing report search overlay."
+      },
+      {
+        "name": "explorer-card",
+        "value": "0 6px 24px oklch(10% 0.02 258 / 0.25)",
+        "purpose": "Existing floating map cards."
+      },
+      {
+        "name": "home-filter-overlay",
+        "value": "0 8px 30px #0003",
+        "purpose": "Light controls over the dark 3D map."
+      },
+      {
+        "name": "home-summary-overlay",
+        "value": "0 10px 35px #0003",
+        "purpose": "Selected geography evidence over map content."
+      }
+    ],
+    "motion": [
+      {
+        "name": "dur-fast",
+        "value": "120ms",
+        "purpose": "Existing explorer control transitions; safety controls have no animated transition."
+      },
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Existing explorer control transitions."
+      },
+      {
+        "name": "home-camera-flight",
+        "value": "1100ms",
+        "purpose": "User-triggered fly-to navigation only; zero duration with reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "safety-compact",
+        "value": "1050px"
+      },
+      {
+        "name": "safety-stacked",
+        "value": "740px"
+      },
+      {
+        "name": "research-stacked",
+        "value": "700px"
+      },
+      {
+        "name": "public-wide",
+        "value": "1300px"
+      },
+      {
+        "name": "public-compact",
+        "value": "1100px"
+      },
+      {
+        "name": "public-stack",
+        "value": "800px"
+      },
+      {
+        "name": "public-mobile",
+        "value": "520px"
+      },
+      {
+        "name": "home-mobile",
+        "value": "760px"
+      }
+    ],
+    "surfaceReviews": [
+      {
+        "surface": "web/static/models.html#m-omaha",
+        "sourceFiles": [
+          "web/static/models.html",
+          "web/static/models.css",
+          "web/static/metro-models.js"
+        ],
+        "reviewer": "metro_finish_reviewer",
+        "disposition": "SHIP",
+        "resolvedFinding": "C imagery uses a global-median label and explicitly states no reporting-source input in table and details.",
+        "verification": "Both frozen protocols, both duration objectives, monthly evaluation and error recovery passed at 1440px and 390px without viewport overflow or JavaScript errors.",
+        "incumbentAdvisories": "Existing font and radius observations do not change the Cobalt Workbench identity."
+      }
+    ],
+    "syntheticState": {
+      "surface": "web/static/safety.html",
+      "sourceFiles": [
+        "web/static/safety.js",
+        "web/static/safety.html"
+      ],
+      "mode": "explicit_synthetic_workflow_demo",
+      "behavior": "Reuses the existing warm notice; labels invented data in title, heading, area note, notice, coverage and footer; hides official model/behavior sections and unavailable research navigation; labels CSV filenames SYNTHETIC-demo.",
+      "visualChange": "No token, layout, palette, font or animation change.",
+      "verification": "Independent synthetic finish review SHIP at 1440px and390px: scenario, labels, exports, area reset, isolation, no JavaScript errors or viewport overflow. Interface verification only."
+    }
+  },
+  "components": [
+    {
+      "name": "Safety primary button",
+      "kind": "button",
+      "refersTo": "safety-button-primary",
+      "description": "Primary action in the safety workspace.",
+      "html": "<button class=\"ds-primary\" type=\"button\">Load screening</button>",
+      "css": ".ds-primary{--color-accent:oklch(54% .2 256);font-family:var(--font-body, Inter, ui-sans-serif, system-ui, sans-serif);font-size:14px;line-height:1.55;min-height:40px;border:1px solid var(--color-rule-strong,oklch(82% .01 255));border-radius:var(--radius-sm,4px);padding:8px 12px;cursor:pointer;background:var(--color-accent,oklch(54% .2 256));border-color:var(--color-accent,oklch(54% .2 256));color:var(--color-accent-ink,oklch(98.5% .004 250));font-weight:600}.ds-primary:hover{background:var(--color-ink-2,oklch(38% .018 257));border-color:var(--color-ink-2,oklch(38% .018 257));color:var(--color-paper,oklch(98.5% .004 250))}.ds-primary:focus-visible{outline:3px solid var(--color-focus,oklch(58% .2 256));outline-offset:3px;}.ds-primary:disabled{opacity:.5;cursor:not-allowed}"
+    },
+    {
+      "name": "Safety secondary button",
+      "kind": "button",
+      "refersTo": "safety-button-secondary",
+      "description": "Neutral export or supporting action.",
+      "html": "<button class=\"ds-secondary\" type=\"button\">Export CSV</button>",
+      "css": ".ds-secondary{--color-accent:oklch(54% .2 256);font-family:var(--font-body, Inter, ui-sans-serif, system-ui, sans-serif);font-size:14px;line-height:1.55;min-height:40px;border:1px solid var(--color-rule-strong,oklch(82% .01 255));border-radius:var(--radius-sm,4px);padding:8px 12px;cursor:pointer;background:var(--color-paper,oklch(98.5% .004 250));color:var(--color-ink,oklch(24% .02 258))}.ds-secondary:hover{background:var(--color-paper-2,oklch(96.2% .006 250));border-color:var(--color-ink-2,oklch(38% .018 257))}.ds-secondary:focus-visible{outline:3px solid var(--color-focus,oklch(58% .2 256));outline-offset:3px;}.ds-secondary:disabled{opacity:.5;cursor:not-allowed}"
+    },
+    {
+      "name": "Safety numeric field",
+      "kind": "input",
+      "refersTo": "safety-input",
+      "description": "Labeled analyst input with native number semantics.",
+      "html": "<label class=\"ds-label\">Eligible share of baseline (%)<input class=\"ds-input\" type=\"number\" min=\"0.01\" max=\"100\" step=\"0.01\" placeholder=\"Enter reviewed share\" required></label>",
+      "css": ".ds-label{font-family:var(--font-body, Inter, ui-sans-serif, system-ui, sans-serif);font-size:14px;line-height:1.55;font-size:12px;font-weight:600;display:flex;flex-direction:column;gap:6px;color:var(--color-ink,oklch(24% .02 258))}.ds-input{--color-accent:oklch(54% .2 256);font-family:var(--font-body, Inter, ui-sans-serif, system-ui, sans-serif);font-size:14px;line-height:1.55;min-height:40px;border:1px solid var(--color-rule-strong,oklch(82% .01 255));border-radius:var(--radius-sm,4px);padding:8px 12px;cursor:pointer;cursor:text;background:var(--color-paper,oklch(98.5% .004 250));color:inherit;min-width:0;font-weight:400}.ds-input:focus-visible{outline:3px solid var(--color-focus,oklch(58% .2 256));outline-offset:3px;}"
+    },
+    {
+      "name": "Safety navigation",
+      "kind": "nav",
+      "refersTo": "safety-navigation",
+      "description": "Text navigation with the current page underlined.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#explorer\">Crash explorer</a><a href=\"#safety\" aria-current=\"page\">Safety screening</a></nav>",
+      "css": ".ds-nav{--color-accent:oklch(54% .2 256);font-family:var(--font-body, Inter, ui-sans-serif, system-ui, sans-serif);font-size:14px;line-height:1.55;display:flex;gap:24px;overflow:auto;border-bottom:1px solid var(--color-rule,oklch(90.5% .008 255))}.ds-nav a{padding:20px 0;text-decoration:none;white-space:nowrap;color:var(--color-ink-2,oklch(38% .018 257))}.ds-nav a[aria-current]{color:var(--color-accent,oklch(54% .2 256));box-shadow:inset 0 -2px var(--color-accent,oklch(54% .2 256))}.ds-nav a:focus-visible{outline:3px solid var(--color-focus,oklch(58% .2 256));outline-offset:3px;}"
+    },
+    {
+      "name": "Safety status tag",
+      "kind": "chip",
+      "refersTo": "safety-status-tag",
+      "description": "Text-only readiness label using a neutral surface.",
+      "html": "<span class=\"ds-tag\">Commercial readiness unconfirmed</span>",
+      "css": ".ds-tag{font-family:var(--font-body, Inter, ui-sans-serif, system-ui, sans-serif);font-size:14px;line-height:1.55;display:inline-block;font-size:11px;background:var(--color-paper-2,oklch(96.2% .006 250));color:var(--color-ink,oklch(24% .02 258));padding:2px 6px;border:1px solid var(--color-rule,oklch(90.5% .008 255));border-radius:3px}"
+    },
+    {
+      "name": "Selected route",
+      "kind": "custom",
+      "refersTo": "safety-selection",
+      "description": "Selection color plus an explicit pressed state.",
+      "html": "<div class=\"ds-selected\"><button class=\"ds-route\" aria-pressed=\"true\" type=\"button\">Selected road segment</button><small>AADT year accompanies each route</small></div>",
+      "css": ".ds-selected{--color-accent:oklch(54% .2 256);font-family:var(--font-body, Inter, ui-sans-serif, system-ui, sans-serif);font-size:14px;line-height:1.55;padding:12px;background:var(--color-accent-soft,oklch(93% .035 256));border-top:1px solid var(--color-rule,oklch(90.5% .008 255))}.ds-route{font-family:var(--font-body, Inter, ui-sans-serif, system-ui, sans-serif);font-size:14px;line-height:1.55;font-size:13px;min-height:24px;padding:0;border:0;background:none;color:var(--color-accent,oklch(54% .2 256));text-align:left;font-weight:600;cursor:pointer}.ds-route:hover{text-decoration:underline}.ds-route:focus-visible{outline:3px solid var(--color-focus,oklch(58% .2 256));outline-offset:3px;}.ds-selected small{display:block;font-size:11px;margin-top:2px;color:var(--color-ink-2,oklch(38% .018 257))}"
+    },
+    {
+      "name": "Explorer floating card",
+      "kind": "card",
+      "refersTo": "explorer-card",
+      "description": "Existing map overlay card; not the safety inspector.",
+      "html": "<section class=\"ds-card\"><h2>Road evidence</h2><p>Map context and supporting observations.</p></section>",
+      "css": ".ds-card{font-family:var(--font-body, Inter, ui-sans-serif, system-ui, sans-serif);font-size:14px;line-height:1.55;background:var(--color-paper,oklch(98.5% .004 250));color:var(--color-ink,oklch(24% .02 258));border-radius:var(--radius-lg,10px);padding:16px 24px;box-shadow:0 6px 24px oklch(10% .02 258 / .25)}.ds-card h2{font:600 24px/1.15 var(--font-display,\"Space Grotesk\",ui-sans-serif,system-ui,sans-serif);letter-spacing:-.02em;margin:0}.ds-card p{font-size:13px;color:var(--color-ink-2,oklch(38% .018 257));margin:8px 0 0}"
+    },
+    {
+      "name": "Exposure notice",
+      "kind": "custom",
+      "description": "Warm notice treatment for exposure qualifications; reused in synthetic mode to explicitly identify invented data and absence of measured model results.",
+      "html": "<div class=\"ds-notice\" role=\"note\"><strong>Exposure vintage matters.</strong> AADT from a different year is a traffic-exposure proxy.</div>",
+      "css": ".ds-notice{font-family:var(--font-body, Inter, ui-sans-serif, system-ui, sans-serif);font-size:14px;line-height:1.55;font-size:13px;padding:14px 16px;background:oklch(96% .025 80);color:oklch(34% .065 60);border:1px solid oklch(84% .055 80);border-radius:var(--radius-sm,4px)}"
+    },
+    {
+      "name": "Research protocol selector",
+      "kind": "input",
+      "refersTo": "research-select",
+      "description": "Native research comparison selector, reused for frozen future, frozen unseen-area future, and monthly Omaha evidence. Protocol takes a full control row on mobile; the separate duration-objective selector hides for monthly evaluation.",
+      "html": "<label class=\"ds-research-label\">Evaluation<select class=\"ds-research-select\"><option>Frozen \u00b7 later incidents</option><option>Frozen \u00b7 later incidents in unseen areas</option><option>Monthly updates \u00b7 later incidents</option></select></label>",
+      "css": ".ds-research-label{display:flex;flex-direction:column;gap:6px;font:400 13px/1.55 var(--font-body,Inter,ui-sans-serif,system-ui,sans-serif);color:var(--color-ink,oklch(24% .02 258))}.ds-research-select{font:inherit;color:inherit;background:var(--color-paper,oklch(98.5% .004 250));border:1px solid var(--color-rule-strong,oklch(82% .01 255));border-radius:4px;min-height:42px;padding:8px 12px}.ds-research-select:focus-visible{outline:2px solid var(--color-focus,oklch(58% .2 256));outline-offset:2px}@media(max-width:700px){.ds-research-label{flex-basis:100%;min-width:0}.ds-research-select{width:100%}}"
+    },
+    {
+      "name": "Recorded-factor share meter",
+      "kind": "custom",
+      "refersTo": "behavior-meter",
+      "description": "Illustrative known-case share; production values and intervals come from the selected cohort API.",
+      "html": "<div class=\"ds-share\">25%<meter min=\"0\" max=\"1\" value=\"0.25\" aria-label=\"Illustrative share among known cases\"></meter><small>Share among known cases \u00b7 example</small></div>",
+      "css": ".ds-share{--color-accent:oklch(54% .2 256);font:400 13px/1.55 var(--font-body,Inter,ui-sans-serif,system-ui,sans-serif);font-variant-numeric:tabular-nums;text-align:right;color:var(--color-ink,oklch(24% .02 258))}.ds-share meter{display:block;width:100%;min-width:90px;height:8px;margin-top:7px;accent-color:var(--color-accent)}.ds-share meter::-webkit-meter-bar{background:var(--color-paper-2,oklch(96.2% .006 250));border:0}.ds-share meter::-webkit-meter-optimum-value{background:var(--color-accent)}.ds-share meter::-moz-meter-bar{background:var(--color-accent)}.ds-share small{display:block;color:var(--color-ink-2,oklch(38% .018 257));font-size:11px;margin-top:2px}"
+    },
+    {
+      "name": "Public geographic state selection",
+      "kind": "custom",
+      "description": "Actual public observatory ranking treatment; values in this preview are explicitly illustrative. Keyboard selection mirrors map selection.",
+      "html": "<button class=\"ds-public-rank\" aria-pressed=\"true\"><span>1</span><span>Example state</span><span>123 \u00b7 example</span></button>",
+      "css": ".ds-public-rank{width:100%;display:grid;grid-template-columns:20px 1fr auto;gap:8px;text-align:left;border:0;border-bottom:1px solid oklch(90.5% .008 255);border-radius:0;background:oklch(93% .035 256);color:oklch(54% .2 256);padding:10px 4px;font:600 12px/1.55 Inter,ui-sans-serif,system-ui,sans-serif;min-height:42px;cursor:pointer}.ds-public-rank:hover{background:oklch(96.2% .006 250)}.ds-public-rank:focus-visible{outline:3px solid oklch(54% .2 256);outline-offset:3px}.ds-public-rank span:last-child{font-variant-numeric:tabular-nums;font-family:ui-monospace,monospace;font-size:11px}"
+    },
+    {
+      "name": "Map city preset",
+      "kind": "button",
+      "description": "Camera shortcut with explicitly state-level results; this overlay variant preserves the original explorer\u2019s visual grammar.",
+      "html": "<button class=\"ds-home-preset\" aria-pressed=\"false\">Omaha</button>",
+      "css": ".ds-home-preset{font:400 12px/1.5 Inter,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;color:#e7edf8;border:1px solid #b5c7e23f;background:#172335cb;border-radius:20px;padding:6px 13px;min-height:32px;cursor:pointer}.ds-home-preset:hover,.ds-home-preset[aria-pressed=true]{background:#2a51a1;border-color:#8eb4ff}.ds-home-preset:focus-visible{outline:3px solid #8eb4ff;outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Cobalt Workbench",
+    "overview": "GeoCrash uses cool paper, dark technical typography, restrained cobalt actions, and compact evidence displays. Rules and aligned columns organize the workbench; maps and satellite imagery provide content in the existing explorer. The safety workspace extends this established identity.\n\nDensity follows the task. Analytical surfaces keep labels, units, and explanations near values. The existing map homepage uses floating panels; the safety workspace uses flush sections and an adjacent inspector. These are distinct layouts within the same visual system.",
+    "keyCharacteristics": [
+      "Cool neutral surfaces with cobalt interaction cues.",
+      "Precise typography and aligned numeric comparisons.",
+      "Ruled analytical sections with restrained corners.",
+      "Evidence limitations visible beside the affected decision."
+    ],
+    "rules": [
+      {
+        "name": "The Meaningful Color Rule",
+        "body": "Use cobalt for interaction and selection; retain explicit text for uncertainty and status.",
+        "section": "colors"
+      },
+      {
+        "name": "The Surface Context Rule",
+        "body": "Keep analytical sections flush; reserve existing overlay elevation for content floating over a map.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve the established Cobalt Workbench when adding analytical surfaces.",
+      "Do align comparable numbers and keep units, source periods, and limitations beside decisions.",
+      "Do retain visible keyboard focus and explicit selection and sorting semantics.",
+      "Do adapt layouts to the viewport while preserving access to the complete table."
+    ],
+    "donts": [
+      "Don't turn modeled results into visual claims of verified outcomes.",
+      "Don't substitute decorative cards for the safety workspace's ruled sections.",
+      "Don't use color alone to communicate selection, uncertainty, or readiness.",
+      "Don't assume declared font families are loaded on every surface."
+    ]
+  }
+}

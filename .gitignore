@@ -1,0 +1,15 @@
+.venv/
+data/
+__pycache__/
+.env
+.tools/
+.cloud-config/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+models/
+outputs/
+.DS_Store
+*.log
+*.zip

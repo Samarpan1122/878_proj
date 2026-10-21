@@ -1,0 +1,120 @@
+GEOCRASH / EXPLORATORY PRE-SEED
+A reviewable road-safety decision.
+GeoCrash | Prepared for Techstars | September 30, 2026
+1 / 7
+Road-safety software with a working engine and a concrete first-pilot
+plan.
+Working public prototype. Real federal fatal-crash records. First agency pilot proposed.
+Samarpan Mohanty | Builder
+Exploring pre-seed investment; amount undecided.
+Open the live screening workspace
+
+
+CUSTOMER HYPOTHESIS
+Start with one purchasing decision.
+GeoCrash | Prepared for Techstars | September 30, 2026
+2 / 7
+Intended buyer
+A transportation agency safety team or the engineering consultant supporting its
+network review.
+Job to evaluate
+Choose which roads deserve engineering investigation, and explain why each
+location made the shortlist.
+Product proposition
+Bring crash records, road linkage, exposure assumptions and screening
+comparisons into one inspectable workspace.
+Why this audience
+Techstars connects early-stage founders with mentorship, a network and capital.
+The immediate need is agency customer discovery, procurement guidance and a
+disciplined first pilot.
+
+
+IMPLEMENTATION EVIDENCE / SEPTEMBER 29 SNAPSHOT
+A working engine, with visible boundaries.
+GeoCrash | Prepared for Techstars | September 30, 2026
+3 / 7
+153,273 records
+Federal FARS fatal-crash records for 2021-2024 across 50 states and DC.
+National ingestion is implemented; road-level screening currently focuses on
+Nebraska.
+11,048 roads
+Nebraska road segments represented in 44,192 segment-year observations,
+exposed through a deployed website and API.
+650 / 835 linked
+Nebraska fatal crashes matched to roads. Another 185 are withheld under
+conservative ambiguous/distance rules rather than assigned silently.
+Inspectable methods
+Observed counts, exposure-normalized rates and experimental Empirical Bayes
+screening, with source years and limitations visible.
+
+
+GO-TO-MARKET AND DIFFERENTIATION / PROPOSED
+The commercial test is workflow value.
+GeoCrash | Prepared for Techstars | September 30, 2026
+4 / 7
+Entry point
+Start with one agency or engineering consultant review. Test a scoped paid pilot
+before a recurring software, hosting and support offering; pricing and demand
+remain unvalidated.
+What earns renewal
+A reproducible review process, useful engineering explanations and less analyst
+effort. These outcomes still need measurement.
+Differentiation to test
+Source lineage, visible exclusions and exposure assumptions tied to each
+screening result. Public data and standard statistical methods alone are not a
+proprietary moat.
+Potential durability
+Approved data integrations, repeated use inside review workflows and externally
+validated evidence. These are development objectives, not established assets.
+
+
+USE OF CAPITAL / PROPOSED MILESTONES
+A bounded first pilot, judged in advance.
+GeoCrash | Prepared for Techstars | September 30, 2026
+5 / 7
+1. Agree the test
+Secure an agency or consultant reviewer, approved data and one named network.
+Agree baseline, review budget and acceptance criteria before evaluating results.
+2. Audit the inputs
+Check road linkage independently; resolve historical traffic exposure and
+commercial reuse rights. Freeze the dataset and record exclusions.
+3. Observe the work
+Observe an engineer complete a real network review. Compare shortlist quality
+and analyst time against current practice; document whether the buyer would pay
+and what blocks adoption.
+4. Make a decision
+Measure analyst time, reproducibility and purchasing interest. Continue only if the
+evidence supports a paid deployment, then test portability to a second network.
+
+
+CURRENT READINESS
+What an investment would still need to prove.
+GeoCrash | Prepared for Techstars | September 30, 2026
+6 / 7
+Customer evidence
+Pre-pilot. No signed agency pilot, paying customer, revenue or demonstrated
+crash reduction is claimed.
+Data readiness
+Current Nebraska traffic counts are from 2025, so historical exposure is a proxy.
+NDOT commercial reuse rights need confirmation or replacement with approved
+data.
+Model readiness
+Experimental statistical screening; no agency validation or demonstrated
+operational superiority. FARS covers fatal crashes, not all injury crashes.
+Delivery readiness
+The public website/API is deployed. A first commercial pilot would require an
+agreed private environment and access plan; enterprise multi-tenant readiness is
+not claimed.
+
+
+INVESTMENT CONVERSATION
+Fund the evidence for a repeatable business.
+GeoCrash | Prepared for Techstars | September 30, 2026
+7 / 7
+Exploratory pre-seed investment to reach an initial agency pilot and a
+credible commercial decision.
+The next milestones are approved data, an independent engineering review, measured workflow
+value and a purchasing decision. The raise amount and terms are not set.
+Which Techstars program is the right fit?
+Samarpan Mohanty | samarpanmohanty3347@gmail.com
+Inspect the working product

@@ -1,0 +1,39 @@
+steps:
+  - id: source
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: bash
+    args:
+      - -ceu
+      - |
+        mkdir -p /workspace/data
+        curl --fail --location --retry 3 --connect-timeout 20 --max-time 300 \
+          https://download.geofabrik.de/north-america/us/nebraska-260926.osm.pbf \
+          --output /workspace/data/nebraska.osm.pbf
+        cd /workspace/data
+        echo "a0caa806aabbe2fb2ef3738cc6af3248f8130021f837d553258b4bc6c6be2273  nebraska.osm.pbf" | sha256sum -c -
+        sha256sum nebraska.osm.pbf | tee SOURCE-SHA256.txt
+        printf '%s\n' 'https://download.geofabrik.de/north-america/us/nebraska-260926.osm.pbf' > SOURCE-URL.txt
+  - id: extract
+    name: ghcr.io/project-osrm/osrm-backend@sha256:359bd596d4adde1bd55856f8b81b0f6459cb8774abd8558aaccb273c1ab2fa4b
+    entrypoint: osrm-extract
+    args: ['--threads', '8', '-p', '/opt/car.lua', '/workspace/data/nebraska.osm.pbf']
+  - id: partition
+    name: ghcr.io/project-osrm/osrm-backend@sha256:359bd596d4adde1bd55856f8b81b0f6459cb8774abd8558aaccb273c1ab2fa4b
+    entrypoint: osrm-partition
+    args: ['--threads', '8', '/workspace/data/nebraska.osrm']
+  - id: customize
+    name: ghcr.io/project-osrm/osrm-backend@sha256:359bd596d4adde1bd55856f8b81b0f6459cb8774abd8558aaccb273c1ab2fa4b
+    entrypoint: osrm-customize
+    args: ['--threads', '8', '/workspace/data/nebraska.osrm']
+  - id: image
+    name: gcr.io/cloud-builders/docker
+    args: ['build', '-t', '${_IMAGE}', '.']
+  - id: nonroot-route-smoke
+    name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args: ['smoke.sh', '${_IMAGE}']
+images: ['${_IMAGE}']
+options:
+  machineType: E2_HIGHCPU_8
+  logging: CLOUD_LOGGING_ONLY
+timeout: 1200s

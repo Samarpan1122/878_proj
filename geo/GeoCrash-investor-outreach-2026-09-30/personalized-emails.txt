@@ -1,0 +1,1978 @@
+GeoCrash investor outreach | 2026-09-30
+Sender: samarpanmohanty3347@gmail.com
+Positioning: exploratory pre-seed; funding amount undecided.
+No formal accelerator applications or investment terms submitted.
+Published contact routes are not proof of deliverability or personal readership.
+
+1. Y Combinator | Jared Friedman
+Recipient: jared@ycombinator.com
+Status: SENT | 2026-09-30T16:58:03.161012+00:00
+Gmail message ID: 1a0f340758eefaba
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: pre-seed road-safety software for agency engineers | An agency safety workflow for YC consideration | From crash records to an agency pilot
+Chosen subject: GeoCrash: pre-seed road-safety software for agency engineers
+
+Hi Jared,
+
+I'm Samarpan Mohanty, building GeoCrash and exploring pre-seed investment. YC's government portfolio includes Waypoint Transit and Ontra Mobility, which makes transportation software a concrete reason to contact you.
+
+GeoCrash combines federal fatal-crash records with Nebraska roadway information to help engineers screen locations and inspect the evidence behind the results. The intended business is recurring software for agencies and their engineering consultants, beginning with a narrow safety-review workflow.
+
+The prototype is live; I'm seeking the first agency pilot. Funding would support data validation and a comparison against an engineer's existing process, measuring review time and analytical disagreements.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would this be worth evaluating for YC funding through the regular application process?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.ycombinator.com/blog/responding-to-covid-19
+Role source: https://www.ycombinator.com/people
+Personalization source: https://www.ycombinator.com/companies/industry/government
+Verification notes: Direct email published in a 2020 official post; current Managing Partner role verified. This email is not a YC application.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+2. Alchemist Accelerator | Alchemist admissions team
+Recipient: admissions@alchemistaccelerator.com
+Status: SENT | 2026-09-30T16:58:07.238224+00:00
+Gmail message ID: 1a0f340831f5a223
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: Alchemist fit: road-safety software sold through engineering firms | GeoCrash: validating a B2B route into agency safety work | A prototype seeking its first engineering customer
+Chosen subject: Alchemist fit: road-safety software sold through engineering firms
+
+Hi Alchemist team,
+
+Your enterprise focus is relevant to a business-model decision I'm testing: selling road-safety analysis software through engineering consultancies that serve cities.
+
+I'm Samarpan Mohanty, building GeoCrash. Its working prototype links real federal fatal-crash records with Nebraska road data and makes screening assumptions inspectable. A consultant could use that evidence as the starting point for a corridor review; the value still needs testing with practitioners.
+
+I'm seeking exploratory pre-seed funding to validate the data and secure an initial pilot. There are no paying customers yet. Your customer-traction work would be particularly useful for testing who owns the budget and what a repeatable sale requires.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would this proposed consultancy-led business fit Alchemist's enterprise admissions criteria?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.alchemistaccelerator.com/programs
+Role source: https://www.alchemistaccelerator.com/programs
+Personalization source: https://www.alchemistaccelerator.com/programs
+Verification notes: Published professional address; deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+3. Berkeley SkyDeck | Berkeley SkyDeck team
+Recipient: skydeck@berkeley.edu
+Status: SENT | 2026-09-30T16:58:11.840395+00:00
+Gmail message ID: 1a0f34095b02c6f9
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: SkyDeck or Pad-13 for a road-safety analytics prototype? | GeoCrash: choosing the right path to a first institutional round | A road-safety product seeking pilot and funding support
+Chosen subject: SkyDeck or Pad-13 for a road-safety analytics prototype?
+
+Hi SkyDeck team,
+
+I'm exploring pre-seed funding for GeoCrash and trying to choose the right stage of support. Your distinction between Pad-13 and the funded accelerator is useful: I have a deployed prototype, but the first agency pilot remains ahead.
+
+GeoCrash brings federal fatal-crash records and Nebraska roadway data into a screening workflow for transportation engineers. Users can inspect source evidence and traffic-exposure assumptions while reviewing locations. I want to build a software business around that recurring agency task.
+
+The immediate milestones are independent data checks, a practitioner comparison and evidence of willingness to pay. Your advisor and customer-introduction network could help test those milestones.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Pad-13 or the accelerator be the more appropriate route to discuss eligibility and eventual investment?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://skydeck.berkeley.edu/program/
+Role source: https://skydeck.berkeley.edu/program/
+Personalization source: https://skydeck.berkeley.edu/program/
+Verification notes: Published professional address; deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+4. LAUNCH | LAUNCH investment team
+Recipient: investmentteam@launch.co
+Status: SENT | 2026-09-30T16:58:15.900256+00:00
+Gmail message ID: 1a0f340a4d487196
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: Founder University investment-path question | A deployed road-safety prototype seeking its first customer | Testing demand before scaling an agency software business
+Chosen subject: GeoCrash: Founder University investment-path question
+
+Hi LAUNCH investment team,
+
+Founder University's path from a working product toward early traction looks closer to my stage than an accelerator that already expects revenue.
+
+I'm Samarpan Mohanty, developing GeoCrash for transportation agencies and engineering firms. The prototype combines real federal fatal-crash records with Nebraska roadway context, helping an engineer review candidate locations and inspect the underlying data. The planned commercial product would make that review repeatable across projects.
+
+I'm exploring pre-seed investment to fund validation and an initial agency pilot. The first commercial test would be whether an engineer saves useful time and whether a budget owner will pay; neither is proven yet.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Founder University be the right LAUNCH route for evaluating this business and potential investment?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.launch.co/apply
+Role source: https://www.launch.co/
+Personalization source: https://www.launch.co/apply
+Verification notes: Investment-team inbox published in indexed official apply page; current page redirects to application portal. Email is not an application.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+5. Techstars | Techstars startup team
+Recipient: startups@techstars.com
+Status: SENT | 2026-09-30T16:58:20.310087+00:00
+Gmail message ID: 1a0f340b7f0fb461
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: Which Techstars program fits a road-safety software pilot? | GeoCrash: seeking a program with agency-buyer expertise | Pre-seed support for a transportation-engineering workflow
+Chosen subject: Which Techstars program fits a road-safety software pilot?
+
+Hi Techstars team,
+
+Your application guidance says to choose a program for the network it can provide. For GeoCrash, the critical network is transportation engineers and public-sector buyers who can test a concrete workflow.
+
+I'm Samarpan Mohanty. I've built a prototype that links federal fatal-crash records and Nebraska roadway data for location screening, with the sources and exposure assumptions visible. I want to turn it into recurring software for agencies and their consultants.
+
+I'm exploring pre-seed investment for data validation and the first agency pilot. I need to test procurement and repeat usage alongside analytical usefulness; there are no customer results to claim yet.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Which current investment accelerator would be most relevant to that buyer and validation plan?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.techstars.com/blog/insights-and-trends/applying-to-techstars-tips-from-our-managing-directors
+Role source: https://www.techstars.com/
+Personalization source: https://www.techstars.com/blog/insights-and-trends/applying-to-techstars-tips-from-our-managing-directors
+Verification notes: Published professional address; deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+6. gener8tor | gener8tor team
+Recipient: info@gener8tor.com
+Status: SENT | 2026-09-30T16:58:24.789610+00:00
+Gmail message ID: 1a0f340c9b6f4d06
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: matching a Nebraska road-safety prototype to a program | An agency-software pilot seeking gener8tor investment support | A first-customer plan for road-safety analytics
+Chosen subject: GeoCrash: matching a Nebraska road-safety prototype to a program
+
+Hi gener8tor team,
+
+I'm Samarpan Mohanty, exploring investment for GeoCrash. Your geography- and stage-specific programs make you relevant because my initial evidence base is Nebraska, and I want the first customer test to stay close to that data.
+
+The live prototype joins federal fatal-crash records with roadway information so engineers can screen locations and inspect the assumptions behind a result. My business hypothesis is that agencies or their consultants would pay for a repeatable, documented safety-review workflow.
+
+An initial pilot would test data quality, analyst effort and willingness to pay. I haven't established those outcomes yet, and the pre-seed amount is undecided.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Could you identify an investment program that would consider this stage and transportation-agency customer focus?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.gener8tor.com/contact-us/
+Role source: https://www.gener8tor.com/contact-us/
+Personalization source: https://www.gener8tor.com/contact-us/
+Verification notes: Published professional address; deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+7. Natasha Kanitkar (individual angel) | Natasha Kanitkar
+Recipient: natasha.kanitkar@gmail.com
+Status: SENT | 2026-09-30T16:58:28.758218+00:00
+Gmail message ID: 1a0f340d88cfb415
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: an exploratory pre-seed road-safety business | A government-software investment with explicit pilot milestones | Testing an agency buyer for crash-screening software
+Chosen subject: GeoCrash: an exploratory pre-seed road-safety business
+
+Hi Natasha,
+
+Your work sourcing early-stage companies and angel investing through Angel Squad prompted this note. I'm Samarpan Mohanty, building GeoCrash and looking for investors willing to evaluate a business before its first agency pilot.
+
+GeoCrash turns federal fatal-crash records and Nebraska roadway information into an inspectable screening workflow for transportation engineers. The proposed business sells recurring access to agencies and consultants that review road locations across projects.
+
+The prototype is deployed, but willingness to pay and analyst time savings remain hypotheses. Pre-seed funding would support a small pilot, independent data checks and a clear go/no-go decision on the initial customer segment. I haven't set the raise amount.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would you consider evaluating this as an angel investment opportunity?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://natashakanitkar.com/
+Role source: https://natashakanitkar.com/
+Personalization source: https://natashakanitkar.com/
+Verification notes: Published professional address; deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+8. Zach Holman (individual angel) | Zach Holman
+Recipient: zach@zachholman.com
+Status: SENT | 2026-09-30T16:58:32.701189+00:00
+Gmail message ID: 1a0f340e77329680
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: a specialist workflow seeking an initial angel investor | Road-safety software with an inspectable data trail | Funding the first agency test of GeoCrash
+Chosen subject: GeoCrash: a specialist workflow seeking an initial angel investor
+
+Hi Zach,
+
+Your work building Signed for angels caught my attention because it takes a specialist workflow seriously. I'm building GeoCrash around a different specialist: the transportation engineer deciding which road locations deserve further investigation.
+
+The prototype combines real federal fatal-crash data and Nebraska roadway information, with source records and traffic-exposure assumptions available for review. I want to sell a repeatable analysis workspace to agencies and engineering firms, starting with one narrowly scoped pilot.
+
+I'm Samarpan Mohanty, and I'm exploring pre-seed investment. The funding would pay for data validation and testing whether the workflow earns repeat usage; I don't have a paying customer yet.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would this be a business you'd consider for an early angel investment?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://zachholman.com/about
+Role source: https://zachholman.com/about
+Personalization source: https://zachholman.com/about
+Verification notes: Published professional address; deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+9. Sand Hill Angels | Sand Hill Angels team
+Recipient: info@sandhillangels.com
+Status: SENT | 2026-09-30T16:59:56.719169+00:00
+Gmail message ID: 1a0f3422e2dc1c4e
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: investment screening for a working road-safety prototype | A specialist agency workflow seeking an angel round | Testing a road-safety software business before its first sale
+Chosen subject: GeoCrash: investment screening for a working road-safety prototype
+
+Hi Sand Hill Angels team,
+
+Your stated interest in companies with working alpha or beta products matches the stage I'd like to discuss. I'm Samarpan Mohanty, exploring pre-seed funding for GeoCrash, a prototype for transportation engineers reviewing road-safety evidence.
+
+It brings federal fatal-crash records and Nebraska roadway information into an inspectable location-screening workflow. I want to build a recurring software business for agencies and engineering consultants, with source traceability as a core product requirement.
+
+The first funded milestone would be a practitioner pilot that tests data quality and willingness to pay. That validation is still ahead. Your members' operator experience could help assess whether the initial customer segment is sufficiently focused.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would this be appropriate for your entrepreneur investment-screening process?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.sandhillangels.com/about/
+Role source: https://www.sandhillangels.com/about/
+Personalization source: https://www.sandhillangels.com/about/
+Verification notes: Published founder-contact route; no independent deliverability verification. Inquiry only; no formal application submitted.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+10. Band of Angels | Band of Angels team
+Recipient: bandhq@bandangels.com
+Status: SENT | 2026-09-30T17:00:01.076871+00:00
+Gmail message ID: 1a0f34240f8020ad
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: stage-fit question for angel investment screening | Road-safety software seeking its first funded pilot | An agency evidence workflow for the Band’s software reviewers
+Chosen subject: GeoCrash: stage-fit question for angel investment screening
+
+Hi Band of Angels team,
+
+I read your investment-screening process and its use of reviewers across technical disciplines. I'm seeking exploratory pre-seed investment in GeoCrash and would value an investor who can examine both the engineering and the agency sales model.
+
+The deployed prototype combines federal fatal-crash data with Nebraska roadway context, allowing engineers to inspect the inputs behind historical location screening. The business I want to build sells that repeatable review workflow to agencies and consultancies.
+
+I use public data today. The defensibility hypothesis is workflow integration and accumulated validation evidence, which still need to be earned through a first pilot. Funding would support that work.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Is this prototype stage suitable for your software screening committee before I prepare a formal application?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.bandangels.com/angel-investment
+Role source: https://www.bandangels.com/angel-investment
+Personalization source: https://www.bandangels.com/angel-investment
+Verification notes: Published founder-contact route; no independent deliverability verification. Inquiry only; no formal application submitted.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+11. Bay Angels | Selina / Bay Angels team
+Recipient: selina@bayangels.com
+Status: SENT | 2026-09-30T17:00:06.823937+00:00
+Gmail message ID: 1a0f342577ff325b
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: readiness for Bay Angels’ investment process | An agency software prototype before the first paid pilot | A road-safety business seeking early angel backing
+Chosen subject: GeoCrash: readiness for Bay Angels’ investment process
+
+Hi Selina,
+
+Bay Angels' rubric makes the commercial work I still need to prove explicit: customer demand, a route to market and a grounded funding plan. I'm Samarpan Mohanty, building GeoCrash and exploring pre-seed investment.
+
+GeoCrash is a deployed prototype that combines real federal fatal-crash records with Nebraska roadway data for engineering review. It exposes source evidence and traffic-volume assumptions so a reviewer can scrutinize a screening result. The intended customers are transportation agencies and the consultants they hire.
+
+My next milestone is a first agency pilot testing analyst effort, data reliability and willingness to pay. I haven't fixed the funding amount or completed that validation.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would your office-hours process consider this stage, or should I return after the first pilot?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.bayangels.com/entrepreneurs
+Role source: https://www.bayangels.com/entrepreneurs
+Personalization source: https://www.bayangels.com/entrepreneurs
+Verification notes: Published founder-contact route; no independent deliverability verification. Inquiry only; no formal application submitted.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+12. Andreessen Horowitz | Seema Amble
+Recipient: samble@a16z.com
+Status: SENT | 2026-09-30T17:00:54.563767+00:00
+Gmail message ID: 1a0f34311c7be930
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: pre-seed fit for road-safety decision software | A source-traceable workflow for agency engineers | From crash data to a testable agency business
+Chosen subject: GeoCrash: pre-seed fit for road-safety decision software
+
+Hi Seema,
+
+Your article on agentic coworkers argues that enterprise value depends on fitting real workflows and their context. That's the problem I want to test with GeoCrash, a road-safety analytics prototype for agency engineers.
+
+It combines real FARS 2021–24 crash records with Nebraska roads and traffic-volume proxies, exposing sources and screening assumptions. It is not yet an autonomous analyst or a validated safety system.
+
+I'm exploring pre-seed funding to secure a first agency pilot and measure whether engineers can review candidate locations faster while preserving traceability. The commercial hypothesis is recurring software for that review process; willingness to pay remains untested.
+
+Prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would this be within your investment scope at the pre-pilot stage?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://a16z.com/the-rise-of-computer-use-and-agentic-coworkers/
+Role source: https://a16z.com/the-rise-of-computer-use-and-agentic-coworkers/
+Personalization source: https://a16z.com/the-rise-of-computer-use-and-agentic-coworkers/
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+13. Lux Capital | Lux investment team
+Recipient: info@luxcapital.com
+Status: SENT | 2026-09-30T17:00:59.562925+00:00
+Gmail message ID: 1a0f343229f9bda5
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: funding an evidence-first road-safety pilot | Road-safety data infrastructure: an early investment question | A proposed agency validation plan for GeoCrash
+Chosen subject: GeoCrash: funding an evidence-first road-safety pilot
+
+Hi Lux team,
+
+Lux's backing of Applied Intuition made me think about the infrastructure needed to evaluate physical-world systems. I'm building GeoCrash around a narrower question: can a road-safety engineer inspect the evidence behind a screening result without reconstructing the analysis?
+
+The deployed prototype uses real FARS 2021–24 records and Nebraska roadway data with traffic-volume proxies. It exposes source information and experimental screening assumptions. I haven't demonstrated improved safety outcomes or secured agency customers.
+
+I'm exploring pre-seed investment to recruit a first pilot agency, test data linkage and screening stability, and establish whether the workflow supports a repeatable software business.
+
+Live prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Lux consider an exploratory investment conversation around that validation plan?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.luxcapital.com/contact
+Role source: https://www.luxcapital.com/contact
+Personalization source: https://www.luxcapital.com/companies
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+14. Costanoa Ventures | Costanoa investment team
+Recipient: info@costanoa.vc
+Status: SENT | 2026-09-30T17:01:04.022784+00:00
+Gmail message ID: 1a0f34336b59bfe5
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: testing an agency software business before scaling | An exploratory pre-seed road-safety workflow | Agency adoption is the next GeoCrash milestone
+Chosen subject: GeoCrash: testing an agency software business before scaling
+
+Hi Costanoa team,
+
+Your site highlights both enterprise company building and your work with Vannevar. I'm approaching a different public-sector workflow: helping transportation engineers inspect crash-screening evidence before deciding which locations need further study.
+
+I built GeoCrash using real FARS 2021–24 crash records and Nebraska roads, with traffic-volume proxies and explicit analytical assumptions. The prototype is deployed; agency adoption and commercial value are still unproven.
+
+I'm exploring pre-seed funding for a first agency pilot. I would use that phase to identify the budget owner, measure review effort against the existing process, and test a paid continuation rather than assume government interest becomes revenue.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would this stage and enterprise workflow fit Costanoa's investment interests?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.costanoa.vc/
+Role source: https://www.costanoa.vc/
+Personalization source: https://www.costanoa.vc/
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+15. Uncork Capital | Uncork investment team
+Recipient: pitches@uncorkcapital.com
+Status: SENT | 2026-09-30T17:01:08.860678+00:00
+Gmail message ID: 1a0f343497bc8650
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: road-safety review as a pre-seed workflow business | A transportation counterpart to technical design review | Testing paid demand for traceable crash screening
+Chosen subject: GeoCrash: road-safety review as a pre-seed workflow business
+
+Hi Uncork team,
+
+Your Buildcheck investment note focuses on technical review work where overlooked errors are expensive. GeoCrash tackles an adjacent challenge for transportation engineers: reviewing candidate road locations with visible crash evidence, data limitations, and screening assumptions.
+
+The live prototype combines real FARS 2021–24 records with Nebraska roadway data and traffic-volume proxies. It is early decision-support work, without customers, revenue, or validated safety outcomes.
+
+I'm exploring pre-seed funding to secure the first agency pilot and evaluate whether the product improves the review process enough to justify a software purchase. The proposed measures are evidence completeness, analyst time, and a clear path to a paid follow-on.
+
+Prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Uncork consider this an appropriate pre-seed investment opportunity to discuss?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://uncorkcapital.com/
+Role source: https://uncorkcapital.com/
+Personalization source: https://uncorkcapital.com/blog/improving-construction-design-with-ai-our-investment-in-buildcheck
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+16. Wing Venture Capital | Wing investment team
+Recipient: hello@wing.vc
+Status: SENT | 2026-09-30T17:01:13.603272+00:00
+Gmail message ID: 1a0f3435b829a331
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: from public crash data to a first design partner | Pre-seed fit for an agency evidence workflow | An early road-safety software investment question
+Chosen subject: GeoCrash: from public crash data to a first design partner
+
+Hi Wing team,
+
+Wing's emphasis on reaching design partners and early buyers is particularly relevant to where I am with GeoCrash. I have a working road-safety prototype; the next question is whether an agency will adopt and pay for the workflow.
+
+GeoCrash combines real FARS 2021–24 crash records with Nebraska roads and traffic-volume proxies. Engineers can inspect the sources and assumptions behind experimental screening. There are no agency customers or validated safety improvements yet.
+
+I'm exploring pre-seed funding to test a focused use case with one agency, then determine whether the same product can transfer to a second agency without substantial custom analysis.
+
+Live work: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Wing consider an investment discussion at this pre-pilot stage?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.wing.vc/
+Role source: https://www.wing.vc/about
+Personalization source: https://www.wing.vc/about
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+17. Zetta Venture Partners | Apoorva Pandhi
+Recipient: apoorva@zettavp.com
+Status: SENT | 2026-09-30T17:01:17.978017+00:00
+Gmail message ID: 1a0f3436d5793060
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: the first design-partner test for road-safety software | A data-product pre-seed question for Zetta | Measuring agency value before expanding the model
+Chosen subject: GeoCrash: the first design-partner test for road-safety software
+
+Hi Apoorva,
+
+Your work on early go-to-market design for technical founders connects directly to my next step with GeoCrash. I've built a road-safety analytics prototype, but need to test the buying decision as carefully as the analytical pipeline.
+
+The product uses real FARS 2021–24 data, Nebraska roads, and traffic-volume proxies, with source-traceable screening and explicit assumptions. There is no proprietary data advantage or validated agency outcome to claim today.
+
+I'm exploring pre-seed funding for a first pilot that would test repeat use, data-review effort, and willingness to pay. A key question is whether the customer is an agency engineering team or a consultant serving several agencies.
+
+Prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would that validation-focused investment opportunity fit Zetta's current scope?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.zettavp.com/team/apoorva-pandhi
+Role source: https://www.zettavp.com/team/apoorva-pandhi
+Personalization source: https://www.zettavp.com/team/apoorva-pandhi
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+18. Air Street Capital | Nathan Benaich
+Recipient: nathan@airstreet.com
+Status: SENT | 2026-09-30T17:01:23.157766+00:00
+Gmail message ID: 1a0f34380bb3c9df
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: testing whether road context earns its place | Pre-seed fit: an honest road-safety evaluation plan | From crash records to a defensible agency data product
+Chosen subject: GeoCrash: testing whether road context earns its place
+
+Hi Nathan,
+
+Air Street's AI-first thesis and Mapillary investment make you a relevant person to ask about GeoCrash. I'm building a road-safety product, and the unresolved technical question is whether learned road-context features improve decisions beyond simpler screening methods.
+
+The deployed prototype uses real FARS 2021–24 crashes and Nebraska roadway data with traffic-volume proxies. I haven't established a model advantage, trained a foundation model, or validated agency outcomes.
+
+I'm exploring pre-seed funding for a first agency pilot and a disciplined comparison on held-out locations. The business would need repeatable agency value, not merely a more elaborate model.
+
+Current work: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Air Street consider this investment stage, or require demonstrated AI advantage before engaging?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.airstreet.com/ai-venture-capital
+Role source: https://www.airstreet.com/ai-venture-capital
+Personalization source: https://www.airstreet.com/ai-venture-capital
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+19. Amplify Partners | Sarah Catanzaro
+Recipient: sarah@amplifypartners.com
+Status: SENT | 2026-09-30T17:01:27.622070+00:00
+Gmail message ID: 1a0f34392646426d
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: turning an agency data project into a company | A pre-seed question about auditable road-safety data | Testing repeatability beyond one Nebraska prototype
+Chosen subject: GeoCrash: turning an agency data project into a company
+
+Hi Sarah,
+
+Your description of agency data-integration challenges at Palantir, and helping technical projects become companies, explains why I'm writing. GeoCrash began as a road-safety analytics project; I want to test whether its data workflow can support a business.
+
+The deployed prototype links real FARS 2021–24 crashes with Nebraska roads and traffic-volume proxies. Sources and screening assumptions are exposed. The hard next step is making those links reproducible across agencies, with explicit coverage and failure reporting.
+
+I'm exploring pre-seed funding for a first agency pilot and a second-dataset portability test. I have no customers or validated safety outcomes yet.
+
+Prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Amplify consider investing in that validation phase, given the current application focus?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.amplifypartners.com/blog-posts/welcoming-sarah-catanzaro
+Role source: https://www.amplifypartners.com/team/sarah-catanzaro
+Personalization source: https://www.amplifypartners.com/team/sarah-catanzaro
+Verification notes: Email explicitly invited founder outreach in 2017 official post; current GP role confirmed on current team page. Not deliverability verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+20. Foundation Capital | Ashu Garg
+Recipient: agarg@foundationcap.com
+Status: SENT | 2026-09-30T17:01:32.018598+00:00
+Gmail message ID: 1a0f343a2179823c
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: a pre-seed test of agency product-market fit | Road-safety evidence software seeking its first pilot | A technical prototype with a specific commercial test
+Chosen subject: GeoCrash: a pre-seed test of agency product-market fit
+
+Hi Ashu,
+
+Your focus on the data stack, AI applications, and helping technical founders find product-market fit is why I'm sharing GeoCrash. It is a deployed prototype for source-traceable crash screening, aimed at transportation agency engineers.
+
+It currently uses real FARS 2021–24 records and Nebraska roads with traffic-volume proxies. The analytical assumptions are visible, and safety benefits remain unvalidated.
+
+I'm exploring pre-seed funding to move from a technical prototype to one agency pilot. My proposed commercial test is whether engineers return to the product during an actual screening cycle and whether the agency identifies a budget for continued use. There are no customers or revenue today.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would that pre-pilot investment opportunity fit your enterprise practice?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://foundationcapital.com/team-members/ashu-garg
+Role source: https://foundationcapital.com/team-members/ashu-garg
+Personalization source: https://foundationcapital.com/team-members/ashu-garg
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+21. Heavybit | Heavybit investment team
+Recipient: membership@heavybit.com
+Status: SENT | 2026-09-30T17:01:37.298960+00:00
+Gmail message ID: 1a0f343b87e4ddd0
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: is the reusable data layer the investable product? | Pre-seed infrastructure fit for road-safety data | Testing a repeatable crash-data API across agencies
+Chosen subject: GeoCrash: is the reusable data layer the investable product?
+
+Hi Heavybit team,
+
+Your thesis on the expanding need for software infrastructure raised a useful question for GeoCrash: is the strongest business the analyst interface, or the repeatable data and evaluation layer underneath it?
+
+I've deployed a road-safety prototype using real FARS 2021–24 crashes and Nebraska roads with traffic-volume proxies. It exposes sources and experimental screening assumptions. I have not established an infrastructure business or agency customer base.
+
+I'm exploring pre-seed funding to secure a first pilot and test whether another agency can reuse the same ingestion, linkage, and evidence interfaces with limited bespoke work. That would help distinguish scalable software from a consulting project.
+
+Current prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Heavybit consider this investment discussion before that portability is proven?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.heavybit.com/press?page=5
+Role source: https://www.heavybit.com/
+Personalization source: https://www.heavybit.com/press/heavybit-reinventing-enterprise-infrastructure
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+22. Differential Ventures | Differential investment team
+Recipient: info@differential.vc
+Status: SENT | 2026-09-30T17:01:41.569525+00:00
+Gmail message ID: 1a0f343c7f7366fc
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: responsible data management for crash screening | Pre-seed funding fit for an agency evidence product | A road-safety pilot built around auditable assumptions
+Chosen subject: GeoCrash: responsible data management for crash screening
+
+Hi Differential team,
+
+Your focus on responsible data management and data-centric B2B companies matches the problem I'm trying to validate with GeoCrash. Transportation engineers need to understand which source records and assumptions support a screening result before relying on it.
+
+The deployed prototype uses real FARS 2021–24 crashes and Nebraska roads, including traffic-volume proxies. It makes analytical limitations visible; it has not demonstrated improved safety outcomes or acquired agency customers.
+
+I'm exploring pre-seed funding for a first pilot focused on data-quality review, reproducibility, and the effort required to explain a result. The business hypothesis is that a repeatable evidence workflow can become recurring agency software.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Differential consider this a fit for exploratory pre-seed investment?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.differential.vc/
+Role source: https://www.differential.vc/
+Personalization source: https://www.differential.vc/
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+23. DCM | DCM investment team
+Recipient: hello@dcm.com
+Status: SENT | 2026-09-30T17:01:46.193449+00:00
+Gmail message ID: 1a0f343dbc14fa6c
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: exploratory pre-seed road-safety investment | Physical-world data with an agency buying test | An agency screening prototype seeking its first pilot
+Chosen subject: GeoCrash: exploratory pre-seed road-safety investment
+
+Hi DCM team,
+
+DCM's work with Matterport interests me because it connects physical-world data with useful business workflows. I'm pursuing a different application through GeoCrash: source-traceable road-safety screening for transportation engineers.
+
+The live prototype uses real FARS 2021–24 records and Nebraska roads with traffic-volume proxies. It is a prototype without agency customers or validated safety outcomes.
+
+I'm exploring pre-seed investment to secure a first agency pilot and test review time, evidence quality, and willingness to pay for continued use. The round amount is undecided; I want the pilot milestones to determine the scope.
+
+Prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would this be within DCM's early-stage investment interests?
+
+Your contact page requests the phrase Alan Turing, so I'm including it here.
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.dcm.com/contact
+Role source: https://www.dcm.com/
+Personalization source: https://www.dcm.com/
+Verification notes: Official founder-submission inbox. DCM also requests a memo/deck, funding history and founder LinkedIn; parent should include accurate available materials or disclose missing, never invent funding history.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+24. Essence Venture Capital | Timothy Chen
+Recipient: tim@essencevc.fund
+Status: SENT | 2026-09-30T17:01:50.293197+00:00
+Gmail message ID: 1a0f343eb016204a
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: a first design-partner test for a technical founder | Pre-seed fit before an agency data product becomes repeatable | A road-safety data workflow seeking commercial validation
+Chosen subject: GeoCrash: a first design-partner test for a technical founder
+
+Hi Tim,
+
+GTMfor.dev's discussions of first design partners and how technical buyers buy software address the questions I now face with GeoCrash. I've shipped the prototype; I need to learn what an agency would actually purchase.
+
+GeoCrash uses real FARS 2021–24 crashes, Nebraska roads, and traffic-volume proxies to support source-traceable screening. It is not yet a validated agency product or a proven data infrastructure business.
+
+I'm exploring pre-seed funding for a first pilot with defined review tasks, a named budget owner, and a test of whether the workflow transfers beyond Nebraska. There are no customers or revenue today.
+
+Live prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Essence consider investing at this stage to validate the product and its buying process?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.gtmfor.dev/
+Role source: https://www.gtmfor.dev/
+Personalization source: https://www.gtmfor.dev/
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+25. CRV | Brittany Walker
+Recipient: brittany@crv.com
+Status: SENT | 2026-09-30T17:01:54.482323+00:00
+Gmail message ID: 1a0f343fac40bf45
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: a transportation workflow at the pre-seed stage | From a road-safety prototype to an agency buying test | An early investment question for transportation decision software
+Chosen subject: GeoCrash: a transportation workflow at the pre-seed stage
+
+Hi Brittany,
+
+Your driver-operations experience at Uber makes you a relevant person to ask about turning a transportation tool into something people actually use. I'm building GeoCrash for agency engineers reviewing which road locations warrant closer safety analysis.
+
+The prototype is live with real FARS 2021–24 crash records and Nebraska roads, plus traffic-volume proxies and visible screening assumptions. It has no agency customers or validated safety outcomes yet.
+
+I'm exploring pre-seed investment to secure a first pilot and observe the workflow inside an actual engineering review process. The commercial test is whether the product earns repeated use and a paid continuation, rather than interest in a demonstration.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would this fit your first-check investment interests?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.brittwalker.com/
+Role source: https://www.crv.com/team/brittany-walker
+Personalization source: https://www.crv.com/team/brittany-walker
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+26. Array Ventures | Array investment team
+Recipient: deals@array.vc
+Status: SENT | 2026-09-30T17:01:59.212321+00:00
+Gmail message ID: 1a0f3440df16037b
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: the path from one agency pilot to repeatable sales | Pre-seed enterprise data software for road-safety engineers | An early investment case to test with paying users
+Chosen subject: GeoCrash: the path from one agency pilot to repeatable sales
+
+Hi Array team,
+
+Your emphasis on helping founders reach their second wave of customers is the lens I want to apply to GeoCrash. A single agency study could remain bespoke consulting; I want to find out whether the same software can serve repeated screening cycles and additional agencies.
+
+The deployed prototype uses real FARS 2021–24 crashes and Nebraska roadway data, with traffic-volume proxies and source-traceable screening. No agency customers or validated safety benefits exist yet.
+
+I'm exploring pre-seed investment to obtain a first pilot, test a paid continuation, and document what a second deployment would require. The commercial hypothesis is recurring evidence software for engineers.
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Array consider investing in that initial customer-validation phase?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.array.vc/
+Role source: https://www.array.vc/
+Personalization source: https://www.array.vc/
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+27. Tau Ventures | Tau investment team
+Recipient: contact@tauventures.com
+Status: SENT | 2026-09-30T17:02:05.096188+00:00
+Gmail message ID: 1a0f34424ad7a54b
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: testing trust and adoption in agency analytics | Exploratory pre-seed funding for road-safety evidence software | An institutional workflow with explicit model assumptions
+Chosen subject: GeoCrash: testing trust and adoption in agency analytics
+
+Hi Tau team,
+
+Your Uptiq spotlight emphasizes institutional trust, grounding, and auditability. The sector is different, but that adoption problem is central to GeoCrash: an engineer needs to see what supports a crash-screening result and where the evidence is incomplete.
+
+I've deployed a prototype using real FARS 2021–24 records and Nebraska roads with traffic-volume proxies. Sources and experimental assumptions are visible. It has no customers, revenue, or validated safety outcomes.
+
+I'm exploring pre-seed funding to secure a first agency pilot. The planned test would measure whether transparent evidence helps engineers review locations efficiently and whether that workflow merits a paid continuation.
+
+Current work: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Tau consider an exploratory investment conversation at this stage?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://www.tauventures.com/
+Role source: https://www.tauventures.com/
+Personalization source: https://www.tauventures.com/spotlights/spot-uptiq
+Verification notes: Published professional contact, accessed 2026-09-30; deliverability not verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+28. Bee Partners | Michael Berolzheimer
+Recipient: michael@beepartners.vc
+Status: SENT | 2026-09-30T17:02:09.792037+00:00
+Gmail message ID: 1a0f34436e88c489
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: testing the business beyond the technical demo | A pre-seed agency data product with a clear validation gap | Road-safety software: repeatability before expansion
+Chosen subject: GeoCrash: testing the business beyond the technical demo
+
+Hi Michael,
+
+Your drone investment essay's distinction between a useful service and a venture-scale product applies to a question I'm working through with GeoCrash. I've built a road-safety prototype, but a compelling map alone doesn't establish a scalable business.
+
+It uses real FARS 2021–24 crashes and Nebraska roads with traffic-volume proxies, exposing sources and screening assumptions. There are no customers or validated safety outcomes yet.
+
+I'm exploring pre-seed funding to secure a first agency pilot and test whether a second agency can use the same workflow without a consulting-heavy rebuild. I'd measure implementation effort and paid demand before expanding the product scope.
+
+Prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Bee consider an investment discussion around that validation plan?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://beepartners.vc/drone-hub-spoke
+Role source: https://beepartners.vc/about-us
+Personalization source: https://beepartners.vc/drone-hub-spoke
+Verification notes: Email in 2016 authored investment-thesis article; same direct email appears in 2026 authored article https://beepartners.vc/early-stage-venture-q1-2026. Current Founder/Managing Partner role confirmed. No deliverability verification. Current site prefers network introductions but does not forbid cold outreach.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+29. Urban Innovation Fund | Urban Innovation Fund team
+Recipient: pitch@urban.vc
+Status: SENT | 2026-09-30T17:02:18.072320+00:00
+Gmail message ID: 1a0f34457b210f12
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: pre-seed fit for agency road-safety software | A first agency pilot for traceable crash screening | Transportation analytics: GeoCrash funding inquiry
+Chosen subject: GeoCrash: pre-seed fit for agency road-safety software
+
+Hi Urban Innovation Fund team,
+
+Your Route Reports investment and focus on regulated urban industries suggest you understand a challenge I want to test: useful infrastructure analysis still needs a buyer, an acceptable evidence standard and a path into routine agency work.
+
+I'm building GeoCrash, a pre-pilot crash-screening prototype for agency engineers. The deployed example combines 2021–2024 federal fatal-crash records with Nebraska road data and labeled traffic-volume proxies: https://geocrash-666321636483.us-central1.run.app/screening/
+
+I'm exploring pre-seed funding to secure the first agency pilot and learn which department would own the workflow, what purchasing requirements apply and whether repeated use justifies a software budget. Those commercial questions are still unanswered; the screening also needs independent validation.
+
+Would this regulated-buyer adoption problem fit your current investment focus?
+
+Samarpan Mohanty
+
+Contact source: https://www.urban.vc/contactus
+Role source: https://www.urban.vc/contactus
+Personalization source: https://www.urban.vc/portfolio
+Verification notes: Official public professional address; inspected September 30, 2026. Deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+30. Autotech Ventures | Autotech Ventures team
+Recipient: founders@autotechvc.com
+Status: SENT | 2026-09-30T17:02:22.831503+00:00
+Gmail message ID: 1a0f3446bfde4a99
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: a transportation software investment-fit question | Pre-seed road-safety workflow, seeking a first pilot | Agency crash screening and Autotech’s transport thesis
+Chosen subject: GeoCrash: a transportation software investment-fit question
+
+Hi Autotech Ventures team,
+
+Autotech's emphasis on enterprise digitization and relationships across transportation is relevant to the adoption question behind GeoCrash: which existing data and engineering workflows would a new safety tool have to fit?
+
+I have a deployed, pre-pilot prototype that presents historical crash screening with its sources visible: https://geocrash-666321636483.us-central1.run.app/screening/
+
+It uses real federal fatal-crash records and Nebraska road data. Traffic-volume proxies remain a limitation to resolve with better exposure data; they aren't measured traffic counts.
+
+I'm exploring pre-seed funding to test a first agency workflow and establish whether suitable data partnerships and a paid product are feasible. I haven't validated that commercial path yet. Your stated focus starts at seed, so I may be early.
+
+Would you consider a funding-fit discussion before the first agency pilot?
+
+Samarpan Mohanty
+
+Contact source: https://www.autotechvc.com/connect
+Role source: https://www.autotechvc.com/connect
+Personalization source: https://www.autotechvc.com/
+Verification notes: Official investment inbox. Site asks for deck/business plan showing traction and background; no deck claimed or attached in this draft. Earlier than stated seed focus; body acknowledges this.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+31. Construct Capital | Rachel Holt
+Recipient: rachel@constructcap.com
+Status: SENT | 2026-09-30T17:02:27.083224+00:00
+Gmail message ID: 1a0f3447bd8bbe6c
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: testing a software workflow for road infrastructure | Pre-seed inquiry: turning a crash prototype into agency software | Infrastructure evidence workflow, first pilot ahead
+Chosen subject: GeoCrash: testing a software workflow for road infrastructure
+
+Hi Rachel,
+
+I'm approaching Construct about exploratory pre-seed funding for GeoCrash because your foundational-industries thesis puts software inside real operational work. My starting point is the engineer who needs to understand why a road segment appears in a safety screen.
+
+Here's the working prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+The existing build brings crash records and Nebraska roadway context together with traceable sources. I want to test a narrower commercial promise than predictive safety: can this make an engineer's initial evidence review easier to inspect and repeat?
+
+Capital would fund pursuing a first agency pilot, observing that review process and validating the data assumptions before selling a recurring product. Customer usefulness and independent validation are still ahead.
+
+Would this engineering workflow be within Construct's pre-seed remit?
+
+Samarpan Mohanty
+
+Contact source: https://www.constructcap.com/
+Role source: https://www.constructcap.com/
+Personalization source: https://www.constructcap.com/
+Verification notes: Official public professional address; inspected September 30, 2026. Deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+32. Fontinalis Partners | Fontinalis Partners team
+Recipient: pitch@fontinalis.com
+Status: SENT | 2026-09-30T17:02:32.499453+00:00
+Gmail message ID: 1a0f3448c500c701
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: pre-seed mobility software seeking its first pilot | Source-traceable crash screening for agency engineers | Fontinalis fit: an early road-safety software business
+Chosen subject: GeoCrash: pre-seed mobility software seeking its first pilot
+
+Hi Fontinalis team,
+
+I'm exploring pre-seed investment in GeoCrash, and your early-stage mobility strategy is relevant to its hardest business question: can one local road-safety prototype become a product that works across agencies?
+
+The Nebraska example is live: https://geocrash-666321636483.us-central1.run.app/screening/
+
+It uses 2021–2024 federal fatal-crash records, roadway data and explicitly labeled traffic-volume proxies. That is a starting implementation, not evidence of portability or independent validation.
+
+The funded milestone I have in mind is a first agency pilot that separates reusable workflow from local data preparation and engineering requirements. That would help establish whether recurring software revenue is plausible, instead of assuming every jurisdiction can use the same setup. I haven't set the raise amount.
+
+Would Fontinalis consider this pre-pilot mobility-software opportunity?
+
+Samarpan Mohanty
+
+Contact source: https://fontinalis.com/contact/
+Role source: https://fontinalis.com/contact/
+Personalization source: https://fontinalis.com/strategy/
+Verification notes: Official public professional address; inspected September 30, 2026. Deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+33. Commonweal Ventures | Commonweal Ventures team
+Recipient: contact@commonwealventures.com
+Status: SENT | 2026-09-30T17:02:36.835775+00:00
+Gmail message ID: 1a0f344a1a75386a
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: pre-seed software for a first agency safety pilot | Government partnership fit for a road-safety prototype | Testing a paid agency workflow with Commonweal
+Chosen subject: GeoCrash: pre-seed software for a first agency safety pilot
+
+Hi Commonweal team,
+
+Your thesis that government partnerships can help early companies grow is why I'm writing about GeoCrash. The current bottleneck is finding a real agency problem owner and agreeing on a useful pilot, not making the demo more elaborate.
+
+I've built a working crash-screening prototype with traceable public-data sources: https://geocrash-666321636483.us-central1.run.app/screening/
+
+It uses 2021–2024 federal fatal-crash records and Nebraska road context, with traffic-volume proxies clearly marked. I am exploring pre-seed funding to pursue the first agency pilot and test what a government customer needs before this could become paid software.
+
+The proposed work would identify the sponsoring team, evidence requirements and route from a useful pilot to an actual purchase. None of that is established yet.
+
+Would this public-safety business fit Commonweal's pre-seed strategy?
+
+Samarpan Mohanty
+
+Contact source: https://www.commonwealventures.com/
+Role source: https://www.commonwealventures.com/
+Personalization source: https://www.commonwealventures.com/
+Verification notes: Official public professional address; inspected September 30, 2026. Deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+34. Govtech Fund | Ron Bouganim
+Recipient: ron@govtechfund.com
+Status: SENT | 2026-09-30T17:02:41.570661+00:00
+Gmail message ID: 1a0f344b2e74a184
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: pre-seed inquiry for agency engineering software | A source-traceable road-safety workflow for government | Funding fit before GeoCrash’s first agency pilot
+Chosen subject: GeoCrash: pre-seed inquiry for agency engineering software
+
+Hi Ron,
+
+GeoCrash is an early attempt to turn road-safety evidence review into software an agency department could use and budget for. Your focus on tools for government employees is the reason I'm approaching Govtech Fund about pre-seed investment.
+
+An engineer can inspect the current crash-screening prototype here: https://geocrash-666321636483.us-central1.run.app/screening/
+
+It exposes source context behind results drawn from federal fatal-crash and Nebraska roadway data. The model still requires independent validation, including its use of traffic-volume proxies.
+
+For a first pilot, I want to learn who owns this review, which evidence must remain inspectable and what would justify a recurring budget. Those are proposed research questions, not customer findings. The funding amount is undecided.
+
+Are you currently considering pre-pilot investments in government engineering software?
+
+Samarpan Mohanty
+
+Contact source: https://govtechfund.com/company/govtech-fund/
+Role source: https://govtechfund.com/company/govtech-fund/
+Personalization source: https://govtechfund.com/mission/
+Verification notes: Official fund contact and role available in indexed official source; direct page fetch returned502. Firm site public news largely old, so current investment activity is not assumed; draft explicitly asks.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+35. Base10 Partners | Base10 Partners team
+Recipient: partners@base10.vc
+Status: SENT | 2026-09-30T17:02:45.582201+00:00
+Gmail message ID: 1a0f344c286d6315
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: automating preparation for agency safety reviews | Pre-seed fit for road infrastructure workflow software | A real-economy software prototype seeking its first pilot
+Chosen subject: GeoCrash: automating preparation for agency safety reviews
+
+Hi Base10 team,
+
+I'm exploring pre-seed funding to test an automation opportunity in agency engineering: preparing and checking the crash evidence behind an initial road-safety review. That seems adjacent to Base10's real-economy thesis.
+
+GeoCrash's working prototype combines public crash records and roadway context with source information visible: https://geocrash-666321636483.us-central1.run.app/screening/
+
+The commercial hypothesis is about workflow effort. A first agency pilot would compare how an engineer prepares the review today with the prototype, record where it helps or fails and test whether the result merits a software purchase.
+
+I haven't measured time savings or secured a customer yet. The current implementation also uses labeled traffic-volume proxies that require validation.
+
+Would Base10 consider funding this early workflow-automation evaluation?
+
+Samarpan Mohanty
+
+Contact source: https://base10.vc/
+Role source: https://base10.vc/
+Personalization source: https://base10.vc/
+Verification notes: Official public mailto address in site footer, not a named partner or verified dedicated pitch inbox. No LP-only restriction observed.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+36. Overture | Overture team
+Recipient: deals@overture.vc
+Status: SENT | 2026-09-30T17:02:49.870630+00:00
+Gmail message ID: 1a0f344d5d4fa83f
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: a government-facing infrastructure pre-seed inquiry | First agency pilot for traceable road-safety screening | Overture fit: road-safety software before commercial validation
+Chosen subject: GeoCrash: a government-facing infrastructure pre-seed inquiry
+
+Hi Overture team,
+
+Your model of pairing capital with government expertise caught my attention because GeoCrash's next challenge is institutional adoption. I'm exploring pre-seed funding for an agency engineering product, and I need to learn what turns a useful technical review into a purchasable workflow.
+
+This is the deployed prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+It presents historical crash screening using real public records and Nebraska road data, with source context and traffic-volume proxies identified.
+
+I would use the first funded phase to pursue an agency pilot, establish acceptable validation requirements and understand the procurement path. GeoCrash is still pre-pilot and unvalidated; no agency adoption is implied.
+
+Would this public-infrastructure use case fit Overture's investment mandate at this stage?
+
+Samarpan Mohanty
+
+Contact source: https://www.overture.vc/contact-us
+Role source: https://www.overture.vc/contact-us
+Personalization source: https://www.overture.vc/
+Verification notes: Official public professional address; inspected September 30, 2026. Deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+37. Automotive Ventures | Automotive Ventures team
+Recipient: info@automotiveventures.com
+Status: SENT | 2026-09-30T17:02:53.859023+00:00
+Gmail message ID: 1a0f344e31d2bd66
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: early road-safety software investment inquiry | Testing a paid agency screening workflow in mobility | Pre-seed fit before a first transportation-agency pilot
+Chosen subject: GeoCrash: early road-safety software investment inquiry
+
+Hi Automotive Ventures team,
+
+Your seed-stage mobility focus prompted this funding-fit question. GeoCrash starts outside the vehicle itself: it is a working prototype for agency engineers inspecting historical crash patterns and roadway context.
+
+You can see the current implementation here: https://geocrash-666321636483.us-central1.run.app/screening/
+
+I'm exploring pre-seed investment to secure a first agency pilot and determine whether a paid evidence-review workflow is viable. The prototype uses 2021–2024 federal fatal-crash records, Nebraska roads and labeled traffic-volume proxies; it is not independently validated.
+
+An eventual fleet or automotive use case would need its own customer discovery. I don't want to assume that agency screening translates directly into a commercial driving product, or claim those customers exist.
+
+Would Automotive Ventures consider funding the agency-first phase of a safety-software business?
+
+Samarpan Mohanty
+
+Contact source: https://automotiveventures.com/contact
+Role source: https://automotiveventures.com/contact
+Personalization source: https://automotiveventures.com/contact
+Verification notes: Public general business email adjacent to founder invitation. Dedicated full-pitch route is Typeform; draft asks investment fit and does not pretend a formal submission was completed.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+38. Dynamo Ventures | Dynamo Ventures team
+Recipient: hello@dynamo.vc
+Status: SENT | 2026-09-30T17:02:58.133555+00:00
+Gmail message ID: 1a0f344f5e51ca83
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: an early physical-infrastructure software question | Road-safety evidence software, before the first agency pilot | Pre-seed fit for an inspectable transportation workflow
+Chosen subject: GeoCrash: an early physical-infrastructure software question
+
+Hi Dynamo team,
+
+Your physical-economy thesis stresses understanding real operations before scaling technology. That is the stage I'm at with GeoCrash: a working prototype exists, but the engineer's actual workflow still needs to shape the business.
+
+The product currently exposes historical crash screening and its public-data sources: https://geocrash-666321636483.us-central1.run.app/screening/
+
+I'm exploring pre-seed funding to pursue a first agency pilot and observe whether engineers would use this repeatedly, which data they distrust and where existing tools already suffice. The goal is to decide whether there is a durable software job to do.
+
+This is not an autonomous-driving system or a validated safety intervention. It is an unvalidated FARS/Nebraska prototype with explicit exposure-data limitations.
+
+Would that operational discovery milestone fit Dynamo's inception-to-seed approach?
+
+Samarpan Mohanty
+
+Contact source: https://www.dynamo.vc/
+Role source: https://www.dynamo.vc/
+Personalization source: https://www.dynamo.vc/
+Verification notes: Official home page public client-rendered mailto:hello@dynamo.vc found in site source associated with call-to-action. No guessed address.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+39. Schema Ventures | Aarthi Ramamurthy
+Recipient: aarthi@schemavc.com
+Status: SENT | 2026-09-30T17:03:02.118655+00:00
+Gmail message ID: 1a0f34502aec4e3d
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: first-check fit for an agency engineering workflow | From crash-screening prototype to a first paid-workflow test | An early infrastructure software build for Schema
+Chosen subject: GeoCrash: first-check fit for an agency engineering workflow
+
+Hi Aarthi,
+
+Schema's first-check approach and interest in workflow intelligence made me think GeoCrash might fit. I'm building for a specific operator: the agency engineer who must inspect the evidence behind a road-safety screening result.
+
+The prototype is working: https://geocrash-666321636483.us-central1.run.app/screening/
+
+What I want to fund next is the feedback loop with a first agency pilot: watch the review, record confusing or unusable output, correct data assumptions and determine what would make the tool worth paying for. No pilot results or customers exist yet.
+
+The current implementation uses real federal fatal-crash and Nebraska roadway data; traffic-volume proxies are labeled and independent validation remains necessary. I'm exploring pre-seed investment, with the amount still open.
+
+Would you consider GeoCrash within Schema's first-check workflow-software focus?
+
+Samarpan Mohanty
+
+Contact source: https://schemavc.com/
+Role source: https://schemavc.com/
+Personalization source: https://schemavc.com/
+Verification notes: Official public professional address; inspected September 30, 2026. Deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+40. Brick & Mortar Ventures | Brick & Mortar Ventures team
+Recipient: info@brickmortar.vc
+Status: SENT | 2026-09-30T17:03:06.026862+00:00
+Gmail message ID: 1a0f34513d319b7f
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: investment fit for an engineering evidence workflow | Pre-seed road-safety software for agency engineers | Testing infrastructure screening before a commercial launch
+Chosen subject: GeoCrash: investment fit for an engineering evidence workflow
+
+Hi Brick & Mortar team,
+
+Your engineering-software focus makes you relevant to a distribution question I'm exploring with GeoCrash: would a traceable safety-review workflow be purchased by an agency, or used through the engineering firms that serve it?
+
+I have a working prototype, not an answer yet: https://geocrash-666321636483.us-central1.run.app/screening/
+
+It combines federal fatal-crash records and Nebraska road context, identifies traffic-volume proxies and makes the underlying sources inspectable. Independent validation is still ahead.
+
+I'm seeking exploratory pre-seed funding to pursue a first agency pilot and test the workflow with engineers. Alongside usability, I want to understand how much setup is repeatable across projects and who would value it enough to pay. There are no existing customers.
+
+Would that infrastructure-engineering product hypothesis fit your investment scope?
+
+Samarpan Mohanty
+
+Contact source: https://brickmortar.vc/contact
+Role source: https://brickmortar.vc/contact
+Personalization source: https://brickmortar.vc/
+Verification notes: Official contact page invites entrepreneurs; footer mailto info@brickmortar.vc inspected directly.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+41. Trucks Venture Capital | Reilly Brennan
+Recipient: rpb@trucks.vc
+Status: SENT | 2026-09-30T17:03:09.673697+00:00
+Gmail message ID: 1a0f3452075a9f3a
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: pre-seed fit within safer transportation | A first agency pilot for historical crash-screening software | Road-safety evidence workflow, exploratory funding inquiry
+Chosen subject: GeoCrash: pre-seed fit within safer transportation
+
+Hi Reilly,
+
+Trucks' safer-transportation thesis is why I'm approaching you about pre-seed funding for GeoCrash. One issue I want to get right is fundamental: a busy road's crash count is not the same thing as risk after accounting for exposure.
+
+The prototype is live: https://geocrash-666321636483.us-central1.run.app/screening/
+
+It uses 2021–2024 federal fatal-crash records and Nebraska roadway data for source-traceable screening. Its traffic-volume inputs include labeled proxies, so I am not presenting the output as independently validated risk.
+
+The proposed first funded milestone is an agency pilot that tests data adequacy and engineering usefulness before a paid product is offered. I am seeking that first partner now; the round size is undecided.
+
+Would Trucks consider investing at this evidence-building stage of an agency safety product?
+
+Samarpan Mohanty
+
+Contact source: https://redbud.vc/vc-list-old/trucks-venture-capital-svcl97uvw0
+Role source: https://www.trucks.vc/about
+Personalization source: https://www.trucks.vc/about
+Verification notes: Public professional address published by peer VC Redbud; also appears in2019 interview explicitly inviting startup email at https://upwardtechsolutions.com/news/top-mobility-vcs-discuss-their-current-investment-strategies/. Older email provenance; current Trucks role confirmed. No deliverability verification.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+42. Assembly Ventures | Assembly Ventures team
+Recipient: contact@assemblyventures.com
+Status: SENT | 2026-09-30T17:03:13.702233+00:00
+Gmail message ID: 1a0f34531f332ddd
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: investment fit for agency road-safety software | A mobility-data prototype seeking its first agency pilot | Exploratory pre-seed: crash evidence for infrastructure review
+Chosen subject: GeoCrash: investment fit for agency road-safety software
+
+Hi Assembly team,
+
+Assembly's connections between mobility operators and innovation teams seem useful for a problem I'm investigating with GeoCrash: what makes new transportation evidence acceptable to the professionals expected to use it?
+
+I'm exploring pre-seed funding for a first agency pilot. The working prototype can be inspected here: https://geocrash-666321636483.us-central1.run.app/screening/
+
+It brings 2021–2024 federal fatal-crash records into Nebraska roadway context, retaining source information and labeling traffic-volume proxies. I don't yet have independent validation or agency customers.
+
+The next phase would ask engineers to assess the screening against their existing review requirements and define what a commercially useful product would need. That decision, including whether they would pay, should guide further model development.
+
+Would Assembly consider funding this early mobility-data workflow evaluation?
+
+Samarpan Mohanty
+
+Contact source: https://www.assemblyventures.com/contact
+Role source: https://www.assemblyventures.com/contact
+Personalization source: https://www.assemblyventures.com/
+Verification notes: Official public professional address; inspected September 30, 2026. Deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+43. Tusk Venture Partners | Tusk Venture Partners team
+Recipient: info@tusk.vc
+Status: SENT | 2026-09-30T17:03:17.577008+00:00
+Gmail message ID: 1a0f345407b0b9d6
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: early funding fit for government-facing safety software | Agency road-safety workflow and a first-pilot investment | Pre-seed inquiry: a traceable infrastructure evidence product
+Chosen subject: GeoCrash: early funding fit for government-facing safety software
+
+Hi Tusk team,
+
+I'm writing about exploratory pre-seed investment in GeoCrash. Your experience in regulated markets interests me because agency adoption depends on more than software functionality: a safety workflow needs an accountable buyer and an agreed standard for its evidence.
+
+GeoCrash is a pre-pilot prototype for agency engineers, using real federal fatal-crash records and Nebraska roadway context. The current build is here: https://geocrash-666321636483.us-central1.run.app/screening/
+
+I want to fund a first pilot that establishes what an engineer can rely on, which data assumptions need improvement and what institutional requirements shape a purchase. I am not claiming that regulation creates a competitive advantage for this business yet.
+
+The screening remains unvalidated, and there are no customers.
+
+Would Tusk consider an investment-fit conversation at this stage?
+
+Samarpan Mohanty
+
+Contact source: https://www.tusk.vc/
+Role source: https://www.tusk.vc/
+Personalization source: https://www.tusk.vc/
+Verification notes: Official public professional address; inspected September 30, 2026. Deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+44. ManchesterStory | ManchesterStory team
+Recipient: info@manchesterstory.com
+Status: SENT | 2026-09-30T17:03:21.668279+00:00
+Gmail message ID: 1a0f34551128c90d
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: investment fit for a road-safety evidence business | Agency-first crash screening with an insurance-data question | Pre-seed inquiry before GeoCrash’s first pilot
+Chosen subject: GeoCrash: investment fit for a road-safety evidence business
+
+Hi ManchesterStory team,
+
+Your insurer and broker network is relevant to a question I want to investigate without assuming the answer: could agency road-safety evidence ever become useful to an insurance customer?
+
+I'm exploring pre-seed funding for GeoCrash, initially focused on agency engineers. The deployed prototype uses 2021–2024 federal fatal-crash records and Nebraska roadway data for inspectable historical screening: https://geocrash-666321636483.us-central1.run.app/screening/
+
+The first funded milestone would be an agency pilot. Insurance relevance would require separate evidence: exposure quality, geographic coverage and a clearly defined decision the data improves. GeoCrash has no validated underwriting performance, and its current traffic-volume inputs include labeled proxies.
+
+This is a pre-customer project, with the raise amount undecided.
+
+Would ManchesterStory consider this agency-first approach, or require an insurance customer before evaluating investment?
+
+Samarpan Mohanty
+
+Contact source: https://www.manchesterstory.com/contact-us
+Role source: https://www.manchesterstory.com/contact-us
+Personalization source: https://www.manchesterstory.com/
+Verification notes: Official public professional address; inspected September 30, 2026. Deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+45. MTech Capital | MTech Capital team
+Recipient: pitch@mtechcapital.com
+Status: SENT | 2026-09-30T17:03:25.269269+00:00
+Gmail message ID: 1a0f3455fab2b1b7
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: early investment-fit question for risk-data workflows | Traceable road-safety evidence, before commercial validation | Pre-seed inquiry: agency workflow with an insurance adjacency
+Chosen subject: GeoCrash: early investment-fit question for risk-data workflows
+
+Hi MTech team,
+
+MTech's interest in employee productivity, alongside insurance technology, prompted a narrower question than an underwriting pitch. Could a product that makes external road-safety evidence easier to inspect be investable before an insurance application is established?
+
+I'm building GeoCrash for agency engineers first. The working prototype combines federal fatal-crash records with Nebraska road context and exposes its sources: https://geocrash-666321636483.us-central1.run.app/screening/
+
+I am exploring pre-seed funding to pursue a first agency pilot and evaluate the evidence-review workflow. Any later insurance offering would need separate validation and customer discovery. I have no customers or independently validated outcomes; traffic-volume proxies remain a known data limitation.
+
+Would this stage and agency-first path fit MTech's early-stage investment approach?
+
+Samarpan Mohanty
+
+Contact source: https://mtechcapital.com/contact/
+Role source: https://mtechcapital.com/contact/
+Personalization source: https://mtechcapital.com/
+Verification notes: Official public professional address; inspected September 30, 2026. Deliverability not independently verified.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+46. Vektor Partners | Vektor Partners team
+Recipient: info@vektorpartners.com
+Status: SENT | 2026-09-30T17:03:29.359403+00:00
+Gmail message ID: 1a0f3456ede7312c
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: agency screening alongside a traffic-AI investment thesis | Pre-seed fit for traceable road-safety evidence | A first agency pilot, before predictive safety claims
+Chosen subject: GeoCrash: agency screening alongside a traffic-AI investment thesis
+
+Hi Vektor team,
+
+Your investments in NoTraffic, Drover and Peregrine make Vektor relevant to the distinction I'm working through with GeoCrash: historical road-safety evidence can inform agency review, but it should not be confused with real-time perception or signal control.
+
+My working prototype serves the first of those jobs: https://geocrash-666321636483.us-central1.run.app/screening/
+
+It uses real 2021–2024 federal fatal-crash records and Nebraska roadway data for source-traceable screening, with traffic-volume proxies labeled. There is no integration with your portfolio or independently validated safety outcome.
+
+I'm exploring pre-seed funding to secure a first agency pilot and test whether the review workflow warrants a paid software product. Customer discovery would determine what to build next.
+
+Would Vektor consider this agency-facing application within its AI and mobility investment scope?
+
+Samarpan Mohanty
+
+Contact source: https://www.vektorpartners.com/
+Role source: https://www.vektorpartners.com/
+Personalization source: https://www.vektorpartners.com/companies
+Verification notes: Official homepage Contact mailto info@vektorpartners.com inspected. Official portfolio confirms NoTraffic, Drover and Peregrine. No existing relationship or integration implied. No deliverability verification.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+47. Pear VC | Pejman Nozad
+Recipient: pejman@pear.vc
+Status: SENT | 2026-09-30T17:03:59.481600+00:00
+Gmail message ID: 1a0f345e25645b7a
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: a first agency pilot, and possible Pear fit | From road-safety prototype to customer evidence | Pre-seed fit for an engineering workflow
+Chosen subject: GeoCrash: a first agency pilot, and possible Pear fit
+
+Hi Pejman,
+
+PearX’s emphasis on customer learning caught my attention because that is GeoCrash’s next milestone. I have built a deployed crash-screening prototype; I now need to establish whether an agency engineer would use it in a real review workflow.
+
+GeoCrash combines 2021–24 federal fatal-crash records with Nebraska roadway data and an traffic-volume exposure proxy. Engineers can inspect the sources and assumptions behind screening results. The proposed first pilot would test whether that evidence trail makes a corridor review more useful and repeatable.
+
+There are no customers or revenue yet. I’m exploring pre-seed investment to fund that pilot; the amount is undecided.
+
+Would this stage and agency-software direction be appropriate for an initial Pear investment conversation, including potential PearX fit?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://www.vitalize.vc/podcast/pejman-nozad-podcast/
+Role source: https://pear.vc/persian-founders-circle/
+Personalization source: https://pear.vc/pearx-s26-applications/
+Verification notes: Direct email self-published in Vitalize interview, approximately 2023; current role verified separately. Pear info@ is press-only and excluded. No program eligibility or participation assumed.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+48. Precursor Ventures | Charles Hudson
+Recipient: charles@precursorvc.com
+Status: SENT | 2026-09-30T17:04:03.452726+00:00
+Gmail message ID: 1a0f345f2427065b
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: An early GeoCrash investment-fit question | GeoCrash before the first agency pilot | Source-traceable road screening at pre-seed
+Chosen subject: An early GeoCrash investment-fit question
+
+Hi Charles,
+
+Your invitation for entrepreneurs to email you directly prompted this note. I’m exploring pre-seed funding for GeoCrash at the point where a working prototype exists but the customer case still needs to be earned.
+
+The product helps agency engineers examine fatal-crash screening results alongside the underlying data and assumptions. Its current implementation uses 2021–24 federal fatal-crash records and Nebraska roadway and traffic-volume data, with traffic exposure explicitly treated as a proxy.
+
+The first milestone I would fund is a narrow agency pilot: observe the existing screening process, compare GeoCrash’s usefulness, and test willingness to pay. There are no customers or revenue, and I haven’t set a round amount.
+
+Given Precursor’s early-stage approach, would you consider a conversation about whether this is an investable starting point?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://alphapartners.com/podcast/navigating-ai-inclusion-and-early-stage-venture-capital-with-charles-hudson/
+Role source: https://precursorvc.com/
+Personalization source: https://precursorvc.com/
+Verification notes: Email expressly offered for founder pitches in primary interview; current website confirms firm.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+49. Homebrew | Hunter Walk
+Recipient: hunter@homebrew.co
+Status: SENT | 2026-09-30T17:04:07.201635+00:00
+Gmail message ID: 1a0f3460363d8b9d
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash and Homebrew’s traffic-safety experience | Agency screening: investment fit or portfolio overlap? | A first-pilot road-safety software question
+Chosen subject: GeoCrash and Homebrew’s traffic-safety experience
+
+Hi Hunter,
+
+Homebrew’s work with Obvio and Ride Report makes you a particularly relevant investor to ask about GeoCrash. I also recognize that there could be portfolio overlap; I would want to establish that before going deeper.
+
+GeoCrash’s current focus is an agency engineer’s review of road segments. The deployed prototype connects 2021–24 federal fatal-crash data with Nebraska roadway information and an traffic-volume exposure proxy, keeping the source evidence and limitations visible.
+
+I’m seeking the first pilot, with no customers or revenue yet. The investment hypothesis is that an auditable screening workflow can become useful recurring agency software; that remains to be tested. I’m exploring pre-seed funding without a fixed amount.
+
+Would this be within Homebrew’s investment scope, subject to the portfolio-overlap check?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://www.homebrew.co/
+Role source: https://www.homebrew.co/
+Personalization source: https://www.homebrew.co/
+Verification notes: Current official published direct email. Homebrew now invests own capital; do not imply traditional LP fund or confirmed differentiation from portfolio.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+50. True Ventures | True Ventures investment team
+Recipient: pitch@trueventures.com
+Status: SENT | 2026-09-30T17:04:12.006712+00:00
+Gmail message ID: 1a0f34613287fe77
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: testing an agency decision workflow | Early infrastructure software investment fit | A prototype before the first road-safety pilot
+Chosen subject: GeoCrash: testing an agency decision workflow
+
+Hello True Ventures team,
+
+I’m exploring pre-seed investment to turn GeoCrash from a deployed prototype into its first agency pilot. True’s backing of Gridware and ICEYE led me to ask whether another business grounded in physical-world data could fit your earliest-stage interests.
+
+The first product is deliberately bounded: fatal-crash screening for agency engineers, using 2021–24 federal fatal-crash data and Nebraska roadway data. An traffic-volume exposure proxy and experimental methods are identified as such. An engineer can inspect the evidence supporting a result.
+
+The commercial hypothesis is recurring use in road-safety review, rather than a single analytical deliverable. The pilot would test that hypothesis; there are no customers or revenue today, and no round amount set.
+
+Would you consider an investment-fit conversation around that first milestone?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://www.trueventures.com/
+Role source: https://www.trueventures.com/
+Personalization source: https://www.trueventures.com/
+Verification notes: Pitch email is a mailto link in current official homepage HTML. Shared investment inbox.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+51. Notation Capital | Notation investment team
+Recipient: hello@notation.vc
+Status: SENT | 2026-09-30T17:04:18.429149+00:00
+Gmail message ID: 1a0f3462bc3c037d
+Delivery status: BOUNCED: Google Groups rejected the message: group may not exist or may not allow external posting.
+Subject options: A data-product question for Notation | GeoCrash: from inspectable records to agency workflow | Day-zero investment fit for road-safety software
+Chosen subject: A data-product question for Notation
+
+Hello Notation team,
+
+A crash record, a road segment, and an exposure estimate are useful only if an engineer understands how they were connected. That data-product problem is the starting point for GeoCrash.
+
+The deployed prototype makes screening evidence inspectable using 2021–24 federal fatal-crash data and Nebraska roadway and traffic-volume data. Traffic exposure is a proxy, and the methods are experimental. I want a first agency pilot to test the product boundary: which parts of the review should become repeatable software, and which still require local engineering judgment.
+
+Notation’s day-zero investing and technical product experience are why I’m reaching out. I’m exploring pre-seed capital for this customer-development step, before any customers or revenue; the amount is open.
+
+Would you consider this public-sector data workflow for investment?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://notation.vc/
+Role source: https://notation.vc/
+Personalization source: https://notation.vc/
+Verification notes: Official homepage explicitly welcomes cold email. NYC focus disclosed by firm; sender location and eligibility not assumed.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+52. Cowboy Ventures | Cowboy investment team
+Recipient: hello@cowboy.vc
+Status: SENT | 2026-09-30T17:04:22.733501+00:00
+Gmail message ID: 1a0f3463fd9c8275
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: a vertical workflow before customer traction | A first-pilot enterprise software question | Would agency crash screening fit Cowboy?
+Chosen subject: GeoCrash: a vertical workflow before customer traction
+
+Hello Cowboy team,
+
+The next GeoCrash milestone is to observe an agency engineer using it on an actual review task, then decide what deserves to become a paid product. I’m exploring pre-seed funding for that first pilot, with no amount set.
+
+Cowboy’s enterprise focus and account of backing Arcol before product make you relevant to this stage. I have already deployed a source-traceable crash-screening prototype using 2021–24 federal fatal-crash records and Nebraska roadway data, with traffic volume treated as an exposure proxy.
+
+The investment case would depend on repeated workflow value, manageable agency onboarding, and purchasing interest. None is established by having a demo; there are no customers or revenue yet.
+
+Would Cowboy consider evaluating this early vertical-software thesis?
+
+Here is the current product: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://www.cowboy.vc/how-we-work
+Role source: https://cowboy.vc/
+Personalization source: https://cowboy.vc/
+Verification notes: How-we-work page explicitly says cold inbound is reviewed; shared founder-facing inbox.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+53. Afore Capital | Anamitra Banerji
+Recipient: anamitra@afore.vc
+Status: SENT | 2026-09-30T17:04:26.727198+00:00
+Gmail message ID: 1a0f3464ff6b1c73
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash’s next product test: the first agency pilot | Pre-traction road-safety software for Afore | An early product-edge hypothesis
+Chosen subject: GeoCrash’s next product test: the first agency pilot
+
+Hi Anamitra,
+
+Afore’s focus on product building before traction is why I’m reaching out now. GeoCrash has a working prototype, but I want its next iteration to be driven by an agency’s actual review process.
+
+The product makes fatal-crash screening traceable to the underlying records and assumptions. Today it combines 2021–24 federal fatal-crash data with Nebraska roadway data and an traffic-volume exposure proxy. The possible product edge is not a claim of superior crash prediction; it is helping an engineer inspect and defend the evidence used in screening.
+
+I’m seeking the first pilot and exploring pre-seed investment to fund it. There are no customers or revenue, and the round amount remains open.
+
+Would you consider evaluating this product hypothesis for Afore’s pre-seed strategy?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://techcrunch.com/2023/09/29/how-to-pitch-me-7-investors-discuss-what-theyre-looking-for-in-september-2023/
+Role source: https://www.afore.vc/
+Personalization source: https://www.afore.vc/
+Verification notes: Email self-published in Sep 2023 primary interview; current Afore role verified separately. Hook drawn from official site, not extensive paraphrase of restricted interview.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+54. Lerer Hippeau | Lerer Hippeau investment team
+Recipient: contact@lererhippeau.com
+Status: SENT | 2026-09-30T17:04:30.962697+00:00
+Gmail message ID: 1a0f3465c7648737
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: A road-data workflow at the first-pilot stage | GeoCrash: uncertainty made visible to agency engineers | Early investment fit alongside your applied-data interests
+Chosen subject: A road-data workflow at the first-pilot stage
+
+Hello Lerer Hippeau team,
+
+WeatherPromise’s presence in your portfolio caught my attention because it brings physical-world uncertainty into a product people use. GeoCrash addresses a different buyer and problem, but communicating the limits of data is central to the experience I’m building.
+
+An agency engineer can inspect fatal-crash screening and its supporting sources in the deployed prototype. The current implementation uses 2021–24 federal fatal-crash data, Nebraska roadway information, and an traffic-volume exposure proxy.
+
+I’m exploring pre-seed investment to secure and execute a first pilot. The test would be whether engineers find the evidence review useful enough to return to it, and whether an agency would buy it. There are no customers or revenue yet; the amount is undecided.
+
+Would this be a fit for LH’s investment interests?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://www.lererhippeau.com/
+Role source: https://www.lererhippeau.com/
+Personalization source: https://www.lererhippeau.com/
+Verification notes: General contact mailto verified in official HTML; separate press inbox excluded. Comparison describes proposed workflow, not claimed similarity of business model.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+55. Scribble Ventures | Scribble investment team
+Recipient: hello@scribble.vc
+Status: SENT | 2026-09-30T17:04:36.521099+00:00
+Gmail message ID: 1a0f34672e391a4c
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash and the public-agency workflow question | First-pilot investment fit for Scribble | Testing the product and GTM behind crash screening
+Chosen subject: GeoCrash and the public-agency workflow question
+
+Hello Scribble team,
+
+Would Scribble consider a pre-seed investment conversation about a public-agency analytics workflow, given your product-and-GTM focus and work with Peregrine?
+
+I’m building GeoCrash, a deployed crash-screening prototype for agency engineers. It is currently applied analytics rather than a foundation-model company, so I recognize your AI-native focus may be narrower. The current data combines 2021–24 federal fatal-crash data with Nebraska roadway information and an traffic-volume exposure proxy; sources and assumptions remain visible.
+
+What I want to fund next is the commercial learning: identify a first pilot, observe the review process, and determine whether the product fits an agency’s repeated work and buying process. No customers or revenue are established, and the pre-seed amount remains undecided.
+
+The working prototype is here: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://www.scribble.vc/
+Role source: https://www.scribble.vc/
+Personalization source: https://www.scribble.vc/
+Verification notes: Current homepage shared email. Lower thesis certainty: explicitly discloses applied analytics vs current AI-native focus; no false AI-native claim.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+56. Founder Collective | Founder Collective investment team
+Recipient: contact@foundercollective.com
+Status: SENT | 2026-09-30T17:04:40.166783+00:00
+Gmail message ID: 1a0f3468221ec645
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: one pilot before expanding the product | A capital-disciplined agency software experiment | First-customer investment fit for Founder Collective
+Chosen subject: GeoCrash: one pilot before expanding the product
+
+Hello Founder Collective team,
+
+I want to keep GeoCrash’s first commercial test small enough to learn from: one agency review workflow before broader integrations or geographic expansion. Your writing about the hidden costs of enterprise opportunities is a useful reason to approach Founder Collective.
+
+A deployed prototype already supports source-traceable fatal-crash screening using 2021–24 federal fatal-crash data, Nebraska roadway records, and an traffic-volume exposure proxy. The next investment would buy evidence about usage and purchasing interest, not simply a longer feature list.
+
+I’m exploring pre-seed funding, with the amount undecided, to secure a first agency pilot and understand the work required to serve it. There are no customers or revenue yet.
+
+Would this capital-disciplined first-customer experiment fit your investment approach?
+
+You can inspect the prototype here: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://foundercollective.com/blog/how-to-write-better-cold-emails-to-vcs/
+Role source: https://foundercollective.com/
+Personalization source: https://foundercollective.com/blog/not-every-opportunity-is-yours-to-pick-up/
+Verification notes: Official blog expressly invites cold outreach to contact inbox; current firm verified independently.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+57. Flybridge | Flybridge investment team
+Recipient: hello@flybridge.com
+Status: SENT | 2026-09-30T17:04:44.190062+00:00
+Gmail message ID: 1a0f3469261b291c
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: testing trust before scaling agency software | A first-pilot investment-fit question for Flybridge | Inspectable road-safety analytics and the path to adoption
+Chosen subject: GeoCrash: testing trust before scaling agency software
+
+Hello Flybridge team,
+
+Your criteria for applied enterprise software connect user trust with getting beyond pilots. GeoCrash needs to prove both, and I’m exploring pre-seed investment to run the first test.
+
+The prototype lets an agency engineer inspect the data and assumptions behind fatal-crash screening. It uses 2021–24 federal fatal-crash data, Nebraska roadway information, and an traffic-volume exposure proxy; its methods remain experimental. No independent validation is claimed.
+
+The proposed pilot would examine whether engineers can use that evidence review in their routine work and what would need to be true for a purchase. I’m not treating a pilot as product-market fit: there are no customers or revenue today, and the funding amount is open.
+
+Would this applied analytics direction be within Flybridge’s early enterprise investment scope?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://www.flybridge.com/ideas/the-bow/announcing-flybridge-2025
+Role source: https://www.flybridge.com/team
+Personalization source: https://www.flybridge.com/approach
+Verification notes: 2025 fund announcement expressly invites founders at email. Current AI focus may be narrower than prototype; fit posed as question.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+58. Weekend Fund | Weekend Fund investment team
+Recipient: team@weekend.fund
+Status: SENT | 2026-09-30T17:04:47.848672+00:00
+Gmail message ID: 1a0f346a050f7bec
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: An unglamorous agency workflow with a first-pilot plan | GeoCrash investment fit for Weekend Fund | Source-traceable screening for road engineers
+Chosen subject: An unglamorous agency workflow with a first-pilot plan
+
+Hello Weekend Fund team,
+
+GeoCrash sits toward the practical B2B end of the range you describe: software for an agency engineer reviewing road-safety evidence. Your backing of Paladin also makes the public-agency customer question relevant.
+
+Here is what exists: a deployed prototype combining 2021–24 federal fatal-crash records, Nebraska roadway data, and an traffic-volume exposure proxy. It keeps the sources and assumptions inspectable.
+
+Here is what needs funding: the first pilot and the product work needed to learn whether agencies would use and pay for this repeatedly. There are no customers or revenue yet. I’m exploring pre-seed investment with the amount undecided.
+
+Would Weekend consider that first-customer milestone as an investment opportunity in public-agency software?
+
+You can try the current scope here: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://weekend.fund/
+Role source: https://weekend.fund/
+Personalization source: https://weekend.fund/
+Verification notes: Official team address explicitly for builders. Ryan direct address is LP-only on site and intentionally excluded.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+59. Long Journey Ventures | Long Journey investment team
+Recipient: hi@longjourney.vc
+Status: SENT | 2026-09-30T17:04:51.740655+00:00
+Gmail message ID: 1a0f346af45e25b6
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: a narrow experiment behind a bigger agency thesis | Road-safety software before its first customer | A disciplined first-pilot investment question
+Chosen subject: GeoCrash: a narrow experiment behind a bigger agency thesis
+
+Hello Long Journey team,
+
+I’m exploring a business around a specific question: can an agency engineer’s review of crash evidence become useful recurring software? GeoCrash is a working prototype; customer demand is still a hypothesis.
+
+Your emphasis on both unconventional early ideas and disciplined use of capital is why I’m reaching out. I want to fund a bounded first pilot, learn what the engineer and budget owner actually value, and let that evidence guide expansion.
+
+The deployed product uses 2021–24 federal fatal-crash records with Nebraska roadway data and an traffic-volume exposure proxy, making assumptions inspectable. There are no customers or revenue yet. I’m considering pre-seed funding, with no amount fixed.
+
+Would Long Journey consider evaluating this early agency-software direction for investment?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://www.longjourney.vc/
+Role source: https://www.longjourney.vc/
+Personalization source: https://www.longjourney.vc/
+Verification notes: Official homepage general founder-facing hello; no press or LP-only restriction.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+60. TenVC | TenVC investment team
+Recipient: ben@10vc.com
+Status: SENT | 2026-09-30T17:04:55.682540+00:00
+Gmail message ID: 1a0f346be1bd2833
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: Testing a narrow entry point for road-safety software | GeoCrash: pre-seed fit for TenVC? | From crash-screening prototype to agency workflow
+Chosen subject: Testing a narrow entry point for road-safety software
+
+Hi Ben,
+
+A possible route into road-safety software is to earn one engineer’s repeated use before trying to become a broader platform. That is the investment hypothesis I want to test with GeoCrash.
+
+I have deployed a prototype for inspecting fatal-crash screening evidence. It combines 2021–24 federal fatal-crash data, Nebraska roadway information, and an traffic-volume exposure proxy. I’m seeking the first agency pilot and exploring pre-seed funding, with the amount undecided.
+
+TenVC’s interest in changing legacy industry workflows led me to you. I’m not claiming breakthrough technology or a proven platform; the immediate question is whether the review task has enough customer value to support a business. There are no customers or revenue yet.
+
+Would TenVC consider this first-pilot investment hypothesis?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://www.10vc.com/
+Role source: https://www.10vc.com/
+Personalization source: https://www.10vc.com/
+Verification notes: Official homepage explicitly reviews pitches at this email. Named owner surname/role not assumed; addressed investment team. Thesis fit tentative, no technological breakthrough asserted.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+61. BoxGroup | BoxGroup investment team
+Recipient: hello@boxgroup.com
+Status: SENT | 2026-09-30T17:04:59.780086+00:00
+Gmail message ID: 1a0f346ce3316b93
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: an investment conversation while assumptions are open | A raw product, a specific agency test | First-pilot road-safety software for BoxGroup
+Chosen subject: GeoCrash: an investment conversation while assumptions are open
+
+Hello BoxGroup team,
+
+I’m exploring pre-seed investment for GeoCrash and would like to know whether you would consider a first conversation at its current stage: deployed prototype, no customers, and a first agency pilot still to secure.
+
+Your description of backing raw products with more assumptions than traction matches where I am. The central assumption to test is whether source-traceable crash screening can earn repeated use from an agency engineer and a budget from the agency.
+
+Today the prototype uses 2021–24 federal fatal-crash records, Nebraska roadway data, and an traffic-volume exposure proxy. Funding would support customer discovery and the first workflow evaluation, before wider geographic expansion. I haven’t fixed the round amount.
+
+The demo makes the current scope inspectable: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://www.boxgroup.com/about
+Role source: https://www.boxgroup.com/team
+Personalization source: https://www.boxgroup.com/about
+Verification notes: Official about page publishes email directly alongside earliest-stage investing invitation.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+62. NextView Ventures | Rob Go
+Recipient: rob@nextviewventures.com
+Status: SENT | 2026-09-30T17:05:04.331533+00:00
+Gmail message ID: 1a0f346e1031536b
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: A vertical-software question from GeoCrash | The engineer’s workflow behind a road-safety prototype | GeoCrash: first-pilot fit for NextView
+Chosen subject: A vertical-software question from GeoCrash
+
+Hi Rob,
+
+The product question behind GeoCrash is how an agency engineer moves from a map of crashes to evidence they can scrutinize. I’m trying to make that step into a useful software workflow.
+
+Your focus on end-user experience and vertical SaaS is why I’m asking NextView about investment fit. GeoCrash is deployed using 2021–24 federal fatal-crash records and Nebraska roadway and traffic-volume data, with exposure identified as a proxy. The interface keeps source records and assumptions near the screening result.
+
+I’m seeking a first agency pilot to learn whether that experience earns repeat use and purchasing interest. There are no customers or revenue yet; I’m exploring pre-seed funding, with the amount undecided.
+
+Would you consider this agency workflow within NextView’s investment scope?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://nextview.vc/blog/our-thesis-on-work-equalizing-opportunity/
+Role source: https://nextview.vc/team/
+Personalization source: https://nextview.vc/team/
+Verification notes: Direct founder invitation in 2019 official blog; current role confirmed in 2026 team page. Address is older published source; deliverability not independently verified. Current site also offers preferred contact form.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+63. Ludlow Ventures | Jonathon Triest
+Recipient: jt@ludlowventures.com
+Status: SENT | 2026-09-30T17:05:08.331221+00:00
+Gmail message ID: 1a0f346f0b3dc55f
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash at the prototype-to-pilot transition | An early investment-fit question for Ludlow | Building agency software before customer traction
+Chosen subject: GeoCrash at the prototype-to-pilot transition
+
+Hi Jonathon,
+
+I have a working GeoCrash prototype and a business hypothesis that still needs its first customer test. Ludlow’s account of backing Backbone when it was a simple prototype encouraged me to reach out before dressing that uncertainty up as traction.
+
+The software supports agency engineers reviewing road safety: it joins 2021–24 federal fatal-crash records to Nebraska roadway data and an traffic-volume exposure proxy, with sources and assumptions visible. I’m seeking a first pilot to establish whether this is a repeated customer need.
+
+I’m exploring pre-seed investment to fund that pilot and the resulting product work. There are no customers or revenue, and the amount is undecided.
+
+Would you consider an early investment-fit conversation about this direction?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://michiganvca.org/wp-content/uploads/2022/02/MVCAEntInvLandscapeGuide2021-lo.pdf
+Role source: https://www.ludlowventures.com/
+Personalization source: https://www.ludlowventures.com/
+Verification notes: Published work address in Michigan Venture Capital Association 2021 member landscape, released Feb 2022; current official site confirms partner. Older source flagged; no guessed pattern and no deliverability guarantee.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+64. 1984 Ventures | 1984 investment team
+Recipient: team@1984.vc
+Status: SENT | 2026-09-30T17:05:12.125526+00:00
+Gmail message ID: 1a0f346fffc3b4b6
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: would this agency application fit 1984? | A domain workflow with the commercial test still ahead | Investment fit for source-traceable crash screening
+Chosen subject: GeoCrash: would this agency application fit 1984?
+
+Hello 1984 team,
+
+Your vertical-AI thesis raises the question I’m trying to answer commercially: where does value sit in an agency’s actual work? For GeoCrash, the proposed starting point is an engineer inspecting crash-screening evidence, rather than a model sold on its own.
+
+There is a deployed prototype using 2021–24 federal fatal-crash records, Nebraska roadway data, and an traffic-volume exposure proxy. The methods remain experimental, with source traceability and visible limitations; I’m not claiming a foundation-model advantage.
+
+I’m exploring pre-seed investment to fund the first agency pilot. There are no customers or revenue yet, and I haven’t settled on a round amount.
+
+Would this applied analytics direction fall within your investment interests before I pursue your formal application route?
+
+Demo: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty
+
+Contact source: https://1984.vc/
+Role source: https://1984.vc/
+Personalization source: https://1984.vc/
+Verification notes: Official general investment-firm inbox, not pitch-exclusive. Body asks investment fit before formal application; https://1984.vc/ links official Apply flow. No assumption that general inbox replaces application.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================
+
+65. Glasswing Ventures | Glasswing investment team
+Recipient: info@glasswing.vc
+Status: SENT | 2026-09-30T17:05:16.123241+00:00
+Gmail message ID: 1a0f3470ead58138
+Delivery status: No bounce found as of 2026-09-30T17:05:30.566557+00:00; delivery/read status unconfirmed
+Subject options: GeoCrash: applying your AI value framework before a first pilot | Pre-seed road-safety software: performance thresholds before scale | An investment fit question for auditable agency screening
+Chosen subject: GeoCrash: applying your AI value framework before a first pilot
+
+Hi Glasswing team,
+
+Your Enterprise AI Value Creation Framework separates data quality, adequate performance, and workflow integration. That is a useful investment test for GeoCrash, the road-safety prototype I'm building.
+
+The deployed screening tool combines real 2021–24 federal fatal-crash records with Nebraska roads and traffic-volume proxies, exposing sources and assumptions for engineering review. I want the first agency pilot to define acceptable errors before adding model complexity, then measure review effort and willingness to pay. Neither adoption nor a safety benefit is proven today.
+
+I'm exploring pre-seed investment to run that validation and determine whether the workflow supports a repeatable business.
+
+Prototype: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Would Glasswing consider evaluating this pre-pilot investment opportunity against that framework?
+
+Thanks,
+Samarpan Mohanty
+
+Contact source: https://glasswing.vc/
+Role source: https://glasswing.vc/
+Personalization source: https://glasswing.vc/resources/enterprise-ai-adoption-framework/
+Verification notes: Official homepage HTML has mailto:info@glasswing.vc with title Contact us by Email; framework also publishes same address for questions. General professional contact, not a dedicated pitch inbox. Published contact verified 2026-09-30, deliverability not tested.
+Possible reason for no reply: GeoCrash is still seeking its first pilot; the recipient may require customer evidence or a different investment mandate.
+
+========================================================================

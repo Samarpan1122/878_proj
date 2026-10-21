@@ -1,0 +1,20 @@
+Form: https://help.techstars.com/support/tickets/new?ticket_form=general_asks
+Subject: GeoCrash: accelerator and investment fit for a road-safety software pilot
+
+Hi Techstars team,
+
+Your email response directed me to this General asks form. I'm Samarpan Mohanty, the builder of GeoCrash, and I'm seeking the right Techstars accelerator and investment pathway. I've attached a seven-page pitch deck.
+
+GeoCrash helps transportation analysts build a reviewable shortlist of roads for engineering investigation. It connects historical fatal-crash records, road matching, traffic-exposure assumptions and statistical screening in a working website and API. The current implementation contains 153,273 federal FARS fatal-crash records from 2021-2024 and a Nebraska engine covering 11,048 road segments.
+
+The business hypothesis is recurring software for agencies and engineering consultants. The first proposed pilot would measure analyst time, engineering usefulness, reproducibility and willingness to pay. I'm pre-pilot, with no paying customers or revenue yet, and exploring pre-seed funding with the amount undecided. The deck explains the data-rights and validation work still needed.
+
+Techstars' combination of mentorship, network and capital is relevant to the next step: finding an agency reviewer, understanding procurement and testing one useful workflow before expanding.
+
+Could you route this to the team best placed to advise which current accelerator fits and the appropriate application route?
+
+Working product: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Thank you,
+Samarpan Mohanty
+samarpanmohanty3347@gmail.com

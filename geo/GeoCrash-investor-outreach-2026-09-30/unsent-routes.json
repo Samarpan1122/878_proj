@@ -1,0 +1,300 @@
+[
+  {
+    "source_file": "held-routes.json",
+    "routes": [
+      {
+        "organization": "Founders, Inc.",
+        "route": "https://f.inc/about",
+        "status": "APPLICATION_ROUTE",
+        "reason": "Official page explicitly says it does not accept decks or pitches; apply for a building trial."
+      },
+      {
+        "organization": "AngelPad",
+        "route": "https://angelpad.com/contact/",
+        "status": "APPLICATION_ROUTE",
+        "reason": "Official contact page directs founders to apply. No appropriately sourced current email selected."
+      },
+      {
+        "organization": "StartX",
+        "route": "https://startx.com/",
+        "status": "NOT_CONTACTED",
+        "reason": "Founder affiliation and program eligibility have not been established."
+      },
+      {
+        "organization": "Ubiquity Ventures",
+        "route": "https://www.ubiquity.vc/",
+        "status": "FIT_HOLD",
+        "reason": "Published thesis distinguishes investments from conventional SaaS; current agency software prototype lacks a strong fit."
+      },
+      {
+        "organization": "Congruent Ventures",
+        "route": "https://www.congruentvc.com/",
+        "status": "FIT_HOLD",
+        "reason": "No demonstrated climate outcome; replaced with transportation-focused firm."
+      }
+    ]
+  },
+  {
+    "source_file": "geocrash-investor-ai-blocked.json",
+    "routes": [
+      {
+        "organization": "DCVC",
+        "reason": "No current public startup-appropriate email found on official pages. Broker and privacy-only addresses excluded."
+      },
+      {
+        "organization": "Radical Ventures",
+        "reason": "Published program-contact email relates to masterclass/compute inquiries; general emails could not be verified from primary sources."
+      },
+      {
+        "organization": "Conviction",
+        "reason": "No public professional pitch email verified on firm or Sarah Guo personal pages; data-broker candidates excluded."
+      },
+      {
+        "organization": "Basis Set Ventures",
+        "reason": "Thesis fits, but no public professional investment email verified."
+      },
+      {
+        "organization": "SignalFire",
+        "reason": "Published press, investor-relations, and corporate-partner inboxes do not establish a startup pitch route."
+      },
+      {
+        "organization": "boldstart ventures",
+        "reason": "Official contact page directs X messages; no public startup email verified."
+      },
+      {
+        "organization": "Ubiquity Ventures",
+        "reason": "Verified email exists but published Not SaaS thesis is a poor match for the current GeoCrash software-only agency workflow; replaced with Glasswing."
+      },
+      {
+        "organization": "Engineering Capital",
+        "reason": "Official contact route prefers introductions; broker-listed email not independently verified."
+      },
+      {
+        "organization": "Hyperplane",
+        "reason": "Strong thesis but no startup-appropriate email verified; privacy-specific personal address excluded."
+      },
+      {
+        "organization": "Two Sigma Ventures",
+        "reason": "Official site certificate/access errors prevented confirmation of broker-listed pitch email."
+      }
+    ]
+  },
+  {
+    "source_file": "geocrash-investor-mobility-blocked.json",
+    "routes": [
+      {
+        "organization": "The Westly Group",
+        "source": "https://westlygroup.com/contact/",
+        "reason": "Public admin@westlygroup.com is explicitly LP/network investor relations. Founder form available; no pitch email verified."
+      },
+      {
+        "organization": "Sway Capital / Sway Ventures",
+        "source": "https://sway.capital/contact",
+        "reason": "Old Sway Ventures domain redirects to Sway Capital. general@sway.capital is explicitly Investor Relations for qualified investors; not used for fundraising pitch."
+      },
+      {
+        "organization": "Maniv",
+        "source": "https://www.maniv.com/contact",
+        "reason": "Official contact form. Public Jake address found only in ESG/legal role; not used as founder pitch route."
+      },
+      {
+        "organization": "VoLo Earth Ventures",
+        "source": "https://www.voloearth.com/contact",
+        "reason": "Official founder form welcomes cold outreach, but no public founder-pitch email verified."
+      },
+      {
+        "organization": "Third Sphere",
+        "source": "https://thirdsphere.com/contact/",
+        "reason": "Official funding form. hello email encountered in job-board privacy policy, not a verified pitch invitation."
+      },
+      {
+        "organization": "Wireframe Ventures",
+        "source": "https://www.wireframevc.com/general/contact-us",
+        "reason": "Official page directs funding applications to form; email explicitly other general inquiries. Climate/bio/health fit also uncertain."
+      },
+      {
+        "organization": "Building Ventures",
+        "source": "https://jobs.buildingventures.com/privacy-policy",
+        "reason": "Only email discovered was job-board privacy/admin contact. Main site403. No appropriate direct founder route verified."
+      },
+      {
+        "organization": "Blackhorn Ventures",
+        "source": "https://www.blackhornvc.com/contact-us",
+        "reason": "Official contact form; no appropriate public pitch email verified. Job-board privacy contact excluded."
+      },
+      {
+        "organization": "Ironspring Ventures",
+        "source": "https://jobs.ironspring.com/privacy-policy",
+        "reason": "Only found job-board administrative address, no validated founder-pitch route."
+      },
+      {
+        "organization": "UP.Partners",
+        "source": "https://up.partners/",
+        "reason": "Current official site researched; no appropriate pitch email verified. investor inbox and press contact not used."
+      },
+      {
+        "organization": "Powerhouse Ventures",
+        "source": "https://www.powerhouse.fund/",
+        "reason": "Official website returned525; search only exposed careers or uncertain contacts. No verified pitch route."
+      },
+      {
+        "organization": "Congruent Ventures",
+        "source": "https://www.congruentvc.com/",
+        "reason": "Valid DEAL SUBMISSIONS email investors@congruentvc.com but excluded for weak climate fit; GeoCrash has no demonstrated climate outcome."
+      },
+      {
+        "organization": "2150",
+        "source": "https://www.2150.vc/contact",
+        "reason": "Public hello@2150.vc found, but climate/built-environment thesis less direct than replacement mobility funds; no climate benefit claimed."
+      },
+      {
+        "organization": "CivStart",
+        "source": "https://www.civstart.org/",
+        "reason": "Not used in VC firm set; accelerator status would need separate categorization. No contact researched for this list."
+      }
+    ]
+  },
+  {
+    "source_file": "geocrash-investor-seed-blocked.json",
+    "routes": [
+      {
+        "organization": "Hustle Fund",
+        "source": "https://www.hustlefund.vc/",
+        "reason": "Official form located; no current founder-facing email verified. Do not use newsletter/support/LP routes.",
+        "do_not_send": true
+      },
+      {
+        "organization": "NFX",
+        "source": "https://www.nfx.com/contact",
+        "reason": "General QED address exists, but investment-specific route is Signal/warm introduction; not substituted.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Betaworks",
+        "source": "https://www.betaworks.com/contact",
+        "reason": "Investment form available; general info inbox not treated as published pitch inbox.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Slow Ventures",
+        "source": "https://slow.co/contact/",
+        "reason": "Official seed-funding application route; no primary-source pitch email verified.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Freestyle",
+        "source": "https://www.freestyle.vc/",
+        "reason": "Public privacy/recruiting contacts excluded; founder investment email not verified.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Initialized",
+        "source": "https://initialized.com/",
+        "reason": "No primary-source founder-facing direct email verified in search.",
+        "do_not_send": true
+      },
+      {
+        "organization": "First Round",
+        "source": "https://firstround.com/",
+        "reason": "No appropriate public investment email verified; do not infer partner patterns.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Susa Ventures",
+        "source": "https://www.susaventures.com/",
+        "reason": "Pitches email appeared in third-party directories only; not verified from primary source.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Haystack",
+        "source": "https://www.haystack.vc/",
+        "reason": "No appropriate current primary-source email verified.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Everywhere Ventures",
+        "source": "https://everywhere.vc/",
+        "reason": "Homepage placeholder address is not a contact; no verified investment email.",
+        "do_not_send": true
+      },
+      {
+        "organization": "The House Fund",
+        "source": "https://www.thehouse.fund/",
+        "reason": "Public build address found, but Berkeley eligibility/connection is not established for sender; held on fit.",
+        "do_not_send": true
+      },
+      {
+        "organization": "South Park Commons",
+        "source": "https://www.southparkcommons.com/",
+        "reason": "Application route available; no verified investment email.",
+        "do_not_send": true
+      },
+      {
+        "organization": "SV Angel",
+        "source": "https://svangel.com/",
+        "reason": "No suitable public pitch email verified.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Tiny Supercomputer Investment Company",
+        "source": "https://tiny.vc/",
+        "reason": "Published hello email, but primarily European investments; not used just to increase count.",
+        "do_not_send": true
+      },
+      {
+        "organization": "1517 Fund",
+        "source": "https://www.1517fund.com/",
+        "reason": "Published partner email, but dropout/undergraduate/deep-tech-scientist thesis not established for sender.",
+        "do_not_send": true
+      },
+      {
+        "organization": "RareBreed Ventures",
+        "source": "https://www.rarebreed.vc/",
+        "reason": "Current HTML contains unrelated Tiempos template contacts; excluded as unreliable.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Crosscut",
+        "source": "https://crosscut.vc/",
+        "reason": "Current thesis is frontier/climate/hardware; no suitable current primary-source email verified.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Bonfire Ventures",
+        "source": "https://www.bonfirevc.com/",
+        "reason": "No primary-source founder-facing email verified.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Matchstick Ventures",
+        "source": "https://www.matchstick.vc/connect",
+        "reason": "Official contact form; third-party email not used.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Dundee Venture Capital",
+        "source": "https://dundeeventurecapital.com/",
+        "reason": "No actual work email found in official HTML; placeholder excluded.",
+        "do_not_send": true
+      },
+      {
+        "organization": "M25",
+        "source": "https://www.m25vc.com/",
+        "reason": "No current primary-source direct email verified; Midwest headquarters eligibility not assumed.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Fika Ventures",
+        "source": "https://www.fika.vc/",
+        "reason": "No appropriate published email verified.",
+        "do_not_send": true
+      },
+      {
+        "organization": "Great North Ventures",
+        "source": "https://greatnorthventures.com/",
+        "reason": "Official form and thesis found; no suitable primary-source email verified.",
+        "do_not_send": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GeoCrash — how safe is this road?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="home.css">
+<script src="https://unpkg.com/deck.gl@9.1.14/dist.min.js"></script>
+<script src="https://unpkg.com/@loaders.gl/gltf@4.3.3/dist/dist.min.js"></script>
+</head>
+<body>
+<div id="deck" aria-label="3D crash map"></div>
+
+<header class="top">
+  <a class="wordmark" href="/">GeoCrash</a>
+  <form class="search" id="search" autocomplete="off" role="search">
+    <input id="q" type="text" placeholder="Type any address or place in the US" aria-label="Search a location" aria-controls="sugg">
+    <button class="go" type="submit">Check</button>
+    <div class="sugg" id="sugg" role="listbox"></div>
+  </form>
+  <nav class="links">
+    <div class="seg" id="basemap" role="group" aria-label="Basemap"><button type="button" data-b="map" aria-pressed="true">Map</button><button type="button" data-b="sat" aria-pressed="false">Satellite</button></div>
+    <a href="eda.html" class="btn">Explore data</a>
+    <a href="models.html" class="btn">Models</a>
+    <a href="safety.html" class="btn">Safety screening</a>
+  </nav>
+</header>
+
+<section class="hero" id="hero">
+  <h1>How safe is this road?</h1>
+  <p>Research explorer: 7.7 million US crashes (2016–2023), mapped in 3D. Taller columns mean more crashes; redder means a larger share were severe. These historical density patterns are not exposure-normalized road risk. <a href="safety.html">Open the agency safety workspace</a> for FARS, traffic exposure and screening.</p>
+  <div class="chips" id="presets"></div>
+</section>
+
+<aside class="panel" id="panel" hidden aria-live="polite"></aside>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-bar"><b>Deep dive</b><button class="btn" id="close-drawer" type="button">Close</button></div>
+  <iframe id="drawer-frame" title="Detailed report"></iframe>
+</div>
+
+<div class="loading" id="loading" hidden><span></span>Analyzing crashes…</div>
+<script src="home.js"></script>
+</body>
+</html>

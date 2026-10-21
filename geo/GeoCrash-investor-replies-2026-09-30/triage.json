@@ -1,0 +1,16 @@
+{
+  "inbound_count": 5,
+  "human_investor_replies": 0,
+  "replied": [
+    "Autotech Ventures",
+    "Cowboy Ventures"
+  ],
+  "acknowledgments_no_action": [
+    "Lux Capital",
+    "Fontinalis Partners"
+  ],
+  "Techstars": {
+    "status": "No email reply sent; support inquiry must use their form. No form submitted.",
+    "url": "https://help.techstars.com/support/tickets/new"
+  }
+}

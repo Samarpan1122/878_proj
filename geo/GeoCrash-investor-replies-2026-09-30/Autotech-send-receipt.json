@@ -1,0 +1,14 @@
+{
+  "successful": true,
+  "data": {
+    "display_url": "https://mail.google.com/mail/u/0/#all/1a0f34e9277470f9",
+    "id": "1a0f34e9277470f9",
+    "labelIds": [
+      "SENT"
+    ],
+    "threadId": "1a0f3446bfde4a99"
+  },
+  "error": null,
+  "logId": "log_61dKrSqaIgzR",
+  "permissionApproval": "approved_for_session"
+}

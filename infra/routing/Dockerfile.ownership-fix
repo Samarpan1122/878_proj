@@ -1,0 +1,7 @@
+FROM us-central1-docker.pkg.dev/geocrashai-safety-20260929/geocrash/routing@sha256:b35da39b36cea07209dd4c93692e13455d87077f18b7c5bbd2930f2fe20bc0db AS prepared
+FROM ghcr.io/project-osrm/osrm-backend@sha256:359bd596d4adde1bd55856f8b81b0f6459cb8774abd8558aaccb273c1ab2fa4b
+COPY --from=prepared --chown=65534:65534 /data/ /data/
+EXPOSE 8080
+USER 65534:65534
+ENTRYPOINT ["osrm-routed"]
+CMD ["--algorithm", "mld", "--port", "8080", "--threads", "1", "--verbosity", "WARNING", "/data/nebraska.osrm"]

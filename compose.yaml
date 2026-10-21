@@ -1,0 +1,26 @@
+services:
+  api:
+    build: .
+    ports: ["8080:8080"]
+    environment:
+      GEOCRASH_SAFETY_DATA: /app/data/safety
+    volumes: ["./data/safety:/app/data/safety"]
+    restart: unless-stopped
+  db:
+    image: postgis/postgis:16-3.5
+    profiles: ["database"]
+    environment:
+      POSTGRES_DB: safety
+      POSTGRES_USER: safety
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-development-only}
+    ports: ["127.0.0.1:5432:5432"]
+    volumes:
+      - safety-db:/var/lib/postgresql/data
+      - ./infra/postgis.sql:/docker-entrypoint-initdb.d/001-safety.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U safety -d safety"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  safety-db:

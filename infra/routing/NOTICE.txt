@@ -1,0 +1,19 @@
+GeoCrash Nebraska route planning backend
+
+Map data: copyright OpenStreetMap contributors, licensed under ODbL 1.0.
+https://www.openstreetmap.org/copyright
+https://opendatacommons.org/licenses/odbl/1-0/
+Original extract supplied by Geofabrik:
+https://download.geofabrik.de/north-america/us/nebraska-260926.osm.pbf
+Extract dated 2026-09-26; SOURCE-SHA256.txt records the downloaded bytes.
+
+Routing engine: Project OSRM, version 26.9.0, BSD 2-Clause license.
+https://github.com/Project-OSRM/osrm-backend/blob/v26.9.0/LICENSE.TXT
+Unmodified bundled /opt/car.lua profile and MLD algorithm.
+Container digest: sha256:359bd596d4adde1bd55856f8b81b0f6459cb8774abd8558aaccb273c1ab2fa4b
+Preparation: osrm-extract -p /opt/car.lua nebraska.osm.pbf;
+             osrm-partition nebraska.osrm; osrm-customize nebraska.osrm.
+
+This is a frozen baseline routing graph, without live traffic, live closures,
+vehicle-dimension routing or a navigation SLA. Historical safety linkage is
+performed separately by GeoCrash and is not part of OSRM's routing weights.

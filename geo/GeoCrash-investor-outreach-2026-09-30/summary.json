@@ -1,0 +1,28 @@
+{
+  "exported_at_utc": "2026-09-30T17:05:47.157730+00:00",
+  "sender": "samarpanmohanty3347@gmail.com",
+  "additional_recipients_attempted": 65,
+  "additional_confirmed_sent": 65,
+  "previous_106_included": false,
+  "note": "Gmail SENT confirms send acceptance, not delivery or readership. Published addresses were not independently deliverability verified. This is exploratory pre-seed fundraising with no amount or valuation stated. Accelerator emails do not constitute formal applications. No automated follow-ups were scheduled.",
+  "bounce_searches": [
+    {
+      "file": "bounce-check-final.json",
+      "successful": true,
+      "result_count": 2
+    },
+    {
+      "file": "bounce-check-initial-expanded.json",
+      "successful": true,
+      "result_count": 1
+    },
+    {
+      "file": "bounce-check-initial.json",
+      "successful": true,
+      "result_count": 0
+    }
+  ],
+  "known_bounced_recipients": [
+    "hello@notation.vc"
+  ]
+}

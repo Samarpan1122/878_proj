@@ -1,0 +1,17 @@
+To: hello@cowboy.vc
+Thread: 1a0f3463fd9c8275
+Attachment: /Users/smohanty13/Downloads/GeoCrash-investor-replies-2026-09-30/GeoCrash-Cowboy-investment-brief.pdf
+
+Hi Cowboy team,
+
+Following your note, I've attached GeoCrash's deck. The starting point is one recurring task: helping a transportation analyst explain which roads warrant engineering review and why.
+
+I've built a public website and API using real federal crash records, with Nebraska road screening and inspectable data sources. My proposed first pilot would test analyst time, engineering usefulness and willingness to pay. I haven't established those outcomes or signed a customer yet.
+
+I'm exploring pre-seed investment to turn the prototype into a validated agency workflow. The deck outlines the milestones and proposed recurring software business; the raise amount is undecided.
+
+Would this be a fit for Cowboy's enterprise investing team?
+
+Live workspace: https://geocrash-666321636483.us-central1.run.app/screening/
+
+Samarpan Mohanty

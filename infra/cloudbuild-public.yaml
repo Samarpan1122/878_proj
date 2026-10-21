@@ -1,0 +1,8 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: sh
+    # Cloud Build's classic Docker builder does not select a Dockerfile-specific
+    # ignore file. Install the explicit public allowlist in this ephemeral context.
+    args: ['-c', 'cp Dockerfile.public.dockerignore .dockerignore && docker build -f Dockerfile.public -t ${_IMAGE} .']
+images: ['${_IMAGE}']
+timeout: 1200s

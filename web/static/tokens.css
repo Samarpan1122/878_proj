@@ -1,0 +1,57 @@
+/* Hallmark · genre: modern-minimal · macrostructure: Workbench · theme: Cobalt · enrichment: none (map + satellite are content)
+ * nav: flush bordered tool bar · footer: none (app) · axes: light / grotesk-sans / cool
+ */
+:root {
+  --color-paper: oklch(98.5% 0.004 250);
+  --color-paper-2: oklch(96.2% 0.006 250);
+  --color-ink: oklch(24% 0.02 258);
+  --color-ink-2: oklch(38% 0.018 257);
+  --color-muted: oklch(54% 0.014 257);
+  --color-rule: oklch(90.5% 0.008 255);
+  --color-rule-strong: oklch(82% 0.01 255);
+  --color-accent: oklch(58% 0.2 256);
+  --color-accent-soft: oklch(93% 0.035 256);
+  --color-accent-ink: oklch(98.5% 0.004 250);
+  --color-focus: oklch(58% 0.2 256);
+  --color-graphite: oklch(22% 0.016 260);
+  --color-graphite-2: oklch(28% 0.016 260);
+  --color-graphite-ink: oklch(92% 0.008 255);
+  --color-graphite-muted: oklch(70% 0.012 257);
+  --color-risk: oklch(53% 0.19 27);
+  --color-safe: oklch(55% 0.12 160);
+  --color-sev-1: oklch(78% 0.04 250);
+  --color-sev-2: oklch(62% 0.07 252);
+  --color-sev-3: oklch(68% 0.16 62);
+  --color-sev-4: oklch(52% 0.2 27);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-md: 0.9375rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --rule: 1px solid var(--color-rule);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-med: 240ms;
+  --dur-slow: 600ms;
+}

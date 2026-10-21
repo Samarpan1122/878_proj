@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101722">
+<meta name="description" content="Explore real U.S. fatal-crash records in 3D, inspect road safety evidence, and open GeoCrash's deployed screening engines.">
+<title>GeoCrash — See the road ahead</title>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/home.css">
+<script defer src="/assets/deckgl.js"></script>
+<script defer src="/assets/home.js"></script>
+</head>
+<body>
+<a class="skip" href="/explore/">Skip the 3D map and explore accessible data tables</a>
+<div id="deck" role="img" aria-label="Interactive 3D map of historical fatal-crash counts. Use the state and year selectors for an accessible alternative."></div>
+<div class="map-shade" aria-hidden="true"></div>
+<header class="top">
+  <a class="wordmark" href="/" aria-label="GeoCrash home">GeoCrash<span class="wordmark-dot" aria-hidden="true"></span></a>
+  <form class="filters" id="filters" aria-label="Choose map geography and observation year">
+    <label class="state-field"><span>Geography</span><select id="state" disabled><option value="">United States</option></select></label>
+    <label><span>Observation years</span><select id="year"><option value="">2021–2024</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></label>
+    <button class="go" type="submit" id="apply" disabled>Explore</button>
+  </form>
+  <nav class="links" aria-label="Main navigation"><a href="/explore/">Data</a><a href="/explore/#models">Models</a><a href="/planning/">Agency planning</a><a href="/docs">API</a><a class="nav-screen" href="/screening/">Road screening <span aria-hidden="true">↗</span></a></nav>
+</header>
+<main>
+  <div class="eyebrow" id="view-status" role="status">Loading real FARS observations…</div>
+  <section class="hero" id="hero" aria-labelledby="headline">
+    <h1 id="headline">See the <br>road ahead.</h1>
+    <p class="intro">Real crash history. Visible patterns. <br>Evidence for the next safety decision.</p>
+    <div class="hero-actions"><a class="primary" href="/screening/">Open road screening <span aria-hidden="true">↗</span></a><a class="secondary" href="/explore/">Explore the evidence</a></div>
+    <div class="preset-block"><p>Fly to a city <span>· state-level results</span></p><div class="chips" id="presets"></div></div>
+  </section>
+  <aside class="panel" id="panel" aria-label="Selected geography summary" aria-busy="true">
+    <p class="panel-kicker">OBSERVED · <span id="summary-years">2021–2024</span></p>
+    <h2 id="scope-name">United States</h2>
+    <div class="count" id="crashes">—</div><p class="count-caption">recorded fatal crashes</p>
+    <div class="stats"><div><strong id="fatalities">—</strong><span>people killed</span></div><div><strong id="cells">—</strong><span>visible map cells</span></div></div>
+    <p class="panel-note" id="summary-note">NHTSA FARS · historical observations.<br>Counts are not traffic-adjusted risk.</p>
+    <p class="cell-detail" id="cell-detail" hidden></p>
+    <a class="panel-link" id="details" href="/explore/">Open data and model evidence <span aria-hidden="true">→</span></a>
+    <button class="reset-inline" type="button" id="reset-panel">Back to United States</button>
+  </aside>
+  <div class="map-controls" aria-label="Map controls"><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="tilt" type="button" aria-pressed="true">3D</button><button id="reset" type="button">Reset view</button></div>
+  <div class="map-help">Drag to move · Shift + drag to tilt · Scroll to zoom</div>
+  <section class="error-card" id="error" hidden aria-live="polite"><h2 id="error-title">The map could not load</h2><p id="error-message"></p><div><button id="retry" type="button">Try again</button><a href="/explore/">Open the data explorer →</a></div></section>
+</main>
+<footer class="legend"><span><i aria-hidden="true"></i> Taller columns = more fatal crashes</span><span>0.25° cells · minimum 5 crashes per state/year</span><a href="/explore/#methods">Sources &amp; limits</a></footer>
+<noscript><div class="no-script">The 3D map needs JavaScript. <a href="/docs">Open the API documentation</a> or <a href="/api/public/summary">read the real data summary</a>.</div></noscript>
+</body>
+</html>

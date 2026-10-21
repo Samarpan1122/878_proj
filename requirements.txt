@@ -1,0 +1,14 @@
+# Python 3.14. torch comes from the system site-packages (see run.sh); torchvision must match it.
+-r requirements-safety.txt
+pandas>=3.0
+pyarrow
+scikit-learn>=1.9
+matplotlib
+folium
+osmnx>=2.1
+geopandas
+rasterio
+pystac-client
+planetary-computer
+torch==2.13.*
+torchvision==0.28.*
