@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/assets/home.css">
 <script defer src="/assets/deckgl.js"></script>
 <script defer src="/assets/home.js"></script>
+<script defer src="/assets/place.js"></script>
 </head>
 <body>
 <a class="skip" href="/explore/">Skip the 3D map and explore accessible data tables</a>
@@ -22,17 +23,25 @@
     <label><span>Observation years</span><select id="year"><option value="">2021–2024</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></label>
     <button class="go" type="submit" id="apply" disabled>Explore</button>
   </form>
-  <nav class="links" aria-label="Main navigation"><a href="/explore/">Data</a><a href="/explore/#models">Models</a><a href="/planning/">Agency planning</a><a href="/docs">API</a><a class="nav-screen" href="/screening/">Road screening <span aria-hidden="true">↗</span></a></nav>
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+  <nav class="links" id="site-nav" aria-label="Main navigation"><a href="/explore/">Data</a><a href="/notebook/">Analysis</a><a class="nav-screen" href="/screening/">Road screening <span aria-hidden="true">↗</span></a></nav>
 </header>
 <main>
   <div class="eyebrow" id="view-status" role="status">Loading real FARS observations…</div>
   <section class="hero" id="hero" aria-labelledby="headline">
     <h1 id="headline">See the <br>road ahead.</h1>
     <p class="intro">Real crash history. Visible patterns. <br>Evidence for the next safety decision.</p>
-    <div class="hero-actions"><a class="primary" href="/screening/">Open road screening <span aria-hidden="true">↗</span></a><a class="secondary" href="/explore/">Explore the evidence</a></div>
-    <div class="preset-block"><p>Fly to a city <span>· state-level results</span></p><div class="chips" id="presets"></div></div>
+    <div class="hero-actions"><a class="primary" href="/screening/">Open road screening <span aria-hidden="true">↗</span></a><a class="secondary" href="/explore/">Explore the evidence</a><a class="secondary" href="/notebook/">Read the analysis</a></div>
+    <form class="place-search" id="place-search" role="search" autocomplete="off" novalidate>
+      <label for="place-q">Check any place <span>· every fatal crash nearby, 2021–2024</span></label>
+      <div class="search-row"><input id="place-q" type="text" placeholder="Type any US address or place" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="place-suggestions"><button type="submit">Check</button></div>
+      <div class="suggestions" id="place-suggestions" role="listbox" aria-label="Place suggestions" hidden></div>
+      <p class="search-status" id="place-status" role="status"></p>
+    </form>
+    <div class="preset-block"><p>Or try a spot</p><div class="chips" id="presets"></div></div>
   </section>
   <aside class="panel" id="panel" aria-label="Selected geography summary" aria-busy="true">
+  <div id="state-view">
     <p class="panel-kicker">OBSERVED · <span id="summary-years">2021–2024</span></p>
     <h2 id="scope-name">United States</h2>
     <div class="count" id="crashes">—</div><p class="count-caption">recorded fatal crashes</p>
@@ -41,12 +50,14 @@
     <p class="cell-detail" id="cell-detail" hidden></p>
     <a class="panel-link" id="details" href="/explore/">Open data and model evidence <span aria-hidden="true">→</span></a>
     <button class="reset-inline" type="button" id="reset-panel">Back to United States</button>
+  </div>
+  <div id="place-view" hidden></div>
   </aside>
-  <div class="map-controls" aria-label="Map controls"><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="tilt" type="button" aria-pressed="true">3D</button><button id="reset" type="button">Reset view</button></div>
+  <div class="map-controls" aria-label="Map controls"><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="tilt" type="button" aria-pressed="true">3D</button><button id="satellite" type="button" aria-pressed="false">Satellite</button><button id="reset" type="button">Reset view</button></div>
   <div class="map-help">Drag to move · Shift + drag to tilt · Scroll to zoom</div>
   <section class="error-card" id="error" hidden aria-live="polite"><h2 id="error-title">The map could not load</h2><p id="error-message"></p><div><button id="retry" type="button">Try again</button><a href="/explore/">Open the data explorer →</a></div></section>
 </main>
-<footer class="legend"><span><i aria-hidden="true"></i> Taller columns = more fatal crashes</span><span>0.25° cells · minimum 5 crashes per state/year</span><a href="/explore/#methods">Sources &amp; limits</a></footer>
+<footer class="legend"><span id="legend-key"><i aria-hidden="true"></i> Taller columns = more fatal crashes</span><span id="legend-note">0.25° cells · minimum 5 crashes per state/year</span><span id="imagery-credit" hidden>Imagery © Esri, Maxar, Earthstar Geographics</span><a href="/explore/#methods">Sources &amp; limits</a><a href="/docs" style="margin-left:0">API docs</a></footer>
 <noscript><div class="no-script">The 3D map needs JavaScript. <a href="/docs">Open the API documentation</a> or <a href="/api/public/summary">read the real data summary</a>.</div></noscript>
 </body>
 </html>

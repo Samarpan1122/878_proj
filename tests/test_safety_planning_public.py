@@ -77,8 +77,8 @@ def test_public_and_mounted_planning_endpoints_exist(public_planning):
             assert response.status_code == 200, (endpoint, prefix, response.text)
             assert response.headers['cache-control'] == 'no-store'
     paths = client.get('/openapi.json').json()['paths']
-    for endpoint in requests():
-        assert '/api/safety/planning/' + endpoint in paths
+    for endpoint in requests():  # served for the screening page, but not advertised
+        assert '/api/safety/planning/' + endpoint not in paths
 
 
 @pytest.mark.parametrize('nonfinite', ['NaN', 'Infinity', '-Infinity', '1e999'])

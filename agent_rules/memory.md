@@ -1,5 +1,21 @@
 # Memory
 
+## Consolidation + place search — 2026-11-05 (DEPLOYED: revision geocrash-00004-xag, image public:place-search-20261105)
+- Nav is 4 links everywhere: Map · Data · Road screening · Analysis; API docs in footers. /planning/ 308 → /screening/ (planning page deleted; its Treatment budget + Future scenario now live in the screening inspector/budget section).
+- Place search on homepage (place.js): Google Places if GOOGLE_MAPS_API_KEY env is set on Cloud Run (not set yet → Nominatim fallback), per-crash FARS pins from GET /api/public/crashes (safety/crash_points.py, data/public/crashes.jsonl.gz built by scripts/build_crash_points.py from NHTSA FARS zips; contract docs/CRASH_POINTS.md).
+- Data page slimmed (filters, totals + 2025 projection, ranking, trend, factors, one About details keeping #methods/#models). Screening cut model comparison/behavior/raw JSON; server-side sort.
+- Public schema advertises 12 paths; planning/routing/linkage/projection routes hidden but working. Routing generation (private OSRM) is unreachable live — no UI uses it.
+- Deploy method used: no local data/ here, so Cloud Build overlay `FROM` the previous live image + new safety/, web/, crashes file; deployed --no-traffic --tag candidate, smoke-tested, then 100% traffic. Rollback: `gcloud run services update-traffic geocrash --region us-central1 --to-revisions=geocrash-00003-kh4=100`.
+- Leftovers: scripts/verify_planning.py and docs/PUBLIC_DEPLOYMENT.md still describe /planning/; web/static/safety-evidence.js unused but referenced by smoke tests/allowlist.
+
+## Public site organization pass — 2026-11-05 (superseded by the entry above)
+- Working copy: fresh clone at ~/Downloads/878_proj (no data/, models/, .tools/ or .cloud-config here). User chose "upgrade public site" over reviving the noncommercial 8878 research site.
+- One nav on every public page: Map · Data · EDA · Models · Notebook · Road screening · Planning · API (home.html, index.html, planning.html, notebook page, safety.js public-portal branch). Homepage collapses it to a Menu dropdown at <=1100px.
+- Homepage: Satellite toggle (Esri World Imagery TileLayer) draws FARS 0.25° cells as points; city presets switch it on. Cells stay aggregates, not street-level locations.
+- New /notebook/ route serves web/public/notebook.html, built by `uv run --no-project --with markdown python scripts/build_notebook_page.py` from the .ipynb (43 figures in web/public/notebook/). EDA nav link = /notebook/#exploratory-data-analysis. Page carries US Accidents CC BY-NC-SA attribution.
+- Verified in Chrome via a local proxy (static files local, /api proxied to live): desktop + 390px. 22 public API/planning tests pass.
+- To deploy: needs data/public + data/safety artifacts and gcloud auth, then rebuild Dockerfile.public.
+
 ## Advanced modeling continuation — 2026-09-29
 - User asked for stronger scores, mixture-of-experts, deep learning and behavior analysis. Implemented measured comparisons, not invented foundation-model or acquisition claims; multi-agent work was explicitly authorized.
 - `safety/context.py` adds outcome-free geometry/neighborhood features. `safety/advanced.py` compares exposure/NB/Poisson boosting/gated mixture/historical EB with nested time/spatial validation. Real 44,192-row benchmark gives mixture2.10% temporal and0.714% spatial deviance gain over NB; adjusted bounds marginallypositive, topdecilecapture mixed. Development challenger only, never promoted. CLI reconstructs source-verified panel; evidence API requires matching artifact-specific hashes.
