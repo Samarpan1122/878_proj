@@ -103,3 +103,37 @@ def test_screening_integration_stays_separate_and_guarded(tmp_path,public_artifa
     assert client.post('/api/safety/benefit-cost',content='a'*16385).status_code==413
     (screening/'snapshot.json').unlink()
     assert client.get('/ready').status_code==503
+
+
+def test_notebook_page_served_when_built_and_503_when_missing(tmp_path,public_artifact):
+    (tmp_path/'snapshot.json').write_text(json.dumps(public_artifact))
+    static=tmp_path/'static';static.mkdir()
+    client=TestClient(create_app(root=tmp_path,static_root=static,enable_screening=False))
+    assert client.get('/notebook/').status_code==503
+    (static/'notebook.html').write_text('<!doctype html><title>Analysis notebook</title>')
+    page=client.get('/notebook/')
+    assert page.status_code==200 and 'Analysis notebook' in page.text
+
+
+def test_planning_page_redirects_and_schema_lists_only_advertised_routes(tmp_path,public_artifact):
+    public=tmp_path/'public';public.mkdir()
+    (public/'snapshot.json').write_text(json.dumps(public_artifact))
+    screening=tmp_path/'screening';screening.mkdir()
+    (screening/'snapshot.json').write_text(json.dumps({'schema_version':1,'built_at':'2026-09-30T00:00:00Z',
+        'segments':[{'segment_id':'A','lat':41.,'lng':-97.,'observed':3,'expected_annual':.2,'excess_annual':.1,'rate_per_100m_vmt':4.}]}))
+    client=TestClient(create_app(public,screening_root=screening))
+    moved=client.get('/planning/',follow_redirects=False)
+    assert moved.status_code==308 and moved.headers['location']=='/screening/'
+    schema=client.get('/openapi.json').json()['paths']
+    advertised={'/api/public/meta':'get','/api/public/states':'get','/api/public/summary':'get','/api/public/map':'get',
+                '/api/public/model':'get','/api/public/forecast':'get','/api/public/behaviors':'get','/api/public/crashes':'get',
+                '/api/safety/status':'get','/api/safety/segments':'get','/api/safety/countermeasures':'get','/api/safety/benefit-cost':'post'}
+    assert set(schema)==set(advertised)
+    for path,method in advertised.items():
+        assert method in schema[path]
+    assert 'post' not in schema['/api/public/forecast']
+    # Hidden routes keep serving the screening page and API callers.
+    assert client.get('/api/safety/segments/A').status_code==200
+    assert client.get('/api/safety/readiness').status_code in {200,503}
+    engines=[e.get('endpoint') for e in client.get('/api/public/meta').json()['engines']]
+    assert all(e is None or e in schema for e in engines)

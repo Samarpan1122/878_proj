@@ -1,0 +1,3900 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GeoCrashAI research notebook: data quality, exploratory data analysis, classification, regression, time series and clustering on the US Accidents dataset.">
+<title>Analysis · GeoCrash</title><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/app.css"><link rel="stylesheet" href="/assets/notebook.css"></head>
+<body>
+<a class="skip" href="#notebook">Skip to the notebook</a>
+<header class="site-head"><a class="brand" href="/">GeoCrash</a><nav aria-label="Main navigation"><a href="/">Map</a><a href="/explore/">Data</a><a href="/screening/">Road screening</a><a href="/notebook/" aria-current="page">Analysis</a></nav></header>
+<main>
+<section class="intro" aria-labelledby="page-title"><div><p class="nb-kicker">CSCE 878 · RESEARCH ANALYSIS</p><h1 id="page-title">The complete analysis notebook</h1>
+<p>Every step from raw data to models, with its output: data quality, exploratory analysis, classification, regression, time series and clustering.</p>
+<div class="nb-actions"><a class="button" href="#exploratory-data-analysis">Jump to the EDA</a><a class="button secondary" href="/assets/GeoCrashAI_Complete_Analysis.ipynb" download>Download .ipynb</a></div></div>
+<div class="dataset-caption"><strong>US Accidents · 2016–2023</strong><span>7.7M recorded crashes, 49 states</span><span>43 figures · rendered from the saved outputs</span></div></section>
+<p class="nb-scope" role="note"><strong>Different dataset from the map.</strong> This notebook studies the US Accidents dataset (Moosavi et al., <a href="https://www.kaggle.com/datasets/sobhanmoosavi/us-accidents">CC BY-NC-SA 4.0</a>, noncommercial), where severity 1–4 means traffic impact. The map, data explorer and road screening use NHTSA FARS fatal-crash records.</p>
+<div class="nb-layout"><nav class="nb-toc" aria-label="Notebook contents"><p>Contents</p><ol><li class="toc-2"><a href="#setup">1. Setup</a></li><li class="toc-2"><a href="#load-data-data-quality">2. Load data &amp; data quality</a></li><li class="toc-2"><a href="#cleaning-targets">3. Cleaning &amp; targets</a></li><li class="toc-2"><a href="#exploratory-data-analysis">4. Exploratory data analysis</a></li><li class="toc-3"><a href="#targets">4.1 Targets</a></li><li class="toc-3"><a href="#when-do-crashes-happen">4.2 When do crashes happen?</a></li><li class="toc-3"><a href="#weather">4.3 Weather</a></li><li class="toc-3"><a href="#scatter-plots-4-000-random-crashes-coloured-by-severity">4.4 Scatter plots (4,000 random crashes, coloured by severity)</a></li><li class="toc-3"><a href="#correlations">4.5 Correlations</a></li><li class="toc-3"><a href="#road-features-geography">4.6 Road features &amp; geography</a></li><li class="toc-3"><a href="#statistical-tests">4.7 Statistical tests</a></li><li class="toc-2"><a href="#outliers">5. Outliers</a></li><li class="toc-2"><a href="#feature-engineering-split">6. Feature engineering &amp; split</a></li><li class="toc-2"><a href="#preprocessing-pipeline-fit-on-training-data-only">7. Preprocessing pipeline (fit on training data only)</a></li><li class="toc-2"><a href="#cross-validation-setup-metric-glossary">8. Cross-validation setup &amp; metric glossary</a></li><li class="toc-2"><a href="#classification-predict-whether-a-crash-is-severe-severity-3-4">9. Classification — predict whether a crash is severe (Severity 3–4)</a></li><li class="toc-3"><a href="#eight-models-stratified-5-fold-cv">9.1 Eight models, stratified 5-fold CV</a></li><li class="toc-3"><a href="#fit-on-the-full-training-period-evaluate-once-on-the-future-test-set">9.2 Fit on the full training period, evaluate once on the future test set</a></li><li class="toc-3"><a href="#decision-threshold-chosen-on-out-of-fold-cv-predictions-not-on-the-test-set">9.3 Decision threshold (chosen on out-of-fold CV predictions, not on the test set)</a></li><li class="toc-3"><a href="#hyper-parameter-tuning-randomized-search-stratified-5-fold-roc-auc">9.4 Hyper-parameter tuning (randomized search, stratified 5-fold, ROC-AUC)</a></li><li class="toc-3"><a href="#class-imbalance-class-weights">9.5 Class imbalance: class weights</a></li><li class="toc-3"><a href="#random-split-vs-temporal-split-why-the-honest-test-is-harder">9.6 Random split vs temporal split (why the honest test is harder)</a></li><li class="toc-3"><a href="#four-class-severity-1-4">9.7 Four-class severity (1–4)</a></li><li class="toc-3"><a href="#what-drives-the-predictions-permutation-importance-logistic-coefficients">9.8 What drives the predictions? (permutation importance + logistic coefficients)</a></li><li class="toc-2"><a href="#regression-predict-traffic-delay-duration">10. Regression — predict traffic-delay duration</a></li><li class="toc-3"><a href="#regularization-ridge-validation-curve-lasso-coefficients-and-learning-curve">10.1 Regularization (Ridge α validation curve, Lasso coefficients) and learning curve</a></li><li class="toc-3"><a href="#prediction-intervals-quantile-gradient-boosting-10th-90th-percentile">10.2 Prediction intervals (quantile gradient boosting, 10th–90th percentile)</a></li><li class="toc-2"><a href="#time-series-monthly-us-crash-counts">11. Time series — monthly US crash counts</a></li><li class="toc-2"><a href="#clustering-what-types-of-crashes-are-there">12. Clustering — what types of crashes are there?</a></li><li class="toc-3"><a href="#spatial-clustering-crash-hotspots-in-the-omaha-metro-dbscan-haversine-distance-150-m-radius">12.1 Spatial clustering — crash hotspots in the Omaha metro (DBSCAN, haversine distance, 150 m radius)</a></li><li class="toc-2"><a href="#final-summary">13. Final summary</a></li></ol></nav>
+<article id="notebook" class="nb-article"><div class="nb-markdown"><h1>GeoCrashAI — Complete Analysis Notebook</h1>
+<p><strong>CSCE 878 · US Accidents (Feb 2016 – Mar 2023, 7.7M crashes)</strong></p>
+<p>One notebook, end to end, every step with its output:</p>
+<ol>
+<li>Setup &amp; data loading</li>
+<li>Data quality: types, missing values, duplicates</li>
+<li>Cleaning &amp; target creation</li>
+<li>Exploratory data analysis (distributions, time, weather, scatter plots, correlations, road features, geography, statistical tests)</li>
+<li>Outlier analysis &amp; handling (IQR, z-score, impossible values, Isolation Forest, winsorizing)</li>
+<li>Feature engineering &amp; train/test split (temporal) + drift check</li>
+<li>Preprocessing pipeline: imputation → clipping → <strong>standardization</strong> → one-hot encoding</li>
+<li><strong>K-fold cross-validation</strong> setup (stratified K-fold, K-fold, time-series split)</li>
+<li><strong>Classification</strong> — severe vs not severe (8 models, CV, test metrics, ROC/PR, calibration, threshold tuning, hyper-parameter search, class imbalance, random vs temporal split, 4-class severity, feature importance)</li>
+<li><strong>Regression</strong> — traffic-delay duration (9 models, CV, residual diagnostics, regularization path, learning curve, prediction intervals)</li>
+<li><strong>Time series</strong> — monthly national crash forecasting (decomposition, stationarity, ACF/PACF, 6 forecasters, rolling-origin CV)</li>
+<li><strong>Clustering</strong> — crash types (elbow, silhouette, 6 algorithms, PCA, t-SNE, dendrogram, profiles) + spatial hotspots (DBSCAN, Omaha)</li>
+<li>Final summary of all results</li>
+</ol>
+<p>Metric glossary is in section 8.</p></div>
+<div class="nb-markdown"><h2 id="setup">1. Setup</h2></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 43 lines</summary><pre><code>import warnings, time
+warnings.filterwarnings(&quot;ignore&quot;)
+import numpy as np, pandas as pd, matplotlib.pyplot as plt
+from IPython.display import display
+from scipy import stats
+from scipy.stats import loguniform, randint
+from sklearn.base import BaseEstimator, TransformerMixin, clone
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.model_selection import (StratifiedKFold, KFold, TimeSeriesSplit, cross_validate, cross_val_predict,
+                                     RandomizedSearchCV, train_test_split, validation_curve, learning_curve)
+from sklearn.dummy import DummyClassifier, DummyRegressor
+from sklearn.linear_model import LogisticRegression, LinearRegression, Ridge, Lasso
+from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor, NearestNeighbors
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
+from sklearn.ensemble import (RandomForestClassifier, RandomForestRegressor, HistGradientBoostingClassifier,
+                              HistGradientBoostingRegressor, GradientBoostingRegressor, IsolationForest)
+from sklearn.neural_network import MLPClassifier, MLPRegressor
+from sklearn.cluster import KMeans, MiniBatchKMeans, AgglomerativeClustering, Birch, DBSCAN
+from sklearn.mixture import GaussianMixture
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
+from sklearn.inspection import permutation_importance
+from sklearn.calibration import calibration_curve
+from sklearn import metrics as M
+from src.features import clean, temporal_split, ROAD_FLAGS, WEATHER_NUM
+
+SEED = 878            # reproducibility
+N = 150_000           # crashes analysed (random subset of the 10% national sample = 772,836 rows)
+CV_N = 40_000         # rows used for K-fold cross-validation (keeps 8 models x 5 folds fast)
+K = 5                 # folds
+rng = np.random.default_rng(SEED)
+DOW = [&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]
+SEV_COLORS = {1: &quot;#9bb8d3&quot;, 2: &quot;#4a78b0&quot;, 3: &quot;#e0912f&quot;, 4: &quot;#c0392b&quot;}
+BLUE, RED, GREY = &quot;#4a78b0&quot;, &quot;#c0392b&quot;, &quot;#999999&quot;
+pd.set_option(&quot;display.max_columns&quot;, 60); pd.set_option(&quot;display.width&quot;, 180)
+plt.rcParams.update({&quot;figure.dpi&quot;: 110, &quot;axes.spines.top&quot;: False, &quot;axes.spines.right&quot;: False,
+                     &quot;axes.grid&quot;: True, &quot;grid.alpha&quot;: 0.3, &quot;figure.figsize&quot;: (9, 4)})
+SUMMARY = []          # best result per task, collected as we go
+print(&quot;ready&quot;)</code></pre></details><pre class="nb-stream">ready
+</pre></div>
+<div class="nb-markdown"><h2 id="load-data-data-quality">2. Load data &amp; data quality</h2>
+<p>The 3 GB Kaggle CSV was streamed once by <code>src/ingest.py</code> into a uniform 10% national sample (seed 878). Here we take a random 150k-crash subset of it.</p></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 5 lines</summary><pre><code>raw_full = pd.read_parquet(&quot;data/processed/national_sample.parquet&quot;)
+print(&quot;national sample:&quot;, raw_full.shape)
+raw = raw_full.sample(N, random_state=SEED).reset_index(drop=True)
+print(&quot;working subset :&quot;, raw.shape)
+raw.head()</code></pre></details><pre class="nb-stream">national sample: (772836, 37)
+working subset : (150000, 37)
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Source</th>
+      <th>Severity</th>
+      <th>Start_Time</th>
+      <th>End_Time</th>
+      <th>Start_Lat</th>
+      <th>Start_Lng</th>
+      <th>Distance(mi)</th>
+      <th>City</th>
+      <th>County</th>
+      <th>State</th>
+      <th>Timezone</th>
+      <th>Temperature(F)</th>
+      <th>Wind_Chill(F)</th>
+      <th>Humidity(%)</th>
+      <th>Pressure(in)</th>
+      <th>Visibility(mi)</th>
+      <th>Wind_Direction</th>
+      <th>Wind_Speed(mph)</th>
+      <th>Precipitation(in)</th>
+      <th>Weather_Condition</th>
+      <th>Amenity</th>
+      <th>Bump</th>
+      <th>Crossing</th>
+      <th>Give_Way</th>
+      <th>Junction</th>
+      <th>No_Exit</th>
+      <th>Railway</th>
+      <th>Roundabout</th>
+      <th>Station</th>
+      <th>Stop</th>
+      <th>Traffic_Calming</th>
+      <th>Traffic_Signal</th>
+      <th>Sunrise_Sunset</th>
+      <th>Civil_Twilight</th>
+      <th>Nautical_Twilight</th>
+      <th>Astronomical_Twilight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A-7593307</td>
+      <td>Source1</td>
+      <td>2</td>
+      <td>2018-04-13 16:56:32</td>
+      <td>2018-04-13 22:56:32</td>
+      <td>38.960995</td>
+      <td>-77.027972</td>
+      <td>0.422</td>
+      <td>Washington</td>
+      <td>District of Columbia</td>
+      <td>DC</td>
+      <td>US/Eastern</td>
+      <td>84.7</td>
+      <td>NaN</td>
+      <td>25.0</td>
+      <td>29.86</td>
+      <td>10.0</td>
+      <td>SSW</td>
+      <td>10.4</td>
+      <td>NaN</td>
+      <td>Clear</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>Day</td>
+      <td>Day</td>
+      <td>Day</td>
+      <td>Day</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A-4217317</td>
+      <td>Source1</td>
+      <td>2</td>
+      <td>2022-11-14 11:18:48.000000000</td>
+      <td>2022-11-14 12:41:11.000000000</td>
+      <td>47.316256</td>
+      <td>-93.358205</td>
+      <td>0.584</td>
+      <td>Bovey</td>
+      <td>Itasca</td>
+      <td>MN</td>
+      <td>US/Central</td>
+      <td>25.0</td>
+      <td>19.0</td>
+      <td>80.0</td>
+      <td>28.84</td>
+      <td>1.0</td>
+      <td>SE</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>Light Snow</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>Day</td>
+      <td>Day</td>
+      <td>Day</td>
+      <td>Day</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A-2366170</td>
+      <td>Source2</td>
+      <td>2</td>
+      <td>2019-01-29 18:41:06</td>
+      <td>2019-01-29 19:25:55</td>
+      <td>35.205559</td>
+      <td>-80.869469</td>
+      <td>0.000</td>
+      <td>Charlotte</td>
+      <td>Mecklenburg</td>
+      <td>NC</td>
+      <td>US/Eastern</td>
+      <td>41.0</td>
+      <td>36.4</td>
+      <td>76.0</td>
+      <td>29.91</td>
+      <td>10.0</td>
+      <td>NNW</td>
+      <td>6.9</td>
+      <td>NaN</td>
+      <td>Partly Cloudy</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>Night</td>
+      <td>Night</td>
+      <td>Day</td>
+      <td>Day</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A-2828666</td>
+      <td>Source2</td>
+      <td>2</td>
+      <td>2018-05-16 11:28:36</td>
+      <td>2018-05-16 12:28:21</td>
+      <td>47.632298</td>
+      <td>-122.345955</td>
+      <td>0.000</td>
+      <td>Seattle</td>
+      <td>King</td>
+      <td>WA</td>
+      <td>US/Pacific</td>
+      <td>63.0</td>
+      <td>NaN</td>
+      <td>63.0</td>
+      <td>30.04</td>
+      <td>10.0</td>
+      <td>Variable</td>
+      <td>3.5</td>
+      <td>NaN</td>
+      <td>Mostly Cloudy</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>Day</td>
+      <td>Day</td>
+      <td>Day</td>
+      <td>Day</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A-6538465</td>
+      <td>Source1</td>
+      <td>2</td>
+      <td>2021-01-17 03:44:39</td>
+      <td>2021-01-17 05:41:40</td>
+      <td>43.911441</td>
+      <td>-91.546615</td>
+      <td>3.175</td>
+      <td>Dakota</td>
+      <td>Winona</td>
+      <td>MN</td>
+      <td>US/Central</td>
+      <td>29.0</td>
+      <td>21.0</td>
+      <td>85.0</td>
+      <td>29.02</td>
+      <td>10.0</td>
+      <td>NNW</td>
+      <td>8.0</td>
+      <td>0.0</td>
+      <td>Cloudy</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>Night</td>
+      <td>Night</td>
+      <td>Night</td>
+      <td>Night</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 2 lines</summary><pre><code>print(&quot;column types:&quot;); display(raw.dtypes.astype(str).value_counts().to_frame(&quot;columns&quot;))
+raw.describe(include=&quot;number&quot;).T.round(2)</code></pre></details><pre class="nb-stream">column types:
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>columns</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>str</th>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>bool</th>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>float64</th>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>int64</th>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Severity</th>
+      <td>150000.0</td>
+      <td>2.21</td>
+      <td>0.49</td>
+      <td>1.00</td>
+      <td>2.00</td>
+      <td>2.00</td>
+      <td>2.00</td>
+      <td>4.00</td>
+    </tr>
+    <tr>
+      <th>Start_Lat</th>
+      <td>150000.0</td>
+      <td>36.20</td>
+      <td>5.07</td>
+      <td>24.57</td>
+      <td>33.41</td>
+      <td>35.81</td>
+      <td>40.08</td>
+      <td>48.99</td>
+    </tr>
+    <tr>
+      <th>Start_Lng</th>
+      <td>150000.0</td>
+      <td>-94.74</td>
+      <td>17.39</td>
+      <td>-124.49</td>
+      <td>-117.22</td>
+      <td>-87.82</td>
+      <td>-80.37</td>
+      <td>-67.84</td>
+    </tr>
+    <tr>
+      <th>Distance(mi)</th>
+      <td>150000.0</td>
+      <td>0.56</td>
+      <td>1.68</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.03</td>
+      <td>0.46</td>
+      <td>100.90</td>
+    </tr>
+    <tr>
+      <th>Temperature(F)</th>
+      <td>146767.0</td>
+      <td>61.63</td>
+      <td>18.97</td>
+      <td>-77.80</td>
+      <td>49.00</td>
+      <td>64.00</td>
+      <td>76.00</td>
+      <td>170.60</td>
+    </tr>
+    <tr>
+      <th>Wind_Chill(F)</th>
+      <td>111358.0</td>
+      <td>58.26</td>
+      <td>22.33</td>
+      <td>-52.60</td>
+      <td>43.00</td>
+      <td>62.00</td>
+      <td>75.00</td>
+      <td>140.00</td>
+    </tr>
+    <tr>
+      <th>Humidity(%)</th>
+      <td>146575.0</td>
+      <td>64.82</td>
+      <td>22.87</td>
+      <td>1.00</td>
+      <td>48.00</td>
+      <td>67.00</td>
+      <td>84.00</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <th>Pressure(in)</th>
+      <td>147242.0</td>
+      <td>29.53</td>
+      <td>1.01</td>
+      <td>19.53</td>
+      <td>29.36</td>
+      <td>29.85</td>
+      <td>30.03</td>
+      <td>30.92</td>
+    </tr>
+    <tr>
+      <th>Visibility(mi)</th>
+      <td>146540.0</td>
+      <td>9.08</td>
+      <td>2.66</td>
+      <td>0.00</td>
+      <td>10.00</td>
+      <td>10.00</td>
+      <td>10.00</td>
+      <td>80.00</td>
+    </tr>
+    <tr>
+      <th>Wind_Speed(mph)</th>
+      <td>138815.0</td>
+      <td>7.67</td>
+      <td>5.26</td>
+      <td>0.00</td>
+      <td>4.60</td>
+      <td>7.00</td>
+      <td>10.40</td>
+      <td>81.00</td>
+    </tr>
+    <tr>
+      <th>Precipitation(in)</th>
+      <td>107629.0</td>
+      <td>0.01</td>
+      <td>0.11</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>10.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 5 lines</summary><pre><code>miss = raw.isna().mean().mul(100).sort_values(ascending=False)
+miss = miss[miss &gt; 0]
+display(miss.round(2).to_frame(&quot;% missing&quot;))
+ax = miss.sort_values().plot.barh(color=BLUE, figsize=(8, 5))
+ax.set(title=&quot;Missing values by column&quot;, xlabel=&quot;% of rows missing&quot;); plt.tight_layout(); plt.show()</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>% missing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Precipitation(in)</th>
+      <td>28.25</td>
+    </tr>
+    <tr>
+      <th>Wind_Chill(F)</th>
+      <td>25.76</td>
+    </tr>
+    <tr>
+      <th>Wind_Speed(mph)</th>
+      <td>7.46</td>
+    </tr>
+    <tr>
+      <th>Wind_Direction</th>
+      <td>2.33</td>
+    </tr>
+    <tr>
+      <th>Visibility(mi)</th>
+      <td>2.31</td>
+    </tr>
+    <tr>
+      <th>Humidity(%)</th>
+      <td>2.28</td>
+    </tr>
+    <tr>
+      <th>Weather_Condition</th>
+      <td>2.26</td>
+    </tr>
+    <tr>
+      <th>Temperature(F)</th>
+      <td>2.16</td>
+    </tr>
+    <tr>
+      <th>Pressure(in)</th>
+      <td>1.84</td>
+    </tr>
+    <tr>
+      <th>Nautical_Twilight</th>
+      <td>0.30</td>
+    </tr>
+    <tr>
+      <th>Civil_Twilight</th>
+      <td>0.30</td>
+    </tr>
+    <tr>
+      <th>Sunrise_Sunset</th>
+      <td>0.30</td>
+    </tr>
+    <tr>
+      <th>Astronomical_Twilight</th>
+      <td>0.30</td>
+    </tr>
+    <tr>
+      <th>Timezone</th>
+      <td>0.11</td>
+    </tr>
+    <tr>
+      <th>City</th>
+      <td>0.01</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-01.png" alt="Figure 1: 2. Load data &amp; data quality" loading="lazy"><figcaption>Figure 1</figcaption></figure></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 4 lines</summary><pre><code>dup_id = raw.ID.duplicated().sum()
+dup_evt = raw.duplicated(subset=[&quot;Start_Time&quot;, &quot;Start_Lat&quot;, &quot;Start_Lng&quot;]).sum()
+print(f&quot;duplicate IDs: {dup_id}   duplicate (time, location) events: {dup_evt}&quot;)
+print(&quot;categorical cardinality:&quot;); display(raw[[&quot;Source&quot;, &quot;State&quot;, &quot;City&quot;, &quot;Weather_Condition&quot;, &quot;Wind_Direction&quot;, &quot;Sunrise_Sunset&quot;]].nunique().to_frame(&quot;unique values&quot;))</code></pre></details><pre class="nb-stream">duplicate IDs: 0   duplicate (time, location) events: 213
+categorical cardinality:
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>unique values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Source</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>State</th>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>City</th>
+      <td>7203</td>
+    </tr>
+    <tr>
+      <th>Weather_Condition</th>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>Wind_Direction</th>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>Sunrise_Sunset</th>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-markdown"><h2 id="cleaning-targets">3. Cleaning &amp; targets</h2>
+<p><code>src.features.clean()</code>:
+- parses times, <strong>duration = End − Start</strong> (kept 1 min … 7 days; longer are roadworks logged as crashes),
+- removes invalid coordinates / severities,
+- derives <code>hour, dow, month, year, is_weekend, is_rush_hour, is_night</code>,
+- collapses ~140 weather strings into 8 groups,
+- targets: <code>Severity</code> (1–4), <code>is_severe</code> (Severity ≥ 3), <code>log_duration = log(1 + minutes)</code>.</p>
+<p><code>Distance(mi)</code> is <strong>dropped from modelling</strong>: it is the length of road affected, known only after the event (target leakage).</p></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 7 lines</summary><pre><code>dedup = raw.drop_duplicates(subset=[&quot;Start_Time&quot;, &quot;Start_Lat&quot;, &quot;Start_Lng&quot;])
+df = clean(dedup)
+steps = pd.DataFrame({&quot;rows&quot;: [len(raw), len(dedup), len(df)]},
+                     index=[&quot;loaded&quot;, &quot;after removing duplicate events&quot;, &quot;after cleaning (valid time/duration/coords)&quot;])
+steps[&quot;dropped&quot;] = -steps.rows.diff().fillna(0).astype(int)
+display(steps)
+df[[&quot;Start_Time&quot;, &quot;End_Time&quot;, &quot;duration_min&quot;, &quot;log_duration&quot;, &quot;Severity&quot;, &quot;is_severe&quot;, &quot;hour&quot;, &quot;dow&quot;, &quot;weather_group&quot;]].head()</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rows</th>
+      <th>dropped</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>loaded</th>
+      <td>150000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>after removing duplicate events</th>
+      <td>149787</td>
+      <td>213</td>
+    </tr>
+    <tr>
+      <th>after cleaning (valid time/duration/coords)</th>
+      <td>149653</td>
+      <td>134</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Start_Time</th>
+      <th>End_Time</th>
+      <th>duration_min</th>
+      <th>log_duration</th>
+      <th>Severity</th>
+      <th>is_severe</th>
+      <th>hour</th>
+      <th>dow</th>
+      <th>weather_group</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2016-02-08 06:15:39</td>
+      <td>2016-02-08 12:15:39</td>
+      <td>360.0</td>
+      <td>5.888878</td>
+      <td>2</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>cloudy</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2016-02-08 09:35:35</td>
+      <td>2016-02-08 10:05:35</td>
+      <td>30.0</td>
+      <td>3.433987</td>
+      <td>2</td>
+      <td>0</td>
+      <td>9</td>
+      <td>0</td>
+      <td>cloudy</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2016-02-08 14:56:57</td>
+      <td>2016-02-08 15:41:57</td>
+      <td>45.0</td>
+      <td>3.828641</td>
+      <td>2</td>
+      <td>0</td>
+      <td>14</td>
+      <td>0</td>
+      <td>cloudy</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2016-02-09 07:44:49</td>
+      <td>2016-02-09 13:44:49</td>
+      <td>360.0</td>
+      <td>5.888878</td>
+      <td>3</td>
+      <td>1</td>
+      <td>7</td>
+      <td>1</td>
+      <td>snow</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2016-02-09 07:48:40</td>
+      <td>2016-02-09 13:48:40</td>
+      <td>360.0</td>
+      <td>5.888878</td>
+      <td>3</td>
+      <td>1</td>
+      <td>7</td>
+      <td>1</td>
+      <td>snow</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-markdown"><h2 id="exploratory-data-analysis">4. Exploratory data analysis</h2>
+<h3 id="targets">4.1 Targets</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 11 lines</summary><pre><code>fig, ax = plt.subplots(1, 2, figsize=(12, 3.8))
+c = df.Severity.value_counts().sort_index()
+ax[0].bar(c.index.astype(str), c.values, color=[SEV_COLORS[s] for s in c.index])
+for i, v in enumerate(c.values):
+    ax[0].text(i, v, f&quot;{v / c.sum():.1%}&quot;, ha=&quot;center&quot;, va=&quot;bottom&quot;)
+ax[0].set(title=&quot;Crashes by severity (class imbalance)&quot;, xlabel=&quot;Severity&quot;, ylabel=&quot;count&quot;)
+ct = pd.crosstab(df.Source, df.Severity, normalize=&quot;index&quot;)
+ct.plot.bar(stacked=True, ax=ax[1], color=[SEV_COLORS[s] for s in ct.columns], rot=0)
+ax[1].set(title=&quot;Severity mix by reporting source&quot;, ylabel=&quot;share&quot;); ax[1].legend(title=&quot;Severity&quot;, bbox_to_anchor=(1, 1))
+plt.tight_layout(); plt.show()
+print(f&quot;severe (3-4) share: {df.is_severe.mean():.1%}  -&gt; imbalanced binary target&quot;)</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-02.png" alt="Figure 2: 4.1 Targets" loading="lazy"><figcaption>Figure 2</figcaption></figure><pre class="nb-stream">severe (3-4) share: 19.4%  -&gt; imbalanced binary target
+</pre></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 7 lines</summary><pre><code>fig, ax = plt.subplots(1, 3, figsize=(15, 3.8))
+ax[0].hist(df.duration_min.clip(upper=600), bins=60, color=BLUE); ax[0].set(title=&quot;Duration (minutes, clipped at 600)&quot;, xlabel=&quot;minutes&quot;)
+ax[1].hist(df.log_duration, bins=60, color=BLUE); ax[1].set(title=&quot;log(1 + duration) — regression target&quot;, xlabel=&quot;log minutes&quot;)
+df.boxplot(column=&quot;log_duration&quot;, by=&quot;Severity&quot;, ax=ax[2], grid=False, showfliers=False); ax[2].set(title=&quot;log duration by severity&quot;, xlabel=&quot;Severity&quot;); plt.suptitle(&quot;&quot;)
+plt.tight_layout(); plt.show()
+print(f&quot;skewness raw: {df.duration_min.skew():.2f}   after log: {df.log_duration.skew():.2f}&quot;)
+display(df.groupby(&quot;Severity&quot;).duration_min.describe(percentiles=[.1, .25, .5, .75, .9]).round(1))</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-03.png" alt="Figure 3: 4.1 Targets" loading="lazy"><figcaption>Figure 3</figcaption></figure><pre class="nb-stream">skewness raw: 12.63   after log: 0.70
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>10%</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>90%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>Severity</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>1335.0</td>
+      <td>44.3</td>
+      <td>28.6</td>
+      <td>15.0</td>
+      <td>15.0</td>
+      <td>29.6</td>
+      <td>44.5</td>
+      <td>59.4</td>
+      <td>65.0</td>
+      <td>360.9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>119359.0</td>
+      <td>121.3</td>
+      <td>180.4</td>
+      <td>6.0</td>
+      <td>29.6</td>
+      <td>44.4</td>
+      <td>77.5</td>
+      <td>128.9</td>
+      <td>242.0</td>
+      <td>7391.1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>25000.0</td>
+      <td>68.3</td>
+      <td>94.5</td>
+      <td>15.0</td>
+      <td>29.3</td>
+      <td>29.6</td>
+      <td>44.4</td>
+      <td>60.0</td>
+      <td>119.4</td>
+      <td>6067.7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3959.0</td>
+      <td>218.9</td>
+      <td>391.7</td>
+      <td>11.4</td>
+      <td>29.3</td>
+      <td>60.0</td>
+      <td>127.8</td>
+      <td>360.0</td>
+      <td>360.0</td>
+      <td>8712.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-markdown"><h3 id="when-do-crashes-happen">4.2 When do crashes happen?</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 16 lines</summary><pre><code>fig, ax = plt.subplots(2, 2, figsize=(13, 7))
+df.year.value_counts().sort_index().plot.bar(ax=ax[0, 0], color=BLUE, rot=0, title=&quot;Crashes by year&quot;)
+df.month.value_counts().sort_index().plot.bar(ax=ax[0, 1], color=BLUE, rot=0, title=&quot;Crashes by month&quot;)
+df.dow.value_counts().sort_index().rename(index=dict(enumerate(DOW))).plot.bar(ax=ax[1, 0], color=BLUE, rot=0, title=&quot;Crashes by weekday&quot;)
+df.hour.value_counts().sort_index().plot.bar(ax=ax[1, 1], color=BLUE, rot=0, title=&quot;Crashes by hour of day&quot;)
+plt.tight_layout(); plt.show()
+
+fig, ax = plt.subplots(1, 2, figsize=(13, 3.5))
+df.groupby(&quot;hour&quot;).is_severe.mean().plot(ax=ax[0], marker=&quot;o&quot;, color=RED, title=&quot;Severe share by hour&quot;)
+df.groupby(&quot;year&quot;).is_severe.mean().plot(ax=ax[1], marker=&quot;o&quot;, color=RED, title=&quot;Severe share by year (label drift!)&quot;)
+for a in ax: a.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f&quot;{v:.0%}&quot;))
+plt.tight_layout(); plt.show()
+
+hm = pd.crosstab(df.dow, df.hour)
+plt.figure(figsize=(13, 3.2)); plt.imshow(hm, aspect=&quot;auto&quot;, cmap=&quot;Blues&quot;)
+plt.yticks(range(7), DOW); plt.xticks(range(24)); plt.colorbar(label=&quot;crashes&quot;); plt.title(&quot;Hour x weekday heatmap&quot;); plt.grid(False); plt.show()</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-04.png" alt="Figure 4: 4.2 When do crashes happen?" loading="lazy"><figcaption>Figure 4</figcaption></figure><figure class="nb-figure"><img src="/assets/notebook/fig-05.png" alt="Figure 5: 4.2 When do crashes happen?" loading="lazy"><figcaption>Figure 5</figcaption></figure><figure class="nb-figure"><img src="/assets/notebook/fig-06.png" alt="Figure 6: 4.2 When do crashes happen?" loading="lazy"><figcaption>Figure 6</figcaption></figure></div>
+<div class="nb-markdown"><h3 id="weather">4.3 Weather</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 21 lines</summary><pre><code>g = (df.groupby(&quot;weather_group&quot;, observed=True)
+       .agg(n=(&quot;is_severe&quot;, &quot;size&quot;), severe_rate=(&quot;is_severe&quot;, &quot;mean&quot;), median_duration=(&quot;duration_min&quot;, &quot;median&quot;))
+       .sort_values(&quot;n&quot;, ascending=False))
+display(g.round(3))
+fig, ax = plt.subplots(1, 2, figsize=(13, 3.6))
+g.n.plot.bar(ax=ax[0], color=BLUE, rot=0, title=&quot;Crashes by weather&quot;)
+g.severe_rate.plot.bar(ax=ax[1], color=RED, rot=0, title=&quot;Severe share by weather&quot;)
+ax[1].axhline(df.is_severe.mean(), ls=&quot;--&quot;, color=&quot;k&quot;, label=&quot;overall&quot;); ax[1].legend()
+plt.tight_layout(); plt.show()
+
+fig, axes = plt.subplots(2, 4, figsize=(16, 6))
+for a, col in zip(axes.flat, WEATHER_NUM):
+    s = df[col].dropna(); lo, hi = s.quantile([0.005, 0.995])
+    a.hist(s.clip(lo, hi), bins=40, color=BLUE); a.set_title(col)
+axes.flat[-1].axis(&quot;off&quot;); plt.suptitle(&quot;Numeric weather distributions (0.5–99.5% range)&quot;); plt.tight_layout(); plt.show()
+
+fig, axes = plt.subplots(2, 4, figsize=(16, 6))
+for a, col in zip(axes.flat, WEATHER_NUM):
+    parts = [df.loc[df.is_severe == k, col].dropna() for k in (0, 1)]
+    a.boxplot(parts, tick_labels=[&quot;not severe&quot;, &quot;severe&quot;], showfliers=False); a.set_title(col)
+axes.flat[-1].axis(&quot;off&quot;); plt.suptitle(&quot;Weather by outcome (box = IQR, whiskers 1.5 IQR)&quot;); plt.tight_layout(); plt.show()</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n</th>
+      <th>severe_rate</th>
+      <th>median_duration</th>
+    </tr>
+    <tr>
+      <th>weather_group</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>clear</th>
+      <td>66192</td>
+      <td>0.170</td>
+      <td>75.767</td>
+    </tr>
+    <tr>
+      <th>cloudy</th>
+      <td>61107</td>
+      <td>0.215</td>
+      <td>61.300</td>
+    </tr>
+    <tr>
+      <th>rain</th>
+      <td>9947</td>
+      <td>0.227</td>
+      <td>62.900</td>
+    </tr>
+    <tr>
+      <th>fog</th>
+      <td>3989</td>
+      <td>0.149</td>
+      <td>76.500</td>
+    </tr>
+    <tr>
+      <th>unknown</th>
+      <td>3381</td>
+      <td>0.214</td>
+      <td>76.500</td>
+    </tr>
+    <tr>
+      <th>snow</th>
+      <td>3354</td>
+      <td>0.191</td>
+      <td>80.842</td>
+    </tr>
+    <tr>
+      <th>thunder</th>
+      <td>1608</td>
+      <td>0.203</td>
+      <td>75.467</td>
+    </tr>
+    <tr>
+      <th>other</th>
+      <td>75</td>
+      <td>0.173</td>
+      <td>95.950</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-07.png" alt="Figure 7: 4.3 Weather" loading="lazy"><figcaption>Figure 7</figcaption></figure><figure class="nb-figure"><img src="/assets/notebook/fig-08.png" alt="Figure 8: 4.3 Weather" loading="lazy"><figcaption>Figure 8</figcaption></figure><figure class="nb-figure"><img src="/assets/notebook/fig-09.png" alt="Figure 9: 4.3 Weather" loading="lazy"><figcaption>Figure 9</figcaption></figure></div>
+<div class="nb-markdown"><h3 id="scatter-plots-4-000-random-crashes-coloured-by-severity">4.4 Scatter plots (4,000 random crashes, coloured by severity)</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 20 lines</summary><pre><code>s = df.sample(4000, random_state=SEED)
+fig, ax = plt.subplots(2, 2, figsize=(13, 9))
+for sev in (1, 2, 3, 4):
+    m = s.Severity == sev
+    kw = dict(s=5 if sev &gt;= 3 else 3, alpha=0.55, color=SEV_COLORS[sev], label=f&quot;Severity {sev}&quot;)
+    ax[0, 0].scatter(s.loc[m, &quot;Temperature(F)&quot;], s.loc[m, &quot;Humidity(%)&quot;], **kw)
+    ax[0, 1].scatter(s.loc[m, &quot;Visibility(mi)&quot;].clip(upper=15), s.loc[m, &quot;duration_min&quot;], **kw)
+    ax[1, 0].scatter(s.loc[m, &quot;Wind_Speed(mph)&quot;].clip(upper=50), s.loc[m, &quot;duration_min&quot;], **kw)
+    ax[1, 1].scatter(s.loc[m, &quot;Start_Lng&quot;], s.loc[m, &quot;Start_Lat&quot;], **kw)
+ax[0, 0].set(title=&quot;Temperature vs humidity&quot;, xlabel=&quot;°F&quot;, ylabel=&quot;%&quot;)
+ax[0, 1].set(title=&quot;Visibility vs duration&quot;, xlabel=&quot;miles&quot;, ylabel=&quot;minutes (log)&quot;, yscale=&quot;log&quot;)
+ax[1, 0].set(title=&quot;Wind speed vs duration&quot;, xlabel=&quot;mph&quot;, ylabel=&quot;minutes (log)&quot;, yscale=&quot;log&quot;)
+ax[1, 1].set(title=&quot;Location (longitude vs latitude)&quot;, xlabel=&quot;lng&quot;, ylabel=&quot;lat&quot;, xlim=(-125, -66), ylim=(24, 50))
+ax[0, 0].legend(markerscale=3); plt.tight_layout(); plt.show()
+
+pd.plotting.scatter_matrix(s[[&quot;Temperature(F)&quot;, &quot;Humidity(%)&quot;, &quot;Pressure(in)&quot;, &quot;Wind_Speed(mph)&quot;, &quot;log_duration&quot;]].clip(
+    lower=s[[&quot;Temperature(F)&quot;, &quot;Humidity(%)&quot;, &quot;Pressure(in)&quot;, &quot;Wind_Speed(mph)&quot;, &quot;log_duration&quot;]].quantile(0.01),
+    upper=s[[&quot;Temperature(F)&quot;, &quot;Humidity(%)&quot;, &quot;Pressure(in)&quot;, &quot;Wind_Speed(mph)&quot;, &quot;log_duration&quot;]].quantile(0.99), axis=1),
+    figsize=(11, 11), s=3, alpha=0.3, color=BLUE, hist_kwds={&quot;color&quot;: BLUE, &quot;bins&quot;: 30})
+plt.suptitle(&quot;Scatter matrix (pair plot)&quot;); plt.show()</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-10.png" alt="Figure 10: 4.4 Scatter plots (4,000 random crashes, coloured by severity)" loading="lazy"><figcaption>Figure 10</figcaption></figure><figure class="nb-figure"><img src="/assets/notebook/fig-11.png" alt="Figure 11: 4.4 Scatter plots (4,000 random crashes, coloured by severity)" loading="lazy"><figcaption>Figure 11</figcaption></figure></div>
+<div class="nb-markdown"><h3 id="correlations">4.5 Correlations</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 11 lines</summary><pre><code>cols = WEATHER_NUM + [&quot;hour&quot;, &quot;year&quot;, &quot;Start_Lat&quot;, &quot;Start_Lng&quot;, &quot;Severity&quot;, &quot;log_duration&quot;]
+corr = df[cols].corr(method=&quot;spearman&quot;)
+fig, ax = plt.subplots(figsize=(11, 9))
+im = ax.imshow(corr, cmap=&quot;RdBu_r&quot;, vmin=-1, vmax=1)
+ax.set_xticks(range(len(cols)), [c.split(&quot;(&quot;)[0] for c in cols], rotation=45, ha=&quot;right&quot;); ax.set_yticks(range(len(cols)), [c.split(&quot;(&quot;)[0] for c in cols])
+for i in range(len(cols)):
+    for j in range(len(cols)):
+        ax.text(j, i, f&quot;{corr.iat[i, j]:.2f}&quot;, ha=&quot;center&quot;, va=&quot;center&quot;, fontsize=7)
+plt.colorbar(im, label=&quot;Spearman ρ&quot;); ax.set_title(&quot;Spearman correlation matrix&quot;); ax.grid(False); plt.tight_layout(); plt.show()
+print(&quot;Strongest correlations with Severity / log_duration:&quot;)
+display(corr[[&quot;Severity&quot;, &quot;log_duration&quot;]].drop([&quot;Severity&quot;, &quot;log_duration&quot;]).round(3).sort_values(&quot;Severity&quot;, key=abs, ascending=False))</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-12.png" alt="Figure 12: 4.5 Correlations" loading="lazy"><figcaption>Figure 12</figcaption></figure><pre class="nb-stream">Strongest correlations with Severity / log_duration:
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Severity</th>
+      <th>log_duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>year</th>
+      <td>-0.282</td>
+      <td>0.274</td>
+    </tr>
+    <tr>
+      <th>Pressure(in)</th>
+      <td>0.093</td>
+      <td>-0.138</td>
+    </tr>
+    <tr>
+      <th>Precipitation(in)</th>
+      <td>0.073</td>
+      <td>-0.063</td>
+    </tr>
+    <tr>
+      <th>Wind_Chill(F)</th>
+      <td>-0.066</td>
+      <td>0.011</td>
+    </tr>
+    <tr>
+      <th>Start_Lat</th>
+      <td>0.061</td>
+      <td>0.018</td>
+    </tr>
+    <tr>
+      <th>Wind_Speed(mph)</th>
+      <td>0.047</td>
+      <td>-0.039</td>
+    </tr>
+    <tr>
+      <th>Start_Lng</th>
+      <td>0.032</td>
+      <td>-0.009</td>
+    </tr>
+    <tr>
+      <th>hour</th>
+      <td>0.014</td>
+      <td>0.018</td>
+    </tr>
+    <tr>
+      <th>Humidity(%)</th>
+      <td>0.013</td>
+      <td>-0.024</td>
+    </tr>
+    <tr>
+      <th>Temperature(F)</th>
+      <td>-0.012</td>
+      <td>-0.025</td>
+    </tr>
+    <tr>
+      <th>Visibility(mi)</th>
+      <td>-0.007</td>
+      <td>0.011</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-markdown"><h3 id="road-features-geography">4.6 Road features &amp; geography</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 15 lines</summary><pre><code>rf = pd.DataFrame({&quot;share_of_crashes&quot;: df[ROAD_FLAGS].mean(),
+                   &quot;severe_with&quot;: [df.loc[df[f] == 1, &quot;is_severe&quot;].mean() for f in ROAD_FLAGS],
+                   &quot;severe_without&quot;: [df.loc[df[f] == 0, &quot;is_severe&quot;].mean() for f in ROAD_FLAGS]}, index=ROAD_FLAGS)
+rf[&quot;lift&quot;] = rf.severe_with / rf.severe_without
+display(rf.sort_values(&quot;share_of_crashes&quot;, ascending=False).round(3))
+fig, ax = plt.subplots(1, 2, figsize=(14, 4.5))
+rf.share_of_crashes.sort_values().plot.barh(ax=ax[0], color=BLUE, title=&quot;Share of crashes near feature&quot;)
+rf.sort_values(&quot;share_of_crashes&quot;)[[&quot;severe_with&quot;, &quot;severe_without&quot;]].plot.barh(ax=ax[1], color=[RED, GREY], title=&quot;Severe share with vs without feature&quot;)
+plt.tight_layout(); plt.show()
+
+fig, ax = plt.subplots(1, 2, figsize=(14, 4.5))
+st = df.groupby(&quot;State&quot;).agg(n=(&quot;is_severe&quot;, &quot;size&quot;), severe=(&quot;is_severe&quot;, &quot;mean&quot;)).sort_values(&quot;n&quot;, ascending=False).head(15)
+st.n.plot.bar(ax=ax[0], color=BLUE, rot=0, title=&quot;Top 15 states (crashes)&quot;)
+st.severe.plot.bar(ax=ax[1], color=RED, rot=0, title=&quot;Severe share, same states&quot;)
+plt.tight_layout(); plt.show()</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>share_of_crashes</th>
+      <th>severe_with</th>
+      <th>severe_without</th>
+      <th>lift</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Traffic_Signal</th>
+      <td>0.148</td>
+      <td>0.092</td>
+      <td>0.211</td>
+      <td>0.438</td>
+    </tr>
+    <tr>
+      <th>Crossing</th>
+      <td>0.113</td>
+      <td>0.068</td>
+      <td>0.209</td>
+      <td>0.327</td>
+    </tr>
+    <tr>
+      <th>Junction</th>
+      <td>0.073</td>
+      <td>0.264</td>
+      <td>0.188</td>
+      <td>1.406</td>
+    </tr>
+    <tr>
+      <th>Stop</th>
+      <td>0.028</td>
+      <td>0.056</td>
+      <td>0.197</td>
+      <td>0.286</td>
+    </tr>
+    <tr>
+      <th>Station</th>
+      <td>0.026</td>
+      <td>0.070</td>
+      <td>0.197</td>
+      <td>0.355</td>
+    </tr>
+    <tr>
+      <th>Amenity</th>
+      <td>0.013</td>
+      <td>0.062</td>
+      <td>0.195</td>
+      <td>0.319</td>
+    </tr>
+    <tr>
+      <th>Railway</th>
+      <td>0.009</td>
+      <td>0.151</td>
+      <td>0.194</td>
+      <td>0.778</td>
+    </tr>
+    <tr>
+      <th>Give_Way</th>
+      <td>0.005</td>
+      <td>0.164</td>
+      <td>0.194</td>
+      <td>0.846</td>
+    </tr>
+    <tr>
+      <th>No_Exit</th>
+      <td>0.003</td>
+      <td>0.101</td>
+      <td>0.194</td>
+      <td>0.520</td>
+    </tr>
+    <tr>
+      <th>Traffic_Calming</th>
+      <td>0.001</td>
+      <td>0.138</td>
+      <td>0.194</td>
+      <td>0.714</td>
+    </tr>
+    <tr>
+      <th>Bump</th>
+      <td>0.000</td>
+      <td>0.110</td>
+      <td>0.194</td>
+      <td>0.566</td>
+    </tr>
+    <tr>
+      <th>Roundabout</th>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.194</td>
+      <td>0.000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-13.png" alt="Figure 13: 4.6 Road features &amp; geography" loading="lazy"><figcaption>Figure 13</figcaption></figure><figure class="nb-figure"><img src="/assets/notebook/fig-14.png" alt="Figure 14: 4.6 Road features &amp; geography" loading="lazy"><figcaption>Figure 14</figcaption></figure></div>
+<div class="nb-markdown"><h3 id="statistical-tests">4.7 Statistical tests</h3>
+<p>With 150k rows almost everything is 'significant', so effect sizes (Cramér's V, rank-biserial r) matter more than p-values.</p></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 14 lines</summary><pre><code>def cramers_v(ct):
+    chi2 = stats.chi2_contingency(ct)[0]; n = ct.to_numpy().sum()
+    return np.sqrt(chi2 / (n * (min(ct.shape) - 1)))
+rows = []
+for col in [&quot;weather_group&quot;, &quot;Source&quot;, &quot;is_night&quot;, &quot;Junction&quot;, &quot;Traffic_Signal&quot;, &quot;Crossing&quot;]:
+    ct = pd.crosstab(df[col], df.is_severe); chi2, p, dof, _ = stats.chi2_contingency(ct)
+    rows.append({&quot;test&quot;: f&quot;chi-square: {col} vs is_severe&quot;, &quot;statistic&quot;: chi2, &quot;p_value&quot;: p, &quot;effect&quot;: f&quot;Cramér&#x27;s V = {cramers_v(ct):.3f}&quot;})
+for col in [&quot;Visibility(mi)&quot;, &quot;Temperature(F)&quot;, &quot;Wind_Speed(mph)&quot;]:
+    a, b = df.loc[df.is_severe == 1, col].dropna(), df.loc[df.is_severe == 0, col].dropna()
+    u, p = stats.mannwhitneyu(a, b)
+    rows.append({&quot;test&quot;: f&quot;Mann-Whitney: {col} severe vs not&quot;, &quot;statistic&quot;: u, &quot;p_value&quot;: p, &quot;effect&quot;: f&quot;rank-biserial r = {1 - 2 * u / (len(a) * len(b)):.3f}&quot;})
+h, p = stats.kruskal(*[g.log_duration for _, g in df.groupby(&quot;Severity&quot;)])
+rows.append({&quot;test&quot;: &quot;Kruskal-Wallis: log_duration across severities&quot;, &quot;statistic&quot;: h, &quot;p_value&quot;: p, &quot;effect&quot;: f&quot;ε² = {h / (len(df) - 1):.3f}&quot;})
+pd.DataFrame(rows).set_index(&quot;test&quot;)</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>statistic</th>
+      <th>p_value</th>
+      <th>effect</th>
+    </tr>
+    <tr>
+      <th>test</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>chi-square: weather_group vs is_severe</th>
+      <td>5.587746e+02</td>
+      <td>1.825892e-116</td>
+      <td>Cramér's V = 0.061</td>
+    </tr>
+    <tr>
+      <th>chi-square: Source vs is_severe</th>
+      <td>1.545901e+04</td>
+      <td>0.000000e+00</td>
+      <td>Cramér's V = 0.321</td>
+    </tr>
+    <tr>
+      <th>chi-square: is_night vs is_severe</th>
+      <td>1.010652e+01</td>
+      <td>1.477455e-03</td>
+      <td>Cramér's V = 0.008</td>
+    </tr>
+    <tr>
+      <th>chi-square: Junction vs is_severe</th>
+      <td>3.744934e+02</td>
+      <td>1.967199e-83</td>
+      <td>Cramér's V = 0.050</td>
+    </tr>
+    <tr>
+      <th>chi-square: Traffic_Signal vs is_severe</th>
+      <td>1.704521e+03</td>
+      <td>0.000000e+00</td>
+      <td>Cramér's V = 0.107</td>
+    </tr>
+    <tr>
+      <th>chi-square: Crossing vs is_severe</th>
+      <td>1.903419e+03</td>
+      <td>0.000000e+00</td>
+      <td>Cramér's V = 0.113</td>
+    </tr>
+    <tr>
+      <th>Mann-Whitney: Visibility(mi) severe vs not</th>
+      <td>1.658236e+09</td>
+      <td>1.316696e-01</td>
+      <td>rank-biserial r = 0.004</td>
+    </tr>
+    <tr>
+      <th>Mann-Whitney: Temperature(F) severe vs not</th>
+      <td>1.673847e+09</td>
+      <td>8.000866e-01</td>
+      <td>rank-biserial r = -0.001</td>
+    </tr>
+    <tr>
+      <th>Mann-Whitney: Wind_Speed(mph) severe vs not</th>
+      <td>1.547937e+09</td>
+      <td>1.074654e-72</td>
+      <td>rank-biserial r = -0.072</td>
+    </tr>
+    <tr>
+      <th>Kruskal-Wallis: log_duration across severities</th>
+      <td>1.161119e+04</td>
+      <td>0.000000e+00</td>
+      <td>ε² = 0.078</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-markdown"><h2 id="outliers">5. Outliers</h2>
+<p>Three views: per-variable <strong>IQR rule</strong> (outside Q1 − 1.5·IQR … Q3 + 1.5·IQR), <strong>z-score &gt; 3</strong>, and a multivariate <strong>Isolation Forest</strong>. Then the handling decision.</p></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 15 lines</summary><pre><code>def outlier_table(d, cols):
+    rows = []
+    for c in cols:
+        s = d[c].dropna(); q1, q3 = s.quantile([.25, .75]); lo, hi = q1 - 1.5 * (q3 - q1), q3 + 1.5 * (q3 - q1)
+        z = (s - s.mean()) / s.std()
+        rows.append({&quot;variable&quot;: c, &quot;n&quot;: len(s), &quot;iqr_low&quot;: int((s &lt; lo).sum()), &quot;iqr_high&quot;: int((s &gt; hi).sum()),
+                     &quot;iqr_%&quot;: 100 * ((s &lt; lo) | (s &gt; hi)).mean(), &quot;z&gt;3_%&quot;: 100 * (z.abs() &gt; 3).mean(),
+                     &quot;lower_fence&quot;: lo, &quot;upper_fence&quot;: hi, &quot;min&quot;: s.min(), &quot;p1&quot;: s.quantile(.01), &quot;median&quot;: s.median(), &quot;p99&quot;: s.quantile(.99), &quot;max&quot;: s.max()})
+    return pd.DataFrame(rows).set_index(&quot;variable&quot;).round(2)
+OUT_COLS = WEATHER_NUM + [&quot;duration_min&quot;]
+display(outlier_table(df, OUT_COLS))
+z = (df[OUT_COLS] - df[OUT_COLS].mean()) / df[OUT_COLS].std()
+plt.figure(figsize=(11, 4.5))
+plt.boxplot([z[c].dropna() for c in OUT_COLS], tick_labels=[c.split(&quot;(&quot;)[0] for c in OUT_COLS], vert=False, flierprops=dict(markersize=2, alpha=0.3, markeredgecolor=RED))
+plt.axvline(3, ls=&quot;--&quot;, color=&quot;k&quot;); plt.axvline(-3, ls=&quot;--&quot;, color=&quot;k&quot;); plt.xlabel(&quot;z-score&quot;); plt.title(&quot;Outliers on a common (z-score) scale — red dots are IQR outliers&quot;); plt.show()</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n</th>
+      <th>iqr_low</th>
+      <th>iqr_high</th>
+      <th>iqr_%</th>
+      <th>z&gt;3_%</th>
+      <th>lower_fence</th>
+      <th>upper_fence</th>
+      <th>min</th>
+      <th>p1</th>
+      <th>median</th>
+      <th>p99</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>variable</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Temperature(F)</th>
+      <td>146428</td>
+      <td>941</td>
+      <td>4</td>
+      <td>0.65</td>
+      <td>0.45</td>
+      <td>8.50</td>
+      <td>116.50</td>
+      <td>-77.80</td>
+      <td>13.00</td>
+      <td>64.00</td>
+      <td>96.00</td>
+      <td>170.60</td>
+    </tr>
+    <tr>
+      <th>Wind_Chill(F)</th>
+      <td>111033</td>
+      <td>825</td>
+      <td>1</td>
+      <td>0.74</td>
+      <td>0.57</td>
+      <td>-5.00</td>
+      <td>123.00</td>
+      <td>-52.60</td>
+      <td>-1.30</td>
+      <td>62.00</td>
+      <td>96.00</td>
+      <td>140.00</td>
+    </tr>
+    <tr>
+      <th>Humidity(%)</th>
+      <td>146236</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>-6.00</td>
+      <td>138.00</td>
+      <td>1.00</td>
+      <td>12.00</td>
+      <td>67.00</td>
+      <td>100.00</td>
+      <td>100.00</td>
+    </tr>
+    <tr>
+      <th>Pressure(in)</th>
+      <td>146899</td>
+      <td>8571</td>
+      <td>0</td>
+      <td>5.83</td>
+      <td>3.12</td>
+      <td>28.35</td>
+      <td>31.04</td>
+      <td>19.53</td>
+      <td>24.59</td>
+      <td>29.85</td>
+      <td>30.44</td>
+      <td>30.92</td>
+    </tr>
+    <tr>
+      <th>Visibility(mi)</th>
+      <td>146202</td>
+      <td>28240</td>
+      <td>588</td>
+      <td>19.72</td>
+      <td>3.13</td>
+      <td>10.00</td>
+      <td>10.00</td>
+      <td>0.00</td>
+      <td>0.50</td>
+      <td>10.00</td>
+      <td>10.00</td>
+      <td>80.00</td>
+    </tr>
+    <tr>
+      <th>Wind_Speed(mph)</th>
+      <td>138483</td>
+      <td>0</td>
+      <td>4120</td>
+      <td>2.98</td>
+      <td>0.81</td>
+      <td>-4.10</td>
+      <td>19.10</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>7.00</td>
+      <td>23.00</td>
+      <td>81.00</td>
+    </tr>
+    <tr>
+      <th>Precipitation(in)</th>
+      <td>107298</td>
+      <td>0</td>
+      <td>10310</td>
+      <td>9.61</td>
+      <td>0.37</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.18</td>
+      <td>10.00</td>
+    </tr>
+    <tr>
+      <th>duration_min</th>
+      <td>149653</td>
+      <td>0</td>
+      <td>13919</td>
+      <td>9.30</td>
+      <td>1.41</td>
+      <td>-108.35</td>
+      <td>264.58</td>
+      <td>6.00</td>
+      <td>15.00</td>
+      <td>74.88</td>
+      <td>765.22</td>
+      <td>8712.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-15.png" alt="Figure 15: 5. Outliers" loading="lazy"><figcaption>Figure 15</figcaption></figure></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 11 lines</summary><pre><code>ISO_COLS = [&quot;Temperature(F)&quot;, &quot;Visibility(mi)&quot;, &quot;Wind_Speed(mph)&quot;, &quot;Precipitation(in)&quot;, &quot;log_duration&quot;, &quot;hour&quot;]
+Xi = df[ISO_COLS].fillna(df[ISO_COLS].median()).sample(30_000, random_state=SEED)
+iso = IsolationForest(contamination=0.01, random_state=SEED).fit(Xi)
+Xi = Xi.assign(anomaly=iso.predict(Xi) == -1, score=-iso.score_samples(Xi))
+fig, ax = plt.subplots(1, 2, figsize=(14, 4.5))
+for a, (xc, yc) in zip(ax, [(&quot;Temperature(F)&quot;, &quot;log_duration&quot;), (&quot;Wind_Speed(mph)&quot;, &quot;Visibility(mi)&quot;)]):
+    a.scatter(Xi.loc[~Xi.anomaly, xc], Xi.loc[~Xi.anomaly, yc], s=2, alpha=0.3, color=GREY, label=&quot;normal&quot;)
+    a.scatter(Xi.loc[Xi.anomaly, xc], Xi.loc[Xi.anomaly, yc], s=10, color=RED, label=&quot;Isolation Forest outlier (1%)&quot;)
+    a.set(xlabel=xc, ylabel=yc); a.legend()
+plt.suptitle(&quot;Multivariate outliers&quot;); plt.tight_layout(); plt.show()
+print(&quot;Most anomalous crashes:&quot;); display(Xi.nlargest(10, &quot;score&quot;).round(2))</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-16.png" alt="Figure 16: 5. Outliers" loading="lazy"><figcaption>Figure 16</figcaption></figure><pre class="nb-stream">Most anomalous crashes:
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Temperature(F)</th>
+      <th>Visibility(mi)</th>
+      <th>Wind_Speed(mph)</th>
+      <th>Precipitation(in)</th>
+      <th>log_duration</th>
+      <th>hour</th>
+      <th>anomaly</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>9493</th>
+      <td>52.0</td>
+      <td>1.00</td>
+      <td>23.0</td>
+      <td>0.57</td>
+      <td>5.89</td>
+      <td>16</td>
+      <td>True</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <th>97075</th>
+      <td>77.0</td>
+      <td>0.50</td>
+      <td>24.0</td>
+      <td>0.72</td>
+      <td>4.41</td>
+      <td>18</td>
+      <td>True</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <th>133343</th>
+      <td>73.0</td>
+      <td>1.00</td>
+      <td>17.0</td>
+      <td>1.36</td>
+      <td>3.42</td>
+      <td>8</td>
+      <td>True</td>
+      <td>0.72</td>
+    </tr>
+    <tr>
+      <th>100881</th>
+      <td>77.0</td>
+      <td>3.00</td>
+      <td>17.0</td>
+      <td>1.70</td>
+      <td>4.82</td>
+      <td>17</td>
+      <td>True</td>
+      <td>0.72</td>
+    </tr>
+    <tr>
+      <th>33871</th>
+      <td>75.0</td>
+      <td>1.20</td>
+      <td>10.4</td>
+      <td>1.14</td>
+      <td>3.42</td>
+      <td>22</td>
+      <td>True</td>
+      <td>0.71</td>
+    </tr>
+    <tr>
+      <th>144833</th>
+      <td>56.0</td>
+      <td>2.00</td>
+      <td>23.0</td>
+      <td>0.34</td>
+      <td>4.38</td>
+      <td>1</td>
+      <td>True</td>
+      <td>0.71</td>
+    </tr>
+    <tr>
+      <th>113769</th>
+      <td>17.0</td>
+      <td>1.00</td>
+      <td>9.0</td>
+      <td>0.96</td>
+      <td>4.88</td>
+      <td>9</td>
+      <td>True</td>
+      <td>0.71</td>
+    </tr>
+    <tr>
+      <th>79225</th>
+      <td>6.0</td>
+      <td>0.25</td>
+      <td>29.0</td>
+      <td>0.00</td>
+      <td>6.21</td>
+      <td>20</td>
+      <td>True</td>
+      <td>0.71</td>
+    </tr>
+    <tr>
+      <th>103169</th>
+      <td>58.0</td>
+      <td>1.00</td>
+      <td>3.0</td>
+      <td>5.13</td>
+      <td>3.04</td>
+      <td>9</td>
+      <td>True</td>
+      <td>0.71</td>
+    </tr>
+    <tr>
+      <th>144127</th>
+      <td>20.0</td>
+      <td>9.00</td>
+      <td>28.0</td>
+      <td>0.72</td>
+      <td>4.35</td>
+      <td>13</td>
+      <td>True</td>
+      <td>0.71</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-markdown"><p><strong>Handling decision</strong>
+- <em>Impossible</em> values (e.g. 207 °F, 470 mph wind) are sensor/recording errors → set to missing, later imputed.
+- <em>Extreme but real</em> values (blizzards, multi-day closures) are kept — they are exactly the crashes we care about. Outliers are <strong>not deleted</strong>.
+- For models, numeric features are <strong>winsorized to the 1st–99th percentile learned on the training fold only</strong> (inside the pipeline), so linear / distance-based models are not dominated by a few points.
+- The duration target is log-transformed (skew 37 → ~0) rather than trimmed.</p></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 5 lines</summary><pre><code>IMPOSSIBLE = {&quot;Temperature(F)&quot;: (-60, 130), &quot;Wind_Chill(F)&quot;: (-80, 130), &quot;Wind_Speed(mph)&quot;: (0, 150),
+              &quot;Visibility(mi)&quot;: (0, 100), &quot;Pressure(in)&quot;: (25, 32.5), &quot;Precipitation(in)&quot;: (0, 10), &quot;Humidity(%)&quot;: (0, 100)}
+fixed = {c: int((df[c].notna() &amp; ~df[c].between(lo, hi)).sum()) for c, (lo, hi) in IMPOSSIBLE.items()}
+df = df.assign(**{c: df[c].where(df[c].between(lo, hi)) for c, (lo, hi) in IMPOSSIBLE.items()})
+pd.Series(fixed, name=&quot;impossible values set to NaN&quot;).to_frame()</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>impossible values set to NaN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Temperature(F)</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Wind_Chill(F)</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Wind_Speed(mph)</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Visibility(mi)</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Pressure(in)</th>
+      <td>1891</td>
+    </tr>
+    <tr>
+      <th>Precipitation(in)</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Humidity(%)</th>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-markdown"><h2 id="feature-engineering-split">6. Feature engineering &amp; split</h2>
+<ul>
+<li><strong>Cyclical encoding</strong> of hour / weekday / month (sin, cos) so 23:00 is next to 00:00.</li>
+<li>Numeric: weather + location + cyclical time + year. Binary: road flags + weekend/rush/night. Categorical: reporting source, weather group, wind direction.</li>
+<li><strong>Temporal split</strong>: train on the earliest 80% of crashes, test on the latest 20% (realistic: predict the future). A random split is compared later.</li>
+</ul></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 17 lines</summary><pre><code>def cyc(s, period):
+    return np.sin(2 * np.pi * s / period), np.cos(2 * np.pi * s / period)
+(hs, hc), (ds, dc), (ms, mc) = cyc(df.hour, 24), cyc(df.dow, 7), cyc(df.month, 12)
+df = df.assign(hour_sin=hs, hour_cos=hc, dow_sin=ds, dow_cos=dc, month_sin=ms, month_cos=mc)
+NUM = WEATHER_NUM + [&quot;Start_Lat&quot;, &quot;Start_Lng&quot;, &quot;hour_sin&quot;, &quot;hour_cos&quot;, &quot;dow_sin&quot;, &quot;dow_cos&quot;, &quot;month_sin&quot;, &quot;month_cos&quot;, &quot;year&quot;]
+BIN = ROAD_FLAGS + [&quot;is_weekend&quot;, &quot;is_rush_hour&quot;, &quot;is_night&quot;]
+CAT = [&quot;Source&quot;, &quot;weather_group&quot;, &quot;Wind_Direction&quot;]
+FEATURES = NUM + BIN + CAT
+tr, te = temporal_split(df)
+X_tr, X_te = df.loc[tr, FEATURES], df.loc[te, FEATURES]
+y_tr, y_te = df.loc[tr, &quot;is_severe&quot;], df.loc[te, &quot;is_severe&quot;]
+print(f&quot;features: {len(NUM)} numeric + {len(BIN)} binary + {len(CAT)} categorical&quot;)
+display(pd.DataFrame({&quot;rows&quot;: [tr.sum(), te.sum()], &quot;from&quot;: [df.Start_Time[tr].min(), df.Start_Time[te].min()],
+                      &quot;to&quot;: [df.Start_Time[tr].max(), df.Start_Time[te].max()], &quot;severe_rate&quot;: [y_tr.mean(), y_te.mean()]}, index=[&quot;train&quot;, &quot;test&quot;]))
+mon = df.set_index(&quot;Start_Time&quot;).is_severe.resample(&quot;MS&quot;).mean()
+ax = mon.plot(color=RED, figsize=(12, 3.2), title=&quot;Monthly severe share — dashed line = train/test cut (distribution drift)&quot;)
+ax.axvline(df.Start_Time[te].min(), ls=&quot;--&quot;, color=&quot;k&quot;); plt.show()</code></pre></details><pre class="nb-stream">features: 16 numeric + 15 binary + 3 categorical
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rows</th>
+      <th>from</th>
+      <th>to</th>
+      <th>severe_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>train</th>
+      <td>119722</td>
+      <td>2016-02-08 06:15:39</td>
+      <td>2022-04-05 06:43:29</td>
+      <td>0.227277</td>
+    </tr>
+    <tr>
+      <th>test</th>
+      <td>29931</td>
+      <td>2022-04-05 06:49:00</td>
+      <td>2023-03-31 22:30:55</td>
+      <td>0.058434</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-17.png" alt="Figure 17: 6. Feature engineering &amp; split" loading="lazy"><figcaption>Figure 17</figcaption></figure></div>
+<div class="nb-markdown"><h2 id="preprocessing-pipeline-fit-on-training-data-only">7. Preprocessing pipeline (fit on training data only)</h2>
+<p><code>numeric → median imputation → winsorize 1–99% → StandardScaler (mean 0, sd 1)</code>, <code>binary → passthrough</code>, <code>categorical → one-hot (rare levels &lt; 1% grouped)</code>.
+Wrapping it in a <code>Pipeline</code> means that inside cross-validation the imputer, clipper and scaler are <strong>re-fit on each training fold</strong> — no leakage from the validation fold.</p></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 32 lines</summary><pre><code>class Clipper(BaseEstimator, TransformerMixin):
+    # Winsorize each column to [low, high] quantiles learned in fit().
+    def __init__(self, low=0.01, high=0.99):
+        self.low, self.high = low, high
+    def fit(self, X, y=None):
+        X = np.asarray(X, float); self.lo_, self.hi_ = np.nanquantile(X, self.low, axis=0), np.nanquantile(X, self.high, axis=0); return self
+    def transform(self, X):
+        return np.clip(np.asarray(X, float), self.lo_, self.hi_)
+    def get_feature_names_out(self, input_features=None):
+        return np.asarray(input_features)
+
+def make_pre(num=NUM):
+    return ColumnTransformer([
+        (&quot;num&quot;, Pipeline([(&quot;impute&quot;, SimpleImputer(strategy=&quot;median&quot;)), (&quot;clip&quot;, Clipper()), (&quot;scale&quot;, StandardScaler())]), num),
+        (&quot;bin&quot;, &quot;passthrough&quot;, BIN),
+        (&quot;cat&quot;, OneHotEncoder(handle_unknown=&quot;infrequent_if_exist&quot;, min_frequency=0.01, sparse_output=False), CAT)])
+
+def make_pipe(model, num=NUM):
+    return Pipeline([(&quot;pre&quot;, make_pre(num)), (&quot;model&quot;, model)])
+
+pre = make_pre().fit(X_tr)
+Z_tr = pre.transform(X_tr); names = pre.get_feature_names_out()
+print(f&quot;{X_tr.shape[1]} raw columns -&gt; {Z_tr.shape[1]} model features&quot;)
+before = X_tr[NUM].describe().T[[&quot;mean&quot;, &quot;std&quot;, &quot;min&quot;, &quot;max&quot;]]
+after = pd.DataFrame(Z_tr[:, :len(NUM)], columns=NUM).describe().T[[&quot;mean&quot;, &quot;std&quot;, &quot;min&quot;, &quot;max&quot;]]
+display(pd.concat({&quot;before (raw)&quot;: before, &quot;after (imputed, clipped, standardized)&quot;: after}, axis=1).round(2))
+fig, ax = plt.subplots(2, 4, figsize=(16, 5.5))
+for j, col in enumerate([&quot;Temperature(F)&quot;, &quot;Pressure(in)&quot;, &quot;Wind_Speed(mph)&quot;, &quot;Visibility(mi)&quot;]):
+    ax[0, j].hist(X_tr[col].dropna(), bins=50, color=GREY); ax[0, j].set_title(f&quot;{col} — raw&quot;)
+    ax[1, j].hist(Z_tr[:, NUM.index(col)], bins=50, color=BLUE); ax[1, j].set_title(f&quot;{col} — standardized&quot;)
+plt.tight_layout(); plt.show()
+print(&quot;one-hot columns:&quot;, [n for n in names if n.startswith(&quot;cat__&quot;)])</code></pre></details><pre class="nb-stream">34 raw columns -&gt; 66 model features
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="4" halign="left">before (raw)</th>
+      <th colspan="4" halign="left">after (imputed, clipped, standardized)</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>max</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Temperature(F)</th>
+      <td>60.94</td>
+      <td>18.86</td>
+      <td>-27.90</td>
+      <td>120.00</td>
+      <td>-0.0</td>
+      <td>1.0</td>
+      <td>-2.62</td>
+      <td>1.85</td>
+    </tr>
+    <tr>
+      <th>Wind_Chill(F)</th>
+      <td>56.49</td>
+      <td>22.44</td>
+      <td>-52.60</td>
+      <td>120.00</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-3.05</td>
+      <td>1.94</td>
+    </tr>
+    <tr>
+      <th>Humidity(%)</th>
+      <td>65.22</td>
+      <td>22.83</td>
+      <td>1.00</td>
+      <td>100.00</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-2.37</td>
+      <td>1.54</td>
+    </tr>
+    <tr>
+      <th>Pressure(in)</th>
+      <td>29.65</td>
+      <td>0.76</td>
+      <td>25.00</td>
+      <td>30.92</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-5.35</td>
+      <td>1.09</td>
+    </tr>
+    <tr>
+      <th>Visibility(mi)</th>
+      <td>9.07</td>
+      <td>2.74</td>
+      <td>0.00</td>
+      <td>80.00</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-3.67</td>
+      <td>0.42</td>
+    </tr>
+    <tr>
+      <th>Wind_Speed(mph)</th>
+      <td>7.69</td>
+      <td>5.20</td>
+      <td>0.00</td>
+      <td>58.00</td>
+      <td>-0.0</td>
+      <td>1.0</td>
+      <td>-1.56</td>
+      <td>3.17</td>
+    </tr>
+    <tr>
+      <th>Precipitation(in)</th>
+      <td>0.01</td>
+      <td>0.12</td>
+      <td>0.00</td>
+      <td>10.00</td>
+      <td>-0.0</td>
+      <td>1.0</td>
+      <td>-0.20</td>
+      <td>7.42</td>
+    </tr>
+    <tr>
+      <th>Start_Lat</th>
+      <td>36.20</td>
+      <td>5.07</td>
+      <td>24.57</td>
+      <td>48.99</td>
+      <td>-0.0</td>
+      <td>1.0</td>
+      <td>-2.07</td>
+      <td>2.24</td>
+    </tr>
+    <tr>
+      <th>Start_Lng</th>
+      <td>-94.95</td>
+      <td>17.32</td>
+      <td>-124.49</td>
+      <td>-67.84</td>
+      <td>-0.0</td>
+      <td>1.0</td>
+      <td>-1.62</td>
+      <td>1.36</td>
+    </tr>
+    <tr>
+      <th>hour_sin</th>
+      <td>-0.03</td>
+      <td>0.76</td>
+      <td>-1.00</td>
+      <td>1.00</td>
+      <td>-0.0</td>
+      <td>1.0</td>
+      <td>-1.27</td>
+      <td>1.35</td>
+    </tr>
+    <tr>
+      <th>hour_cos</th>
+      <td>-0.28</td>
+      <td>0.58</td>
+      <td>-1.00</td>
+      <td>1.00</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-1.24</td>
+      <td>2.20</td>
+    </tr>
+    <tr>
+      <th>dow_sin</th>
+      <td>0.16</td>
+      <td>0.65</td>
+      <td>-0.97</td>
+      <td>0.97</td>
+      <td>-0.0</td>
+      <td>1.0</td>
+      <td>-1.75</td>
+      <td>1.25</td>
+    </tr>
+    <tr>
+      <th>dow_cos</th>
+      <td>-0.06</td>
+      <td>0.74</td>
+      <td>-0.90</td>
+      <td>1.00</td>
+      <td>-0.0</td>
+      <td>1.0</td>
+      <td>-1.14</td>
+      <td>1.44</td>
+    </tr>
+    <tr>
+      <th>month_sin</th>
+      <td>0.00</td>
+      <td>0.71</td>
+      <td>-1.00</td>
+      <td>1.00</td>
+      <td>-0.0</td>
+      <td>1.0</td>
+      <td>-1.42</td>
+      <td>1.42</td>
+    </tr>
+    <tr>
+      <th>month_cos</th>
+      <td>0.12</td>
+      <td>0.70</td>
+      <td>-1.00</td>
+      <td>1.00</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-1.61</td>
+      <td>1.25</td>
+    </tr>
+    <tr>
+      <th>year</th>
+      <td>2019.36</td>
+      <td>1.72</td>
+      <td>2016.00</td>
+      <td>2022.00</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-1.95</td>
+      <td>1.54</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-18.png" alt="Figure 18: 7. Preprocessing pipeline (fit on training data only)" loading="lazy"><figcaption>Figure 18</figcaption></figure><pre class="nb-stream">one-hot columns: [&#x27;cat__Source_Source1&#x27;, &#x27;cat__Source_Source2&#x27;, &#x27;cat__Source_Source3&#x27;, &#x27;cat__weather_group_clear&#x27;, &#x27;cat__weather_group_cloudy&#x27;, &#x27;cat__weather_group_fog&#x27;, &#x27;cat__weather_group_rain&#x27;, &#x27;cat__weather_group_snow&#x27;, &#x27;cat__weather_group_unknown&#x27;, &#x27;cat__weather_group_infrequent_sklearn&#x27;, &#x27;cat__Wind_Direction_CALM&#x27;, &#x27;cat__Wind_Direction_Calm&#x27;, &#x27;cat__Wind_Direction_E&#x27;, &#x27;cat__Wind_Direction_ENE&#x27;, &#x27;cat__Wind_Direction_ESE&#x27;, &#x27;cat__Wind_Direction_East&#x27;, &#x27;cat__Wind_Direction_N&#x27;, &#x27;cat__Wind_Direction_NE&#x27;, &#x27;cat__Wind_Direction_NNE&#x27;, &#x27;cat__Wind_Direction_NNW&#x27;, &#x27;cat__Wind_Direction_NW&#x27;, &#x27;cat__Wind_Direction_North&#x27;, &#x27;cat__Wind_Direction_S&#x27;, &#x27;cat__Wind_Direction_SE&#x27;, &#x27;cat__Wind_Direction_SSE&#x27;, &#x27;cat__Wind_Direction_SSW&#x27;, &#x27;cat__Wind_Direction_SW&#x27;, &#x27;cat__Wind_Direction_South&#x27;, &#x27;cat__Wind_Direction_VAR&#x27;, &#x27;cat__Wind_Direction_Variable&#x27;, &#x27;cat__Wind_Direction_W&#x27;, &#x27;cat__Wind_Direction_WNW&#x27;, &#x27;cat__Wind_Direction_WSW&#x27;, &#x27;cat__Wind_Direction_West&#x27;, &#x27;cat__Wind_Direction_unknown&#x27;]
+</pre></div>
+<div class="nb-markdown"><h2 id="cross-validation-setup-metric-glossary">8. Cross-validation setup &amp; metric glossary</h2>
+<ul>
+<li><strong>Stratified K-fold (K=5)</strong> for classification: every fold keeps the 22% severe share.</li>
+<li><strong>K-fold (K=5, shuffled)</strong> for regression.</li>
+<li><strong>TimeSeriesSplit</strong> (rolling origin) for forecasting — never trains on the future.</li>
+<li>CV runs on a 40k-row random subset of the <em>training</em> period; the untouched temporal test set is used once at the end.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy</td>
+<td>share correct (misleading when 78% are "not severe")</td>
+</tr>
+<tr>
+<td>Balanced accuracy</td>
+<td>mean recall over classes (0.5 = chance)</td>
+</tr>
+<tr>
+<td>Precision / Recall / F1</td>
+<td>for the severe class; F1 = harmonic mean</td>
+</tr>
+<tr>
+<td>Macro F1</td>
+<td>F1 averaged over classes equally</td>
+</tr>
+<tr>
+<td>ROC-AUC</td>
+<td>probability a random severe crash is ranked above a random non-severe one (0.5 chance, 1 perfect)</td>
+</tr>
+<tr>
+<td>PR-AUC</td>
+<td>area under precision–recall (baseline = prevalence 0.22)</td>
+</tr>
+<tr>
+<td>Log loss / Brier</td>
+<td>quality of predicted probabilities (lower better)</td>
+</tr>
+<tr>
+<td>MAE / RMSE / MedAE</td>
+<td>regression errors (RMSE punishes big misses)</td>
+</tr>
+<tr>
+<td>R²</td>
+<td>share of variance explained (0 = predicting the mean)</td>
+</tr>
+<tr>
+<td>MAPE</td>
+<td>mean absolute % error (forecasting)</td>
+</tr>
+<tr>
+<td>Silhouette / Davies–Bouldin / Calinski–Harabasz</td>
+<td>cluster separation (higher / lower / higher better)</td>
+</tr>
+</tbody>
+</table></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 10 lines</summary><pre><code>cv_idx = rng.choice(np.flatnonzero(tr), CV_N, replace=False)
+X_cv, y_cv = df.loc[cv_idx, FEATURES], df.loc[cv_idx, &quot;is_severe&quot;]
+skf = StratifiedKFold(K, shuffle=True, random_state=SEED)
+folds = pd.DataFrame([{&quot;fold&quot;: i + 1, &quot;train_rows&quot;: len(a), &quot;valid_rows&quot;: len(b), &quot;valid_severe_rate&quot;: y_cv.iloc[b].mean()}
+                      for i, (a, b) in enumerate(skf.split(X_cv, y_cv))]).set_index(&quot;fold&quot;)
+display(folds.round(4))
+fig, ax = plt.subplots(figsize=(10, 2.6))
+for i, (a, b) in enumerate(skf.split(X_cv[:200], y_cv[:200])):
+    ax.scatter(b, [i + 1] * len(b), marker=&quot;|&quot;, s=120, color=BLUE)
+ax.set(title=&quot;Stratified 5-fold: which of the first 200 rows land in each validation fold&quot;, xlabel=&quot;row&quot;, ylabel=&quot;fold&quot;, yticks=range(1, 6)); plt.show()</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train_rows</th>
+      <th>valid_rows</th>
+      <th>valid_severe_rate</th>
+    </tr>
+    <tr>
+      <th>fold</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>32000</td>
+      <td>8000</td>
+      <td>0.2271</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>32000</td>
+      <td>8000</td>
+      <td>0.2271</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>32000</td>
+      <td>8000</td>
+      <td>0.2271</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>32000</td>
+      <td>8000</td>
+      <td>0.2271</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>32000</td>
+      <td>8000</td>
+      <td>0.2271</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-19.png" alt="Figure 19: 8. Cross-validation setup &amp; metric glossary" loading="lazy"><figcaption>Figure 19</figcaption></figure></div>
+<div class="nb-markdown"><h2 id="classification-predict-whether-a-crash-is-severe-severity-3-4">9. Classification — predict whether a crash is severe (Severity 3–4)</h2>
+<h3 id="eight-models-stratified-5-fold-cv">9.1 Eight models, stratified 5-fold CV</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 19 lines</summary><pre><code>CLS = {
+    &quot;Dummy (majority class)&quot;: DummyClassifier(strategy=&quot;most_frequent&quot;),
+    &quot;Logistic regression&quot;: LogisticRegression(max_iter=2000),
+    &quot;Gaussian naive Bayes&quot;: GaussianNB(),
+    &quot;k-nearest neighbours (k=25)&quot;: KNeighborsClassifier(25, n_jobs=-1),
+    &quot;Decision tree&quot;: DecisionTreeClassifier(max_depth=10, min_samples_leaf=20, random_state=SEED),
+    &quot;Random forest&quot;: RandomForestClassifier(200, min_samples_leaf=5, max_samples=0.5, n_jobs=-1, random_state=SEED),
+    &quot;Gradient boosting (HGB)&quot;: HistGradientBoostingClassifier(max_iter=300, learning_rate=0.08, random_state=SEED),
+    &quot;Neural network (MLP)&quot;: MLPClassifier(hidden_layer_sizes=(64, 32), early_stopping=True, max_iter=200, random_state=SEED),
+}
+SCORING = {&quot;accuracy&quot;: &quot;accuracy&quot;, &quot;balanced_acc&quot;: &quot;balanced_accuracy&quot;, &quot;f1_macro&quot;: &quot;f1_macro&quot;, &quot;roc_auc&quot;: &quot;roc_auc&quot;, &quot;pr_auc&quot;: &quot;average_precision&quot;}
+cv_cls = {}
+for name, m in CLS.items():
+    t0 = time.time()
+    cv_cls[name] = cross_validate(make_pipe(m), X_cv, y_cv, cv=skf, scoring=SCORING, n_jobs=1)
+    print(f&quot;{name:32s} done in {time.time() - t0:5.1f}s&quot;)
+cv_table = pd.DataFrame({n: {k: f&quot;{r[&#x27;test_&#x27; + k].mean():.3f} ± {r[&#x27;test_&#x27; + k].std():.3f}&quot; for k in SCORING} | {&quot;fit_sec&quot;: round(r[&quot;fit_time&quot;].mean(), 2)}
+                         for n, r in cv_cls.items()}).T
+cv_table</code></pre></details><pre class="nb-stream">Dummy (majority class)           done in   0.9s
+</pre><pre class="nb-stream">Logistic regression              done in   1.1s
+</pre><pre class="nb-stream">Gaussian naive Bayes             done in   1.0s
+</pre><pre class="nb-stream">k-nearest neighbours (k=25)      done in   5.9s
+</pre><pre class="nb-stream">Decision tree                    done in   2.3s
+</pre><pre class="nb-stream">Random forest                    done in   5.4s
+</pre><pre class="nb-stream">Gradient boosting (HGB)          done in  20.1s
+</pre><pre class="nb-stream">Neural network (MLP)             done in   8.2s
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accuracy</th>
+      <th>balanced_acc</th>
+      <th>f1_macro</th>
+      <th>roc_auc</th>
+      <th>pr_auc</th>
+      <th>fit_sec</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Dummy (majority class)</th>
+      <td>0.773 ± 0.000</td>
+      <td>0.500 ± 0.000</td>
+      <td>0.436 ± 0.000</td>
+      <td>0.500 ± 0.000</td>
+      <td>0.227 ± 0.000</td>
+      <td>0.14</td>
+    </tr>
+    <tr>
+      <th>Logistic regression</th>
+      <td>0.782 ± 0.004</td>
+      <td>0.597 ± 0.007</td>
+      <td>0.609 ± 0.009</td>
+      <td>0.789 ± 0.002</td>
+      <td>0.487 ± 0.011</td>
+      <td>0.19</td>
+    </tr>
+    <tr>
+      <th>Gaussian naive Bayes</th>
+      <td>0.430 ± 0.074</td>
+      <td>0.597 ± 0.028</td>
+      <td>0.425 ± 0.070</td>
+      <td>0.718 ± 0.002</td>
+      <td>0.394 ± 0.010</td>
+      <td>0.15</td>
+    </tr>
+    <tr>
+      <th>k-nearest neighbours (k=25)</th>
+      <td>0.777 ± 0.001</td>
+      <td>0.556 ± 0.002</td>
+      <td>0.552 ± 0.003</td>
+      <td>0.763 ± 0.006</td>
+      <td>0.439 ± 0.010</td>
+      <td>0.19</td>
+    </tr>
+    <tr>
+      <th>Decision tree</th>
+      <td>0.803 ± 0.003</td>
+      <td>0.674 ± 0.008</td>
+      <td>0.689 ± 0.006</td>
+      <td>0.832 ± 0.001</td>
+      <td>0.548 ± 0.009</td>
+      <td>0.42</td>
+    </tr>
+    <tr>
+      <th>Random forest</th>
+      <td>0.808 ± 0.004</td>
+      <td>0.627 ± 0.007</td>
+      <td>0.648 ± 0.008</td>
+      <td>0.851 ± 0.004</td>
+      <td>0.594 ± 0.016</td>
+      <td>0.96</td>
+    </tr>
+    <tr>
+      <th>Gradient boosting (HGB)</th>
+      <td>0.829 ± 0.004</td>
+      <td>0.707 ± 0.005</td>
+      <td>0.728 ± 0.006</td>
+      <td>0.872 ± 0.002</td>
+      <td>0.652 ± 0.013</td>
+      <td>3.92</td>
+    </tr>
+    <tr>
+      <th>Neural network (MLP)</th>
+      <td>0.791 ± 0.004</td>
+      <td>0.622 ± 0.016</td>
+      <td>0.637 ± 0.017</td>
+      <td>0.825 ± 0.004</td>
+      <td>0.529 ± 0.013</td>
+      <td>1.61</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 5 lines</summary><pre><code>fig, ax = plt.subplots(1, 3, figsize=(17, 4.5))
+for a, k in zip(ax, [&quot;roc_auc&quot;, &quot;f1_macro&quot;, &quot;balanced_acc&quot;]):
+    a.boxplot([cv_cls[n][&quot;test_&quot; + k] for n in CLS], tick_labels=[n.split(&quot; (&quot;)[0] for n in CLS], vert=False)
+    a.set_title(f&quot;5-fold CV: {k}&quot;)
+plt.tight_layout(); plt.show()</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-20.png" alt="Figure 20: 9.1 Eight models, stratified 5-fold CV" loading="lazy"><figcaption>Figure 20</figcaption></figure></div>
+<div class="nb-markdown"><h3 id="fit-on-the-full-training-period-evaluate-once-on-the-future-test-set">9.2 Fit on the full training period, evaluate once on the future test set</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 16 lines</summary><pre><code>fitted = {}
+for name, m in CLS.items():
+    Xf, yf = (X_cv, y_cv) if name.startswith(&quot;k-nearest&quot;) else (X_tr, y_tr)   # kNN: 40k reference points keeps prediction fast
+    fitted[name] = make_pipe(m).fit(Xf, yf)
+proba = {n: p.predict_proba(X_te)[:, 1] for n, p in fitted.items()}
+
+def cls_metrics(y, p, thr=0.5):
+    pred = (p &gt;= thr).astype(int)
+    return {&quot;accuracy&quot;: M.accuracy_score(y, pred), &quot;balanced_acc&quot;: M.balanced_accuracy_score(y, pred),
+            &quot;precision&quot;: M.precision_score(y, pred, zero_division=0), &quot;recall&quot;: M.recall_score(y, pred),
+            &quot;f1&quot;: M.f1_score(y, pred), &quot;f1_macro&quot;: M.f1_score(y, pred, average=&quot;macro&quot;),
+            &quot;roc_auc&quot;: M.roc_auc_score(y, p), &quot;pr_auc&quot;: M.average_precision_score(y, p),
+            &quot;log_loss&quot;: M.log_loss(y, np.clip(p, 1e-6, 1 - 1e-6)), &quot;brier&quot;: M.brier_score_loss(y, p)}
+test_cls = pd.DataFrame({n: cls_metrics(y_te, p) for n, p in proba.items()}).T
+display(test_cls.round(3).style.highlight_max(subset=[&quot;balanced_acc&quot;, &quot;f1&quot;, &quot;f1_macro&quot;, &quot;roc_auc&quot;, &quot;pr_auc&quot;], color=&quot;#cfe0f5&quot;)
+        .highlight_min(subset=[&quot;log_loss&quot;, &quot;brier&quot;], color=&quot;#cfe0f5&quot;).format(&quot;{:.3f}&quot;))</code></pre></details><div class="nb-table"><style type="text/css">
+#T_6f77e_row6_col1, #T_6f77e_row6_col4, #T_6f77e_row6_col5, #T_6f77e_row6_col6, #T_6f77e_row6_col7, #T_6f77e_row6_col8, #T_6f77e_row6_col9 {
+  background-color: #cfe0f5;
+}
+</style>
+<table id="T_6f77e">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_6f77e_level0_col0" class="col_heading level0 col0" >accuracy</th>
+      <th id="T_6f77e_level0_col1" class="col_heading level0 col1" >balanced_acc</th>
+      <th id="T_6f77e_level0_col2" class="col_heading level0 col2" >precision</th>
+      <th id="T_6f77e_level0_col3" class="col_heading level0 col3" >recall</th>
+      <th id="T_6f77e_level0_col4" class="col_heading level0 col4" >f1</th>
+      <th id="T_6f77e_level0_col5" class="col_heading level0 col5" >f1_macro</th>
+      <th id="T_6f77e_level0_col6" class="col_heading level0 col6" >roc_auc</th>
+      <th id="T_6f77e_level0_col7" class="col_heading level0 col7" >pr_auc</th>
+      <th id="T_6f77e_level0_col8" class="col_heading level0 col8" >log_loss</th>
+      <th id="T_6f77e_level0_col9" class="col_heading level0 col9" >brier</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_6f77e_level0_row0" class="row_heading level0 row0" >Dummy (majority class)</th>
+      <td id="T_6f77e_row0_col0" class="data row0 col0" >0.942</td>
+      <td id="T_6f77e_row0_col1" class="data row0 col1" >0.500</td>
+      <td id="T_6f77e_row0_col2" class="data row0 col2" >0.000</td>
+      <td id="T_6f77e_row0_col3" class="data row0 col3" >0.000</td>
+      <td id="T_6f77e_row0_col4" class="data row0 col4" >0.000</td>
+      <td id="T_6f77e_row0_col5" class="data row0 col5" >0.485</td>
+      <td id="T_6f77e_row0_col6" class="data row0 col6" >0.500</td>
+      <td id="T_6f77e_row0_col7" class="data row0 col7" >0.058</td>
+      <td id="T_6f77e_row0_col8" class="data row0 col8" >0.807</td>
+      <td id="T_6f77e_row0_col9" class="data row0 col9" >0.058</td>
+    </tr>
+    <tr>
+      <th id="T_6f77e_level0_row1" class="row_heading level0 row1" >Logistic regression</th>
+      <td id="T_6f77e_row1_col0" class="data row1 col0" >0.942</td>
+      <td id="T_6f77e_row1_col1" class="data row1 col1" >0.504</td>
+      <td id="T_6f77e_row1_col2" class="data row1 col2" >0.625</td>
+      <td id="T_6f77e_row1_col3" class="data row1 col3" >0.009</td>
+      <td id="T_6f77e_row1_col4" class="data row1 col4" >0.017</td>
+      <td id="T_6f77e_row1_col5" class="data row1 col5" >0.493</td>
+      <td id="T_6f77e_row1_col6" class="data row1 col6" >0.755</td>
+      <td id="T_6f77e_row1_col7" class="data row1 col7" >0.335</td>
+      <td id="T_6f77e_row1_col8" class="data row1 col8" >0.195</td>
+      <td id="T_6f77e_row1_col9" class="data row1 col9" >0.048</td>
+    </tr>
+    <tr>
+      <th id="T_6f77e_level0_row2" class="row_heading level0 row2" >Gaussian naive Bayes</th>
+      <td id="T_6f77e_row2_col0" class="data row2 col0" >0.483</td>
+      <td id="T_6f77e_row2_col1" class="data row2 col1" >0.590</td>
+      <td id="T_6f77e_row2_col2" class="data row2 col2" >0.077</td>
+      <td id="T_6f77e_row2_col3" class="data row2 col3" >0.711</td>
+      <td id="T_6f77e_row2_col4" class="data row2 col4" >0.138</td>
+      <td id="T_6f77e_row2_col5" class="data row2 col5" >0.384</td>
+      <td id="T_6f77e_row2_col6" class="data row2 col6" >0.646</td>
+      <td id="T_6f77e_row2_col7" class="data row2 col7" >0.133</td>
+      <td id="T_6f77e_row2_col8" class="data row2 col8" >2.357</td>
+      <td id="T_6f77e_row2_col9" class="data row2 col9" >0.472</td>
+    </tr>
+    <tr>
+      <th id="T_6f77e_level0_row3" class="row_heading level0 row3" >k-nearest neighbours (k=25)</th>
+      <td id="T_6f77e_row3_col0" class="data row3 col0" >0.943</td>
+      <td id="T_6f77e_row3_col1" class="data row3 col1" >0.519</td>
+      <td id="T_6f77e_row3_col2" class="data row3 col2" >0.636</td>
+      <td id="T_6f77e_row3_col3" class="data row3 col3" >0.040</td>
+      <td id="T_6f77e_row3_col4" class="data row3 col4" >0.075</td>
+      <td id="T_6f77e_row3_col5" class="data row3 col5" >0.523</td>
+      <td id="T_6f77e_row3_col6" class="data row3 col6" >0.751</td>
+      <td id="T_6f77e_row3_col7" class="data row3 col7" >0.236</td>
+      <td id="T_6f77e_row3_col8" class="data row3 col8" >0.238</td>
+      <td id="T_6f77e_row3_col9" class="data row3 col9" >0.052</td>
+    </tr>
+    <tr>
+      <th id="T_6f77e_level0_row4" class="row_heading level0 row4" >Decision tree</th>
+      <td id="T_6f77e_row4_col0" class="data row4 col0" >0.946</td>
+      <td id="T_6f77e_row4_col1" class="data row4 col1" >0.626</td>
+      <td id="T_6f77e_row4_col2" class="data row4 col2" >0.590</td>
+      <td id="T_6f77e_row4_col3" class="data row4 col3" >0.264</td>
+      <td id="T_6f77e_row4_col4" class="data row4 col4" >0.364</td>
+      <td id="T_6f77e_row4_col5" class="data row4 col5" >0.668</td>
+      <td id="T_6f77e_row4_col6" class="data row4 col6" >0.832</td>
+      <td id="T_6f77e_row4_col7" class="data row4 col7" >0.393</td>
+      <td id="T_6f77e_row4_col8" class="data row4 col8" >0.183</td>
+      <td id="T_6f77e_row4_col9" class="data row4 col9" >0.043</td>
+    </tr>
+    <tr>
+      <th id="T_6f77e_level0_row5" class="row_heading level0 row5" >Random forest</th>
+      <td id="T_6f77e_row5_col0" class="data row5 col0" >0.949</td>
+      <td id="T_6f77e_row5_col1" class="data row5 col1" >0.606</td>
+      <td id="T_6f77e_row5_col2" class="data row5 col2" >0.692</td>
+      <td id="T_6f77e_row5_col3" class="data row5 col3" >0.217</td>
+      <td id="T_6f77e_row5_col4" class="data row5 col4" >0.331</td>
+      <td id="T_6f77e_row5_col5" class="data row5 col5" >0.652</td>
+      <td id="T_6f77e_row5_col6" class="data row5 col6" >0.838</td>
+      <td id="T_6f77e_row5_col7" class="data row5 col7" >0.430</td>
+      <td id="T_6f77e_row5_col8" class="data row5 col8" >0.165</td>
+      <td id="T_6f77e_row5_col9" class="data row5 col9" >0.042</td>
+    </tr>
+    <tr>
+      <th id="T_6f77e_level0_row6" class="row_heading level0 row6" >Gradient boosting (HGB)</th>
+      <td id="T_6f77e_row6_col0" class="data row6 col0" >0.951</td>
+      <td id="T_6f77e_row6_col1" class="data row6 col1" >0.632</td>
+      <td id="T_6f77e_row6_col2" class="data row6 col2" >0.704</td>
+      <td id="T_6f77e_row6_col3" class="data row6 col3" >0.270</td>
+      <td id="T_6f77e_row6_col4" class="data row6 col4" >0.391</td>
+      <td id="T_6f77e_row6_col5" class="data row6 col5" >0.683</td>
+      <td id="T_6f77e_row6_col6" class="data row6 col6" >0.854</td>
+      <td id="T_6f77e_row6_col7" class="data row6 col7" >0.469</td>
+      <td id="T_6f77e_row6_col8" class="data row6 col8" >0.156</td>
+      <td id="T_6f77e_row6_col9" class="data row6 col9" >0.040</td>
+    </tr>
+    <tr>
+      <th id="T_6f77e_level0_row7" class="row_heading level0 row7" >Neural network (MLP)</th>
+      <td id="T_6f77e_row7_col0" class="data row7 col0" >0.947</td>
+      <td id="T_6f77e_row7_col1" class="data row7 col1" >0.617</td>
+      <td id="T_6f77e_row7_col2" class="data row7 col2" >0.605</td>
+      <td id="T_6f77e_row7_col3" class="data row7 col3" >0.243</td>
+      <td id="T_6f77e_row7_col4" class="data row7 col4" >0.347</td>
+      <td id="T_6f77e_row7_col5" class="data row7 col5" >0.659</td>
+      <td id="T_6f77e_row7_col6" class="data row7 col6" >0.826</td>
+      <td id="T_6f77e_row7_col7" class="data row7 col7" >0.383</td>
+      <td id="T_6f77e_row7_col8" class="data row7 col8" >0.177</td>
+      <td id="T_6f77e_row7_col9" class="data row7 col9" >0.044</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 10 lines</summary><pre><code>fig, ax = plt.subplots(1, 3, figsize=(18, 5))
+for n, p in proba.items():
+    fpr, tpr, _ = M.roc_curve(y_te, p); ax[0].plot(fpr, tpr, label=f&quot;{n.split(&#x27; (&#x27;)[0]} ({M.roc_auc_score(y_te, p):.3f})&quot;)
+    pr, rc, _ = M.precision_recall_curve(y_te, p); ax[1].plot(rc, pr, label=f&quot;{n.split(&#x27; (&#x27;)[0]} ({M.average_precision_score(y_te, p):.3f})&quot;)
+ax[0].plot([0, 1], [0, 1], &quot;k--&quot;, lw=1); ax[0].set(title=&quot;ROC curves (test)&quot;, xlabel=&quot;false positive rate&quot;, ylabel=&quot;true positive rate&quot;); ax[0].legend(fontsize=7)
+ax[1].axhline(y_te.mean(), color=&quot;k&quot;, ls=&quot;--&quot;, lw=1, label=&quot;prevalence&quot;); ax[1].set(title=&quot;Precision–recall curves (test)&quot;, xlabel=&quot;recall&quot;, ylabel=&quot;precision&quot;); ax[1].legend(fontsize=7)
+for n in [&quot;Logistic regression&quot;, &quot;Gaussian naive Bayes&quot;, &quot;Random forest&quot;, &quot;Gradient boosting (HGB)&quot;, &quot;Neural network (MLP)&quot;]:
+    fo, mp = calibration_curve(y_te, proba[n], n_bins=10, strategy=&quot;quantile&quot;); ax[2].plot(mp, fo, marker=&quot;o&quot;, label=n.split(&quot; (&quot;)[0])
+ax[2].plot([0, 1], [0, 1], &quot;k--&quot;, lw=1); ax[2].set(title=&quot;Calibration (reliability) curve&quot;, xlabel=&quot;predicted P(severe)&quot;, ylabel=&quot;observed severe rate&quot;); ax[2].legend(fontsize=7)
+plt.tight_layout(); plt.show()</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-21.png" alt="Figure 21: 9.2 Fit on the full training period, evaluate once on the future test set" loading="lazy"><figcaption>Figure 21</figcaption></figure></div>
+<div class="nb-markdown"><h3 id="decision-threshold-chosen-on-out-of-fold-cv-predictions-not-on-the-test-set">9.3 Decision threshold (chosen on out-of-fold CV predictions, not on the test set)</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 19 lines</summary><pre><code>best_name = test_cls.roc_auc.drop(&quot;Dummy (majority class)&quot;).idxmax()
+print(&quot;best model by test ROC-AUC:&quot;, best_name)
+oof = cross_val_predict(make_pipe(clone(CLS[best_name])), X_cv, y_cv, cv=skf, method=&quot;predict_proba&quot;)[:, 1]
+thr_grid = np.linspace(0.05, 0.9, 86)
+f1s = [M.f1_score(y_cv, oof &gt;= t) for t in thr_grid]
+best_thr = thr_grid[int(np.argmax(f1s))]
+p_best = proba[best_name]
+curve = pd.DataFrame({&quot;precision&quot;: [M.precision_score(y_te, p_best &gt;= t, zero_division=0) for t in thr_grid],
+                      &quot;recall&quot;: [M.recall_score(y_te, p_best &gt;= t) for t in thr_grid],
+                      &quot;f1&quot;: [M.f1_score(y_te, p_best &gt;= t) for t in thr_grid]}, index=thr_grid)
+ax = curve.plot(figsize=(9, 3.8), title=f&quot;{best_name}: metrics vs threshold (test)&quot;)
+ax.axvline(0.5, color=GREY, ls=&quot;:&quot;, label=&quot;0.5&quot;); ax.axvline(best_thr, color=&quot;k&quot;, ls=&quot;--&quot;, label=f&quot;CV-chosen {best_thr:.2f}&quot;); ax.legend(); plt.show()
+display(pd.DataFrame({&quot;threshold 0.50&quot;: cls_metrics(y_te, p_best, 0.5), f&quot;threshold {best_thr:.2f}&quot;: cls_metrics(y_te, p_best, best_thr)}).T.round(3))
+fig, ax = plt.subplots(1, 2, figsize=(11, 4))
+for a, t in zip(ax, [0.5, best_thr]):
+    M.ConfusionMatrixDisplay.from_predictions(y_te, (p_best &gt;= t).astype(int), display_labels=[&quot;not severe&quot;, &quot;severe&quot;], ax=a, cmap=&quot;Blues&quot;, colorbar=False)
+    a.set_title(f&quot;Confusion matrix, threshold {t:.2f}&quot;); a.grid(False)
+plt.tight_layout(); plt.show()
+print(M.classification_report(y_te, (p_best &gt;= best_thr).astype(int), target_names=[&quot;not severe&quot;, &quot;severe&quot;], digits=3))</code></pre></details><pre class="nb-stream">best model by test ROC-AUC: Gradient boosting (HGB)
+</pre><figure class="nb-figure"><img src="/assets/notebook/fig-22.png" alt="Figure 22: 9.3 Decision threshold (chosen on out-of-fold CV predictions, not on the test set)" loading="lazy"><figcaption>Figure 22</figcaption></figure><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accuracy</th>
+      <th>balanced_acc</th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1</th>
+      <th>f1_macro</th>
+      <th>roc_auc</th>
+      <th>pr_auc</th>
+      <th>log_loss</th>
+      <th>brier</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>threshold 0.50</th>
+      <td>0.951</td>
+      <td>0.632</td>
+      <td>0.704</td>
+      <td>0.270</td>
+      <td>0.391</td>
+      <td>0.683</td>
+      <td>0.854</td>
+      <td>0.469</td>
+      <td>0.156</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>threshold 0.28</th>
+      <td>0.947</td>
+      <td>0.701</td>
+      <td>0.568</td>
+      <td>0.422</td>
+      <td>0.484</td>
+      <td>0.728</td>
+      <td>0.854</td>
+      <td>0.469</td>
+      <td>0.156</td>
+      <td>0.04</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-23.png" alt="Figure 23: 9.3 Decision threshold (chosen on out-of-fold CV predictions, not on the test set)" loading="lazy"><figcaption>Figure 23</figcaption></figure><pre class="nb-stream">              precision    recall  f1-score   support
+
+  not severe      0.965     0.980     0.972     28182
+      severe      0.568     0.422     0.484      1749
+
+    accuracy                          0.947     29931
+   macro avg      0.766     0.701     0.728     29931
+weighted avg      0.942     0.947     0.944     29931
+
+</pre></div>
+<div class="nb-markdown"><h3 id="hyper-parameter-tuning-randomized-search-stratified-5-fold-roc-auc">9.4 Hyper-parameter tuning (randomized search, stratified 5-fold, ROC-AUC)</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 12 lines</summary><pre><code>space = {&quot;model__learning_rate&quot;: loguniform(0.02, 0.3), &quot;model__max_leaf_nodes&quot;: randint(15, 128),
+         &quot;model__min_samples_leaf&quot;: randint(10, 200), &quot;model__l2_regularization&quot;: loguniform(1e-3, 10)}
+search = RandomizedSearchCV(make_pipe(HistGradientBoostingClassifier(max_iter=300, random_state=SEED)), space, n_iter=12,
+                            scoring=&quot;roc_auc&quot;, cv=skf, random_state=SEED, n_jobs=1).fit(X_cv, y_cv)
+res = pd.DataFrame(search.cv_results_).sort_values(&quot;rank_test_score&quot;)
+display(res[[&quot;rank_test_score&quot;, &quot;mean_test_score&quot;, &quot;std_test_score&quot;] + [c for c in res if c.startswith(&quot;param_&quot;)]].head(8).round(4))
+tuned = clone(search.best_estimator_).fit(X_tr, y_tr)
+p_tuned = tuned.predict_proba(X_te)[:, 1]
+print(&quot;best params:&quot;, search.best_params_)
+display(pd.DataFrame({&quot;HGB default&quot;: cls_metrics(y_te, proba[&quot;Gradient boosting (HGB)&quot;]), &quot;HGB tuned&quot;: cls_metrics(y_te, p_tuned)}).T.round(3))
+plt.figure(figsize=(8, 3.5)); plt.scatter(res.param_model__learning_rate.astype(float), res.mean_test_score, c=res.param_model__max_leaf_nodes.astype(float), cmap=&quot;viridis&quot;)
+plt.colorbar(label=&quot;max_leaf_nodes&quot;); plt.xscale(&quot;log&quot;); plt.xlabel(&quot;learning rate&quot;); plt.ylabel(&quot;CV ROC-AUC&quot;); plt.title(&quot;Search space explored&quot;); plt.show()</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rank_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>param_model__l2_regularization</th>
+      <th>param_model__learning_rate</th>
+      <th>param_model__max_leaf_nodes</th>
+      <th>param_model__min_samples_leaf</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>0.8754</td>
+      <td>0.0018</td>
+      <td>0.0720</td>
+      <td>0.0252</td>
+      <td>93</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0.8751</td>
+      <td>0.0022</td>
+      <td>0.1456</td>
+      <td>0.1019</td>
+      <td>88</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>0.8747</td>
+      <td>0.0029</td>
+      <td>1.2295</td>
+      <td>0.0547</td>
+      <td>116</td>
+      <td>125</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>0.8742</td>
+      <td>0.0024</td>
+      <td>0.0187</td>
+      <td>0.0961</td>
+      <td>65</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>5</td>
+      <td>0.8741</td>
+      <td>0.0029</td>
+      <td>0.2296</td>
+      <td>0.0218</td>
+      <td>95</td>
+      <td>147</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>6</td>
+      <td>0.8741</td>
+      <td>0.0023</td>
+      <td>0.4018</td>
+      <td>0.0483</td>
+      <td>68</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>7</td>
+      <td>0.8725</td>
+      <td>0.0029</td>
+      <td>0.0262</td>
+      <td>0.1258</td>
+      <td>98</td>
+      <td>180</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>8</td>
+      <td>0.8716</td>
+      <td>0.0030</td>
+      <td>0.0034</td>
+      <td>0.1401</td>
+      <td>39</td>
+      <td>176</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><pre class="nb-stream">best params: {&#x27;model__l2_regularization&#x27;: np.float64(0.07202792123795003), &#x27;model__learning_rate&#x27;: np.float64(0.025213146669353953), &#x27;model__max_leaf_nodes&#x27;: 93, &#x27;model__min_samples_leaf&#x27;: 87}
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accuracy</th>
+      <th>balanced_acc</th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1</th>
+      <th>f1_macro</th>
+      <th>roc_auc</th>
+      <th>pr_auc</th>
+      <th>log_loss</th>
+      <th>brier</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>HGB default</th>
+      <td>0.951</td>
+      <td>0.632</td>
+      <td>0.704</td>
+      <td>0.270</td>
+      <td>0.391</td>
+      <td>0.683</td>
+      <td>0.854</td>
+      <td>0.469</td>
+      <td>0.156</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>HGB tuned</th>
+      <td>0.952</td>
+      <td>0.646</td>
+      <td>0.712</td>
+      <td>0.299</td>
+      <td>0.421</td>
+      <td>0.698</td>
+      <td>0.856</td>
+      <td>0.480</td>
+      <td>0.155</td>
+      <td>0.04</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-24.png" alt="Figure 24: 9.4 Hyper-parameter tuning (randomized search, stratified 5-fold, ROC-AUC)" loading="lazy"><figcaption>Figure 24</figcaption></figure></div>
+<div class="nb-markdown"><h3 id="class-imbalance-class-weights">9.5 Class imbalance: class weights</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 4 lines</summary><pre><code>bal = make_pipe(HistGradientBoostingClassifier(max_iter=300, learning_rate=0.08, class_weight=&quot;balanced&quot;, random_state=SEED)).fit(X_tr, y_tr)
+p_bal = bal.predict_proba(X_te)[:, 1]
+display(pd.DataFrame({&quot;HGB unweighted&quot;: cls_metrics(y_te, proba[&quot;Gradient boosting (HGB)&quot;]), &quot;HGB class_weight=&#x27;balanced&#x27;&quot;: cls_metrics(y_te, p_bal)}).T.round(3))
+print(&quot;Balancing trades precision and calibration for recall of the rare severe class; ROC-AUC (ranking) barely changes.&quot;)</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accuracy</th>
+      <th>balanced_acc</th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1</th>
+      <th>f1_macro</th>
+      <th>roc_auc</th>
+      <th>pr_auc</th>
+      <th>log_loss</th>
+      <th>brier</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>HGB unweighted</th>
+      <td>0.951</td>
+      <td>0.632</td>
+      <td>0.704</td>
+      <td>0.270</td>
+      <td>0.391</td>
+      <td>0.683</td>
+      <td>0.854</td>
+      <td>0.469</td>
+      <td>0.156</td>
+      <td>0.040</td>
+    </tr>
+    <tr>
+      <th>HGB class_weight='balanced'</th>
+      <td>0.945</td>
+      <td>0.718</td>
+      <td>0.533</td>
+      <td>0.461</td>
+      <td>0.495</td>
+      <td>0.733</td>
+      <td>0.852</td>
+      <td>0.460</td>
+      <td>0.184</td>
+      <td>0.047</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><pre class="nb-stream">Balancing trades precision and calibration for recall of the rare severe class; ROC-AUC (ranking) barely changes.
+</pre></div>
+<div class="nb-markdown"><h3 id="random-split-vs-temporal-split-why-the-honest-test-is-harder">9.6 Random split vs temporal split (why the honest test is harder)</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 6 lines</summary><pre><code>idx_a, idx_b = train_test_split(np.arange(len(df)), test_size=0.2, stratify=df.is_severe, random_state=SEED)
+rnd = make_pipe(HistGradientBoostingClassifier(max_iter=300, learning_rate=0.08, random_state=SEED)).fit(df.loc[idx_a, FEATURES], df.loc[idx_a, &quot;is_severe&quot;])
+p_rnd = rnd.predict_proba(df.loc[idx_b, FEATURES])[:, 1]
+cmp = pd.DataFrame({&quot;random 80/20 split&quot;: cls_metrics(df.loc[idx_b, &quot;is_severe&quot;], p_rnd), &quot;temporal split (future)&quot;: cls_metrics(y_te, proba[&quot;Gradient boosting (HGB)&quot;])}).T
+display(cmp[[&quot;balanced_acc&quot;, &quot;f1_macro&quot;, &quot;roc_auc&quot;, &quot;pr_auc&quot;]].round(3))
+print(&quot;The gap = how much severity labelling / coverage drifts over time (Source mix changes after 2020).&quot;)</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>balanced_acc</th>
+      <th>f1_macro</th>
+      <th>roc_auc</th>
+      <th>pr_auc</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>random 80/20 split</th>
+      <td>0.730</td>
+      <td>0.756</td>
+      <td>0.897</td>
+      <td>0.686</td>
+    </tr>
+    <tr>
+      <th>temporal split (future)</th>
+      <td>0.632</td>
+      <td>0.683</td>
+      <td>0.854</td>
+      <td>0.469</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><pre class="nb-stream">The gap = how much severity labelling / coverage drifts over time (Source mix changes after 2020).
+</pre></div>
+<div class="nb-markdown"><h3 id="four-class-severity-1-4">9.7 Four-class severity (1–4)</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 13 lines</summary><pre><code>y4_tr, y4_te = df.loc[tr, &quot;Severity&quot;], df.loc[te, &quot;Severity&quot;]
+mc = {&quot;HGB&quot;: make_pipe(HistGradientBoostingClassifier(max_iter=300, random_state=SEED)).fit(X_tr, y4_tr),
+      &quot;HGB balanced&quot;: make_pipe(HistGradientBoostingClassifier(max_iter=300, class_weight=&quot;balanced&quot;, random_state=SEED)).fit(X_tr, y4_tr)}
+fig, ax = plt.subplots(1, 2, figsize=(12, 4.5))
+rows = {}
+for a, (n, m) in zip(ax, mc.items()):
+    pr = m.predict(X_te)
+    rows[n] = {&quot;accuracy&quot;: M.accuracy_score(y4_te, pr), &quot;balanced_acc&quot;: M.balanced_accuracy_score(y4_te, pr), &quot;macro_f1&quot;: M.f1_score(y4_te, pr, average=&quot;macro&quot;),
+               &quot;weighted_f1&quot;: M.f1_score(y4_te, pr, average=&quot;weighted&quot;)}
+    M.ConfusionMatrixDisplay.from_predictions(y4_te, pr, normalize=&quot;true&quot;, ax=a, cmap=&quot;Blues&quot;, colorbar=False, values_format=&quot;.2f&quot;); a.set_title(f&quot;{n} (row-normalised)&quot;); a.grid(False)
+plt.tight_layout(); plt.show()
+display(pd.DataFrame(rows).T.round(3))
+print(M.classification_report(y4_te, mc[&quot;HGB balanced&quot;].predict(X_te), digits=3, zero_division=0))</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-25.png" alt="Figure 25: 9.7 Four-class severity (1–4)" loading="lazy"><figcaption>Figure 25</figcaption></figure><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accuracy</th>
+      <th>balanced_acc</th>
+      <th>macro_f1</th>
+      <th>weighted_f1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>HGB</th>
+      <td>0.922</td>
+      <td>0.372</td>
+      <td>0.386</td>
+      <td>0.898</td>
+    </tr>
+    <tr>
+      <th>HGB balanced</th>
+      <td>0.803</td>
+      <td>0.514</td>
+      <td>0.414</td>
+      <td>0.839</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><pre class="nb-stream">              precision    recall  f1-score   support
+
+           1      0.000     0.000     0.000       743
+           2      0.949     0.837     0.889     27439
+           3      0.521     0.812     0.635       930
+           4      0.078     0.407     0.130       819
+
+    accuracy                          0.803     29931
+   macro avg      0.387     0.514     0.414     29931
+weighted avg      0.888     0.803     0.839     29931
+
+</pre></div>
+<div class="nb-markdown"><h3 id="what-drives-the-predictions-permutation-importance-logistic-coefficients">9.8 What drives the predictions? (permutation importance + logistic coefficients)</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 13 lines</summary><pre><code>sub = rng.choice(len(X_te), 8000, replace=False)
+pi = permutation_importance(tuned, X_te.iloc[sub], y_te.iloc[sub], scoring=&quot;roc_auc&quot;, n_repeats=3, random_state=SEED, n_jobs=1)
+imp = pd.Series(pi.importances_mean, index=FEATURES).sort_values()
+lr = fitted[&quot;Logistic regression&quot;]
+coef = pd.Series(lr.named_steps[&quot;model&quot;].coef_[0], index=lr.named_steps[&quot;pre&quot;].get_feature_names_out())
+coef = coef.reindex(coef.abs().sort_values().index).tail(15)
+fig, ax = plt.subplots(1, 2, figsize=(16, 6))
+imp.tail(18).plot.barh(ax=ax[0], color=BLUE, title=&quot;Permutation importance (drop in test ROC-AUC), tuned HGB&quot;)
+coef.plot.barh(ax=ax[1], color=[RED if v &gt; 0 else BLUE for v in coef], title=&quot;Logistic regression coefficients (standardized; red raises P(severe))&quot;)
+plt.tight_layout(); plt.show()
+best_cls = test_cls.drop(&quot;Dummy (majority class)&quot;).roc_auc.idxmax()
+SUMMARY.append({&quot;task&quot;: &quot;Classification (severe vs not)&quot;, &quot;best model&quot;: &quot;HGB tuned&quot;, &quot;key metric&quot;: &quot;ROC-AUC (future test)&quot;,
+                &quot;value&quot;: M.roc_auc_score(y_te, p_tuned), &quot;baseline&quot;: 0.5, &quot;other&quot;: f&quot;macro F1 {cls_metrics(y_te, p_tuned, best_thr)[&#x27;f1_macro&#x27;]:.3f} @thr {best_thr:.2f}&quot;})</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-26.png" alt="Figure 26: 9.8 What drives the predictions? (permutation importance + logistic coefficients)" loading="lazy"><figcaption>Figure 26</figcaption></figure></div>
+<div class="nb-markdown"><h2 id="regression-predict-traffic-delay-duration">10. Regression — predict traffic-delay duration</h2>
+<p>Target: <code>log(1 + minutes)</code>. Severity is added as a feature (it is recorded when the incident is logged). Errors are reported on the log scale and in minutes.</p></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 25 lines</summary><pre><code>NUM_R = NUM + [&quot;Severity&quot;]
+FEAT_R = NUM_R + BIN + CAT
+Xr_tr, Xr_te = df.loc[tr, FEAT_R], df.loc[te, FEAT_R]
+yr_tr, yr_te = df.loc[tr, &quot;log_duration&quot;], df.loc[te, &quot;log_duration&quot;]
+Xr_cv, yr_cv = df.loc[cv_idx, FEAT_R], df.loc[cv_idx, &quot;log_duration&quot;]
+REG = {
+    &quot;Dummy (mean)&quot;: DummyRegressor(),
+    &quot;Linear regression&quot;: LinearRegression(),
+    &quot;Ridge (L2, α=10)&quot;: Ridge(alpha=10),
+    &quot;Lasso (L1, α=0.002)&quot;: Lasso(alpha=0.002, max_iter=5000),
+    &quot;k-nearest neighbours (k=25)&quot;: KNeighborsRegressor(25, n_jobs=-1),
+    &quot;Decision tree&quot;: DecisionTreeRegressor(max_depth=12, min_samples_leaf=20, random_state=SEED),
+    &quot;Random forest&quot;: RandomForestRegressor(200, min_samples_leaf=5, max_samples=0.5, n_jobs=-1, random_state=SEED),
+    &quot;Gradient boosting (HGB)&quot;: HistGradientBoostingRegressor(max_iter=400, learning_rate=0.08, random_state=SEED),
+    &quot;Neural network (MLP)&quot;: MLPRegressor(hidden_layer_sizes=(64, 32), early_stopping=True, max_iter=200, random_state=SEED),
+}
+mae_min = M.make_scorer(lambda y, p: M.mean_absolute_error(np.expm1(y), np.expm1(p)), greater_is_better=False)
+RSC = {&quot;MAE_log&quot;: &quot;neg_mean_absolute_error&quot;, &quot;RMSE_log&quot;: &quot;neg_root_mean_squared_error&quot;, &quot;R2_log&quot;: &quot;r2&quot;, &quot;MAE_minutes&quot;: mae_min}
+kf = KFold(K, shuffle=True, random_state=SEED)
+cv_reg = {}
+for name, m in REG.items():
+    t0 = time.time(); cv_reg[name] = cross_validate(make_pipe(m, NUM_R), Xr_cv, yr_cv, cv=kf, scoring=RSC, n_jobs=1)
+    print(f&quot;{name:32s} done in {time.time() - t0:5.1f}s&quot;)
+sign = {&quot;MAE_log&quot;: -1, &quot;RMSE_log&quot;: -1, &quot;R2_log&quot;: 1, &quot;MAE_minutes&quot;: -1}
+pd.DataFrame({n: {k: f&quot;{sign[k] * r[&#x27;test_&#x27; + k].mean():.3f} ± {r[&#x27;test_&#x27; + k].std():.3f}&quot; for k in RSC} for n, r in cv_reg.items()}).T</code></pre></details><pre class="nb-stream">Dummy (mean)                     done in   0.8s
+</pre><pre class="nb-stream">Linear regression                done in   1.0s
+</pre><pre class="nb-stream">Ridge (L2, α=10)                 done in   0.8s
+</pre><pre class="nb-stream">Lasso (L1, α=0.002)              done in   0.9s
+</pre><pre class="nb-stream">k-nearest neighbours (k=25)      done in   3.6s
+</pre><pre class="nb-stream">Decision tree                    done in   2.6s
+</pre><pre class="nb-stream">Random forest                    done in  25.1s
+</pre><pre class="nb-stream">Gradient boosting (HGB)          done in  13.9s
+</pre><pre class="nb-stream">Neural network (MLP)             done in  17.7s
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MAE_log</th>
+      <th>RMSE_log</th>
+      <th>R2_log</th>
+      <th>MAE_minutes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Dummy (mean)</th>
+      <td>0.692 ± 0.005</td>
+      <td>0.854 ± 0.006</td>
+      <td>-0.000 ± 0.000</td>
+      <td>76.457 ± 1.875</td>
+    </tr>
+    <tr>
+      <th>Linear regression</th>
+      <td>0.556 ± 0.006</td>
+      <td>0.731 ± 0.007</td>
+      <td>0.269 ± 0.006</td>
+      <td>66.698 ± 1.952</td>
+    </tr>
+    <tr>
+      <th>Ridge (L2, α=10)</th>
+      <td>0.556 ± 0.006</td>
+      <td>0.731 ± 0.007</td>
+      <td>0.269 ± 0.006</td>
+      <td>66.699 ± 1.950</td>
+    </tr>
+    <tr>
+      <th>Lasso (L1, α=0.002)</th>
+      <td>0.557 ± 0.006</td>
+      <td>0.731 ± 0.007</td>
+      <td>0.267 ± 0.006</td>
+      <td>66.785 ± 1.930</td>
+    </tr>
+    <tr>
+      <th>k-nearest neighbours (k=25)</th>
+      <td>0.531 ± 0.005</td>
+      <td>0.709 ± 0.008</td>
+      <td>0.312 ± 0.006</td>
+      <td>64.839 ± 1.923</td>
+    </tr>
+    <tr>
+      <th>Decision tree</th>
+      <td>0.381 ± 0.007</td>
+      <td>0.560 ± 0.011</td>
+      <td>0.570 ± 0.013</td>
+      <td>44.985 ± 1.979</td>
+    </tr>
+    <tr>
+      <th>Random forest</th>
+      <td>0.366 ± 0.005</td>
+      <td>0.533 ± 0.010</td>
+      <td>0.611 ± 0.010</td>
+      <td>43.618 ± 1.935</td>
+    </tr>
+    <tr>
+      <th>Gradient boosting (HGB)</th>
+      <td>0.382 ± 0.006</td>
+      <td>0.541 ± 0.011</td>
+      <td>0.599 ± 0.011</td>
+      <td>45.121 ± 1.967</td>
+    </tr>
+    <tr>
+      <th>Neural network (MLP)</th>
+      <td>0.440 ± 0.004</td>
+      <td>0.601 ± 0.006</td>
+      <td>0.504 ± 0.006</td>
+      <td>54.297 ± 0.968</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 16 lines</summary><pre><code>fig, ax = plt.subplots(1, 2, figsize=(16, 4.5))
+for a, k in zip(ax, [&quot;R2_log&quot;, &quot;MAE_minutes&quot;]):
+    a.boxplot([sign[k] * cv_reg[n][&quot;test_&quot; + k] for n in REG], tick_labels=[n.split(&quot; (&quot;)[0] for n in REG], vert=False); a.set_title(f&quot;5-fold CV: {k}&quot;)
+plt.tight_layout(); plt.show()
+
+fit_r = {}
+for name, m in REG.items():
+    Xf, yf = (Xr_cv, yr_cv) if name.startswith(&quot;k-nearest&quot;) else (Xr_tr, yr_tr)
+    fit_r[name] = make_pipe(m, NUM_R).fit(Xf, yf)
+pred_r = {n: p.predict(Xr_te) for n, p in fit_r.items()}
+def reg_metrics(y, p):
+    ym, pm = np.expm1(y), np.expm1(p)
+    return {&quot;MAE_log&quot;: M.mean_absolute_error(y, p), &quot;RMSE_log&quot;: M.root_mean_squared_error(y, p), &quot;R2_log&quot;: M.r2_score(y, p),
+            &quot;MAE_min&quot;: M.mean_absolute_error(ym, pm), &quot;MedAE_min&quot;: M.median_absolute_error(ym, pm), &quot;RMSE_min&quot;: M.root_mean_squared_error(ym, pm)}
+test_reg = pd.DataFrame({n: reg_metrics(yr_te, p) for n, p in pred_r.items()}).T
+test_reg.round(3).style.highlight_min(subset=[&quot;MAE_log&quot;, &quot;RMSE_log&quot;, &quot;MAE_min&quot;, &quot;MedAE_min&quot;, &quot;RMSE_min&quot;], color=&quot;#cfe0f5&quot;).highlight_max(subset=[&quot;R2_log&quot;], color=&quot;#cfe0f5&quot;).format(&quot;{:.3f}&quot;)</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-27.png" alt="Figure 27: 10. Regression — predict traffic-delay duration" loading="lazy"><figcaption>Figure 27</figcaption></figure><div class="nb-table"><style type="text/css">
+#T_6ea77_row6_col4, #T_6ea77_row7_col0, #T_6ea77_row7_col1, #T_6ea77_row7_col2, #T_6ea77_row7_col3, #T_6ea77_row7_col5 {
+  background-color: #cfe0f5;
+}
+</style>
+<table id="T_6ea77">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_6ea77_level0_col0" class="col_heading level0 col0" >MAE_log</th>
+      <th id="T_6ea77_level0_col1" class="col_heading level0 col1" >RMSE_log</th>
+      <th id="T_6ea77_level0_col2" class="col_heading level0 col2" >R2_log</th>
+      <th id="T_6ea77_level0_col3" class="col_heading level0 col3" >MAE_min</th>
+      <th id="T_6ea77_level0_col4" class="col_heading level0 col4" >MedAE_min</th>
+      <th id="T_6ea77_level0_col5" class="col_heading level0 col5" >RMSE_min</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_6ea77_level0_row0" class="row_heading level0 row0" >Dummy (mean)</th>
+      <td id="T_6ea77_row0_col0" class="data row0 col0" >0.564</td>
+      <td id="T_6ea77_row0_col1" class="data row0 col1" >0.765</td>
+      <td id="T_6ea77_row0_col2" class="data row0 col2" >-0.087</td>
+      <td id="T_6ea77_row0_col3" class="data row0 col3" >67.508</td>
+      <td id="T_6ea77_row0_col4" class="data row0 col4" >38.576</td>
+      <td id="T_6ea77_row0_col5" class="data row0 col5" >195.060</td>
+    </tr>
+    <tr>
+      <th id="T_6ea77_level0_row1" class="row_heading level0 row1" >Linear regression</th>
+      <td id="T_6ea77_row1_col0" class="data row1 col0" >0.501</td>
+      <td id="T_6ea77_row1_col1" class="data row1 col1" >0.708</td>
+      <td id="T_6ea77_row1_col2" class="data row1 col2" >0.069</td>
+      <td id="T_6ea77_row1_col3" class="data row1 col3" >63.336</td>
+      <td id="T_6ea77_row1_col4" class="data row1 col4" >30.373</td>
+      <td id="T_6ea77_row1_col5" class="data row1 col5" >188.056</td>
+    </tr>
+    <tr>
+      <th id="T_6ea77_level0_row2" class="row_heading level0 row2" >Ridge (L2, α=10)</th>
+      <td id="T_6ea77_row2_col0" class="data row2 col0" >0.501</td>
+      <td id="T_6ea77_row2_col1" class="data row2 col1" >0.708</td>
+      <td id="T_6ea77_row2_col2" class="data row2 col2" >0.069</td>
+      <td id="T_6ea77_row2_col3" class="data row2 col3" >63.337</td>
+      <td id="T_6ea77_row2_col4" class="data row2 col4" >30.376</td>
+      <td id="T_6ea77_row2_col5" class="data row2 col5" >188.054</td>
+    </tr>
+    <tr>
+      <th id="T_6ea77_level0_row3" class="row_heading level0 row3" >Lasso (L1, α=0.002)</th>
+      <td id="T_6ea77_row3_col0" class="data row3 col0" >0.504</td>
+      <td id="T_6ea77_row3_col1" class="data row3 col1" >0.710</td>
+      <td id="T_6ea77_row3_col2" class="data row3 col2" >0.064</td>
+      <td id="T_6ea77_row3_col3" class="data row3 col3" >63.598</td>
+      <td id="T_6ea77_row3_col4" class="data row3 col4" >30.793</td>
+      <td id="T_6ea77_row3_col5" class="data row3 col5" >187.733</td>
+    </tr>
+    <tr>
+      <th id="T_6ea77_level0_row4" class="row_heading level0 row4" >k-nearest neighbours (k=25)</th>
+      <td id="T_6ea77_row4_col0" class="data row4 col0" >0.535</td>
+      <td id="T_6ea77_row4_col1" class="data row4 col1" >0.738</td>
+      <td id="T_6ea77_row4_col2" class="data row4 col2" >-0.012</td>
+      <td id="T_6ea77_row4_col3" class="data row4 col3" >66.293</td>
+      <td id="T_6ea77_row4_col4" class="data row4 col4" >34.573</td>
+      <td id="T_6ea77_row4_col5" class="data row4 col5" >189.744</td>
+    </tr>
+    <tr>
+      <th id="T_6ea77_level0_row5" class="row_heading level0 row5" >Decision tree</th>
+      <td id="T_6ea77_row5_col0" class="data row5 col0" >0.499</td>
+      <td id="T_6ea77_row5_col1" class="data row5 col1" >0.709</td>
+      <td id="T_6ea77_row5_col2" class="data row5 col2" >0.066</td>
+      <td id="T_6ea77_row5_col3" class="data row5 col3" >63.379</td>
+      <td id="T_6ea77_row5_col4" class="data row5 col4" >28.835</td>
+      <td id="T_6ea77_row5_col5" class="data row5 col5" >188.709</td>
+    </tr>
+    <tr>
+      <th id="T_6ea77_level0_row6" class="row_heading level0 row6" >Random forest</th>
+      <td id="T_6ea77_row6_col0" class="data row6 col0" >0.488</td>
+      <td id="T_6ea77_row6_col1" class="data row6 col1" >0.696</td>
+      <td id="T_6ea77_row6_col2" class="data row6 col2" >0.099</td>
+      <td id="T_6ea77_row6_col3" class="data row6 col3" >61.974</td>
+      <td id="T_6ea77_row6_col4" class="data row6 col4" >28.184</td>
+      <td id="T_6ea77_row6_col5" class="data row6 col5" >188.040</td>
+    </tr>
+    <tr>
+      <th id="T_6ea77_level0_row7" class="row_heading level0 row7" >Gradient boosting (HGB)</th>
+      <td id="T_6ea77_row7_col0" class="data row7 col0" >0.484</td>
+      <td id="T_6ea77_row7_col1" class="data row7 col1" >0.691</td>
+      <td id="T_6ea77_row7_col2" class="data row7 col2" >0.112</td>
+      <td id="T_6ea77_row7_col3" class="data row7 col3" >61.564</td>
+      <td id="T_6ea77_row7_col4" class="data row7 col4" >28.306</td>
+      <td id="T_6ea77_row7_col5" class="data row7 col5" >187.206</td>
+    </tr>
+    <tr>
+      <th id="T_6ea77_level0_row8" class="row_heading level0 row8" >Neural network (MLP)</th>
+      <td id="T_6ea77_row8_col0" class="data row8 col0" >0.537</td>
+      <td id="T_6ea77_row8_col1" class="data row8 col1" >0.743</td>
+      <td id="T_6ea77_row8_col2" class="data row8 col2" >-0.027</td>
+      <td id="T_6ea77_row8_col3" class="data row8 col3" >65.574</td>
+      <td id="T_6ea77_row8_col4" class="data row8 col4" >31.099</td>
+      <td id="T_6ea77_row8_col5" class="data row8 col5" >191.718</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 13 lines</summary><pre><code>best_r = test_reg.drop(&quot;Dummy (mean)&quot;).R2_log.idxmax(); p = pred_r[best_r]; res_ = yr_te - p
+print(&quot;best regression model (test R² on log scale):&quot;, best_r)
+fig, ax = plt.subplots(2, 2, figsize=(14, 10))
+hb = ax[0, 0].hexbin(p, yr_te, gridsize=60, bins=&quot;log&quot;, cmap=&quot;Blues&quot;); ax[0, 0].plot([0, 9], [0, 9], &quot;r--&quot;)
+ax[0, 0].set(title=f&quot;Predicted vs actual — {best_r}&quot;, xlabel=&quot;predicted log(1+min)&quot;, ylabel=&quot;actual log(1+min)&quot;); plt.colorbar(hb, ax=ax[0, 0])
+ax[0, 1].scatter(p[::10], res_.to_numpy()[::10], s=2, alpha=0.3, color=BLUE); ax[0, 1].axhline(0, color=&quot;k&quot;, ls=&quot;--&quot;)
+ax[0, 1].set(title=&quot;Residuals vs fitted&quot;, xlabel=&quot;predicted&quot;, ylabel=&quot;actual − predicted&quot;)
+ax[1, 0].hist(res_, bins=80, color=BLUE); ax[1, 0].set(title=&quot;Residual distribution&quot;, xlabel=&quot;residual (log minutes)&quot;)
+stats.probplot(res_.sample(5000, random_state=SEED), dist=&quot;norm&quot;, plot=ax[1, 1]); ax[1, 1].set_title(&quot;Normal Q-Q plot of residuals&quot;)
+plt.tight_layout(); plt.show()
+bysev = pd.DataFrame({n.split(&quot; (&quot;)[0]: [M.mean_absolute_error(np.expm1(yr_te[df.loc[te, &quot;Severity&quot;] == s]), np.expm1(pred_r[n][(df.loc[te, &quot;Severity&quot;] == s).to_numpy()]))
+                       for s in (1, 2, 3, 4)] for n in [&quot;Dummy (mean)&quot;, &quot;Ridge (L2, α=10)&quot;, &quot;Random forest&quot;, &quot;Gradient boosting (HGB)&quot;]}, index=[1, 2, 3, 4])
+bysev.plot.bar(rot=0, figsize=(10, 3.8), title=&quot;Test MAE (minutes) by severity&quot;); plt.ylabel(&quot;MAE minutes&quot;); plt.show()</code></pre></details><pre class="nb-stream">best regression model (test R² on log scale): Gradient boosting (HGB)
+</pre><figure class="nb-figure"><img src="/assets/notebook/fig-28.png" alt="Figure 28: 10. Regression — predict traffic-delay duration" loading="lazy"><figcaption>Figure 28</figcaption></figure><figure class="nb-figure"><img src="/assets/notebook/fig-29.png" alt="Figure 29: 10. Regression — predict traffic-delay duration" loading="lazy"><figcaption>Figure 29</figcaption></figure></div>
+<div class="nb-markdown"><h3 id="regularization-ridge-validation-curve-lasso-coefficients-and-learning-curve">10.1 Regularization (Ridge α validation curve, Lasso coefficients) and learning curve</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 14 lines</summary><pre><code>alphas = np.logspace(-2, 4, 13)
+tr_s, va_s = validation_curve(make_pipe(Ridge(), NUM_R), Xr_cv, yr_cv, param_name=&quot;model__alpha&quot;, param_range=alphas, cv=kf, scoring=&quot;r2&quot;, n_jobs=1)
+sizes, lc_tr, lc_va = learning_curve(make_pipe(HistGradientBoostingRegressor(max_iter=300, random_state=SEED), NUM_R), Xr_cv, yr_cv,
+                                     train_sizes=np.linspace(0.1, 1.0, 6), cv=kf, scoring=&quot;r2&quot;, n_jobs=1)
+lasso = fit_r[&quot;Lasso (L1, α=0.002)&quot;]
+lc = pd.Series(lasso.named_steps[&quot;model&quot;].coef_, index=lasso.named_steps[&quot;pre&quot;].get_feature_names_out())
+fig, ax = plt.subplots(1, 3, figsize=(18, 4.5))
+ax[0].semilogx(alphas, tr_s.mean(1), &quot;o-&quot;, label=&quot;train&quot;); ax[0].semilogx(alphas, va_s.mean(1), &quot;o-&quot;, label=&quot;validation&quot;)
+ax[0].fill_between(alphas, va_s.mean(1) - va_s.std(1), va_s.mean(1) + va_s.std(1), alpha=0.2); ax[0].set(title=&quot;Ridge: R² vs α (5-fold)&quot;, xlabel=&quot;α&quot;); ax[0].legend()
+ax[1].plot(sizes, lc_tr.mean(1), &quot;o-&quot;, label=&quot;train&quot;); ax[1].plot(sizes, lc_va.mean(1), &quot;o-&quot;, label=&quot;validation&quot;)
+ax[1].fill_between(sizes, lc_va.mean(1) - lc_va.std(1), lc_va.mean(1) + lc_va.std(1), alpha=0.2); ax[1].set(title=&quot;Learning curve: HGB regressor&quot;, xlabel=&quot;training rows&quot;); ax[1].legend()
+nz = lc[lc != 0]; nz = nz.reindex(nz.abs().sort_values().index).tail(15)
+nz.plot.barh(ax=ax[2], color=[RED if v &gt; 0 else BLUE for v in nz], title=f&quot;Lasso: {int((lc != 0).sum())}/{len(lc)} features kept (top 15)&quot;)
+plt.tight_layout(); plt.show()</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-30.png" alt="Figure 30: 10.1 Regularization (Ridge α validation curve, Lasso coefficients) and learning curve" loading="lazy"><figcaption>Figure 30</figcaption></figure></div>
+<div class="nb-markdown"><h3 id="prediction-intervals-quantile-gradient-boosting-10th-90th-percentile">10.2 Prediction intervals (quantile gradient boosting, 10th–90th percentile)</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 9 lines</summary><pre><code>q = {a: make_pipe(HistGradientBoostingRegressor(loss=&quot;quantile&quot;, quantile=a, max_iter=300, random_state=SEED), NUM_R).fit(Xr_tr, yr_tr).predict(Xr_te) for a in (0.1, 0.5, 0.9)}
+cover = ((yr_te &gt;= q[0.1]) &amp; (yr_te &lt;= q[0.9])).mean()
+print(f&quot;80% interval covers {cover:.1%} of real delays (target 80%); median width {np.median(np.expm1(q[0.9]) - np.expm1(q[0.1])):.0f} minutes&quot;)
+o = np.argsort(q[0.5])[:: max(1, len(q[0.5]) // 300)]
+plt.figure(figsize=(12, 4)); plt.fill_between(range(len(o)), np.expm1(q[0.1][o]), np.expm1(q[0.9][o]), alpha=0.3, color=BLUE, label=&quot;80% interval&quot;)
+plt.plot(np.expm1(q[0.5][o]), color=BLUE, label=&quot;median prediction&quot;); plt.scatter(range(len(o)), np.expm1(yr_te.to_numpy()[o]), s=6, color=RED, label=&quot;actual&quot;)
+plt.yscale(&quot;log&quot;); plt.xlabel(&quot;test crashes sorted by prediction&quot;); plt.ylabel(&quot;minutes&quot;); plt.legend(); plt.title(&quot;Quantile regression intervals&quot;); plt.show()
+SUMMARY.append({&quot;task&quot;: &quot;Regression (delay)&quot;, &quot;best model&quot;: best_r, &quot;key metric&quot;: &quot;R² log (future test)&quot;, &quot;value&quot;: test_reg.loc[best_r, &quot;R2_log&quot;],
+                &quot;baseline&quot;: test_reg.loc[&quot;Dummy (mean)&quot;, &quot;R2_log&quot;], &quot;other&quot;: f&quot;MAE {test_reg.loc[best_r, &#x27;MAE_min&#x27;]:.1f} min vs {test_reg.loc[&#x27;Dummy (mean)&#x27;, &#x27;MAE_min&#x27;]:.1f}; 80% PI coverage {cover:.1%}&quot;})</code></pre></details><pre class="nb-stream">80% interval covers 79.0% of real delays (target 80%); median width 145 minutes
+</pre><figure class="nb-figure"><img src="/assets/notebook/fig-31.png" alt="Figure 31: 10.2 Prediction intervals (quantile gradient boosting, 10th–90th percentile)" loading="lazy"><figcaption>Figure 31</figcaption></figure></div>
+<div class="nb-markdown"><h2 id="time-series-monthly-us-crash-counts">11. Time series — monthly US crash counts</h2>
+<p>Built from the full 10% national sample (772k rows) × 10 to represent all recorded crashes. Mar 2016 – Feb 2023 (84 complete months).</p></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 16 lines</summary><pre><code>from statsmodels.tsa.seasonal import STL
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+from statsmodels.tsa.holtwinters import ExponentialSmoothing
+from statsmodels.tsa.statespace.sarimax import SARIMAX
+t_all = pd.to_datetime(raw_full.Start_Time.astype(str).str[:19], errors=&quot;coerce&quot;)
+y_ts = (t_all.dt.to_period(&quot;M&quot;).value_counts().sort_index().loc[&quot;2016-03&quot;:&quot;2023-02&quot;] * 10).to_timestamp().asfreq(&quot;MS&quot;).astype(float)
+fig, ax = plt.subplots(figsize=(13, 3.8))
+y_ts.plot(ax=ax, color=BLUE, label=&quot;monthly crashes&quot;); y_ts.rolling(12).mean().plot(ax=ax, color=RED, label=&quot;12-month rolling mean&quot;)
+ax.set(title=&quot;Recorded US crashes per month&quot;, ylabel=&quot;crashes&quot;); ax.legend(); plt.show()
+stl = STL(y_ts, period=12, robust=True).fit()
+fig = stl.plot(); fig.set_size_inches(13, 7); fig.suptitle(&quot;STL decomposition: trend + seasonality + remainder&quot;, y=1.01); plt.show()
+for name, s in [(&quot;level&quot;, y_ts), (&quot;first difference&quot;, y_ts.diff().dropna())]:
+    adf = adfuller(s); print(f&quot;ADF test on {name:16s}: stat {adf[0]:7.2f}, p-value {adf[1]:.4f} -&gt; {&#x27;stationary&#x27; if adf[1] &lt; 0.05 else &#x27;NON-stationary&#x27;}&quot;)
+fig, ax = plt.subplots(1, 2, figsize=(14, 3.5))
+plot_acf(y_ts.diff().dropna(), lags=24, ax=ax[0]); plot_pacf(y_ts.diff().dropna(), lags=24, ax=ax[1], method=&quot;ywm&quot;); plt.tight_layout(); plt.show()</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-32.png" alt="Figure 32: 11. Time series — monthly US crash counts" loading="lazy"><figcaption>Figure 32</figcaption></figure><figure class="nb-figure"><img src="/assets/notebook/fig-33.png" alt="Figure 33: 11. Time series — monthly US crash counts" loading="lazy"><figcaption>Figure 33</figcaption></figure><pre class="nb-stream">ADF test on level           : stat   -0.93, p-value 0.7774 -&gt; NON-stationary
+ADF test on first difference: stat   -4.82, p-value 0.0000 -&gt; stationary
+</pre><figure class="nb-figure"><img src="/assets/notebook/fig-34.png" alt="Figure 34: 11. Time series — monthly US crash counts" loading="lazy"><figcaption>Figure 34</figcaption></figure></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 28 lines</summary><pre><code>H = 12
+train_ts, test_ts = y_ts[:-H], y_ts[-H:]
+LAGS = [1, 2, 3, 6, 12]
+def f_naive(s, h): return np.repeat(s.iloc[-1], h)
+def f_snaive(s, h): return s.iloc[-12:].to_numpy()[:h]
+def f_ma(s, h): return np.repeat(s.iloc[-3:].mean(), h)
+def f_hw(s, h): return ExponentialSmoothing(s, trend=&quot;add&quot;, damped_trend=True, seasonal=&quot;add&quot;, seasonal_periods=12).fit().forecast(h).to_numpy()
+def f_sarima(s, h): return SARIMAX(s, order=(1, 1, 1), seasonal_order=(0, 1, 1, 12)).fit(disp=False).forecast(h).to_numpy()
+def f_gbm(s, h):
+    v, mo = list(s.to_numpy(float)), list(s.index.month)
+    X = [[v[t - l] for l in LAGS] + [np.sin(2 * np.pi * mo[t] / 12), np.cos(2 * np.pi * mo[t] / 12)] for t in range(12, len(v))]
+    m = GradientBoostingRegressor(n_estimators=300, max_depth=2, learning_rate=0.05, random_state=SEED).fit(X, v[12:])
+    out = []
+    for i in range(h):   # recursive multi-step: feed predictions back as lags
+        mon = (s.index[-1] + pd.DateOffset(months=i + 1)).month
+        out.append(m.predict([[v[-l] for l in LAGS] + [np.sin(2 * np.pi * mon / 12), np.cos(2 * np.pi * mon / 12)]])[0]); v.append(out[-1])
+    return np.array(out)
+FC = {&quot;Naive (last value)&quot;: f_naive, &quot;Seasonal naive&quot;: f_snaive, &quot;Moving average (3)&quot;: f_ma, &quot;Holt-Winters (damped)&quot;: f_hw,
+      &quot;SARIMA(1,1,1)(0,1,1)12&quot;: f_sarima, &quot;Gradient boosting on lags&quot;: f_gbm}
+def fc_metrics(y, p): return {&quot;MAE&quot;: M.mean_absolute_error(y, p), &quot;RMSE&quot;: M.root_mean_squared_error(y, p), &quot;MAPE_%&quot;: 100 * M.mean_absolute_percentage_error(y, p)}
+
+tscv = TimeSeriesSplit(n_splits=5, test_size=6)
+fig, ax = plt.subplots(figsize=(12, 2.6))
+for i, (a, b) in enumerate(tscv.split(train_ts)):
+    ax.barh(i, len(a), color=BLUE); ax.barh(i, len(b), left=len(a), color=RED)
+ax.set(title=&quot;Rolling-origin CV (TimeSeriesSplit): blue = train, red = validate (6 months)&quot;, xlabel=&quot;month index&quot;, yticks=range(5), yticklabels=[f&quot;fold {i + 1}&quot; for i in range(5)]); plt.show()
+cv_ts = {n: pd.DataFrame([fc_metrics(train_ts.iloc[b], f(train_ts.iloc[a], len(b))) for a, b in tscv.split(train_ts)]).agg([&quot;mean&quot;, &quot;std&quot;]) for n, f in FC.items()}
+display(pd.DataFrame({n: {k: f&quot;{d.loc[&#x27;mean&#x27;, k]:,.0f} ± {d.loc[&#x27;std&#x27;, k]:,.0f}&quot; if k != &quot;MAPE_%&quot; else f&quot;{d.loc[&#x27;mean&#x27;, k]:.1f} ± {d.loc[&#x27;std&#x27;, k]:.1f}&quot; for k in d} for n, d in cv_ts.items()}).T)</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-35.png" alt="Figure 35: 11. Time series — monthly US crash counts" loading="lazy"><figcaption>Figure 35</figcaption></figure><pre class="nb-stream">/Users/smohanty13/Downloads/Temp/878_proj/.venv/lib/python3.14/site-packages/statsmodels/tsa/statespace/sarimax.py:1022: EstimationWarning: Too few observations to estimate starting parameters for seasonal ARMA. All parameters except for variances will be set to zeros.
+  self._conditional_sum_squares(
+/Users/smohanty13/Downloads/Temp/878_proj/.venv/lib/python3.14/site-packages/statsmodels/tsa/statespace/sarimax.py:1022: EstimationWarning: Too few observations to estimate starting parameters for seasonal ARMA. All parameters except for variances will be set to zeros.
+  self._conditional_sum_squares(
+/Users/smohanty13/Downloads/Temp/878_proj/.venv/lib/python3.14/site-packages/statsmodels/tsa/statespace/mlemodel.py:679: EstimationWarning: Non-invertible starting seasonal moving average Using zeros as starting parameters.
+  start_params = self.start_params
+</pre><pre class="nb-stream">/Users/smohanty13/Downloads/Temp/878_proj/.venv/lib/python3.14/site-packages/statsmodels/tsa/statespace/mlemodel.py:679: EstimationWarning: Non-invertible starting seasonal moving average Using zeros as starting parameters.
+  start_params = self.start_params
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MAE</th>
+      <th>RMSE</th>
+      <th>MAPE_%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Naive (last value)</th>
+      <td>45,411 ± 37,563</td>
+      <td>49,933 ± 37,183</td>
+      <td>41.8 ± 22.7</td>
+    </tr>
+    <tr>
+      <th>Seasonal naive</th>
+      <td>29,453 ± 16,368</td>
+      <td>35,866 ± 19,613</td>
+      <td>27.8 ± 14.5</td>
+    </tr>
+    <tr>
+      <th>Moving average (3)</th>
+      <td>43,676 ± 28,337</td>
+      <td>48,506 ± 28,006</td>
+      <td>42.1 ± 19.1</td>
+    </tr>
+    <tr>
+      <th>Holt-Winters (damped)</th>
+      <td>41,791 ± 35,495</td>
+      <td>46,036 ± 35,819</td>
+      <td>39.9 ± 24.0</td>
+    </tr>
+    <tr>
+      <th>SARIMA(1,1,1)(0,1,1)12</th>
+      <td>31,437 ± 23,881</td>
+      <td>36,757 ± 24,502</td>
+      <td>32.9 ± 20.4</td>
+    </tr>
+    <tr>
+      <th>Gradient boosting on lags</th>
+      <td>32,091 ± 20,277</td>
+      <td>36,550 ± 20,674</td>
+      <td>34.1 ± 19.9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 15 lines</summary><pre><code>fc = {n: f(train_ts, H) for n, f in FC.items()}
+test_ts_tbl = pd.DataFrame({n: fc_metrics(test_ts, p) for n, p in fc.items()}).T
+display(test_ts_tbl.round(1).style.highlight_min(color=&quot;#cfe0f5&quot;).format(&quot;{:,.1f}&quot;))
+sar = SARIMAX(train_ts, order=(1, 1, 1), seasonal_order=(0, 1, 1, 12)).fit(disp=False)
+ci = sar.get_forecast(H).conf_int()
+fig, ax = plt.subplots(figsize=(13, 4.5))
+y_ts[&quot;2020&quot;:].plot(ax=ax, color=&quot;k&quot;, lw=2, label=&quot;actual&quot;)
+for n, p in fc.items():
+    ax.plot(test_ts.index, p, marker=&quot;o&quot;, ms=3, label=n)
+ax.fill_between(test_ts.index, ci.iloc[:, 0], ci.iloc[:, 1], color=GREY, alpha=0.2, label=&quot;SARIMA 95% interval&quot;)
+ax.axvline(test_ts.index[0], ls=&quot;--&quot;, color=GREY); ax.set(title=&quot;12-month forecasts vs actual (test: Mar 2022 – Feb 2023)&quot;, ylabel=&quot;crashes&quot;); ax.legend(fontsize=7, ncol=2); plt.show()
+fig = sar.plot_diagnostics(figsize=(13, 7)); fig.suptitle(&quot;SARIMA residual diagnostics&quot;, y=1.01); plt.show()
+best_ts = test_ts_tbl.MAE.idxmin()
+SUMMARY.append({&quot;task&quot;: &quot;Time series (monthly count)&quot;, &quot;best model&quot;: best_ts, &quot;key metric&quot;: &quot;MAE (12-month test)&quot;, &quot;value&quot;: test_ts_tbl.loc[best_ts, &quot;MAE&quot;],
+                &quot;baseline&quot;: test_ts_tbl.loc[&quot;Seasonal naive&quot;, &quot;MAE&quot;], &quot;other&quot;: f&quot;MAPE {test_ts_tbl.loc[best_ts, &#x27;MAPE_%&#x27;]:.1f}% (seasonal naive {test_ts_tbl.loc[&#x27;Seasonal naive&#x27;, &#x27;MAPE_%&#x27;]:.1f}%)&quot;})</code></pre></details><pre class="nb-stream">/Users/smohanty13/Downloads/Temp/878_proj/.venv/lib/python3.14/site-packages/statsmodels/tsa/statespace/mlemodel.py:679: EstimationWarning: Non-stationary starting autoregressive parameters found. Using zeros as starting parameters.
+  start_params = self.start_params
+/Users/smohanty13/Downloads/Temp/878_proj/.venv/lib/python3.14/site-packages/statsmodels/tsa/statespace/mlemodel.py:679: EstimationWarning: Non-invertible starting MA parameters found. Using zeros as starting parameters.
+  start_params = self.start_params
+</pre><div class="nb-table"><style type="text/css">
+#T_96f1f_row2_col1, #T_96f1f_row2_col2, #T_96f1f_row3_col0 {
+  background-color: #cfe0f5;
+}
+</style>
+<table id="T_96f1f">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_96f1f_level0_col0" class="col_heading level0 col0" >MAE</th>
+      <th id="T_96f1f_level0_col1" class="col_heading level0 col1" >RMSE</th>
+      <th id="T_96f1f_level0_col2" class="col_heading level0 col2" >MAPE_%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_96f1f_level0_row0" class="row_heading level0 row0" >Naive (last value)</th>
+      <td id="T_96f1f_row0_col0" class="data row0 col0" >33,715.8</td>
+      <td id="T_96f1f_row0_col1" class="data row0 col1" >44,578.6</td>
+      <td id="T_96f1f_row0_col2" class="data row0 col2" >36.0</td>
+    </tr>
+    <tr>
+      <th id="T_96f1f_level0_row1" class="row_heading level0 row1" >Seasonal naive</th>
+      <td id="T_96f1f_row1_col0" class="data row1 col0" >39,830.8</td>
+      <td id="T_96f1f_row1_col1" class="data row1 col1" >52,468.5</td>
+      <td id="T_96f1f_row1_col2" class="data row1 col2" >37.4</td>
+    </tr>
+    <tr>
+      <th id="T_96f1f_level0_row2" class="row_heading level0 row2" >Moving average (3)</th>
+      <td id="T_96f1f_row2_col0" class="data row2 col0" >31,342.5</td>
+      <td id="T_96f1f_row2_col1" class="data row2 col1" >42,662.7</td>
+      <td id="T_96f1f_row2_col2" class="data row2 col2" >33.8</td>
+    </tr>
+    <tr>
+      <th id="T_96f1f_level0_row3" class="row_heading level0 row3" >Holt-Winters (damped)</th>
+      <td id="T_96f1f_row3_col0" class="data row3 col0" >30,244.8</td>
+      <td id="T_96f1f_row3_col1" class="data row3 col1" >46,114.3</td>
+      <td id="T_96f1f_row3_col2" class="data row3 col2" >34.4</td>
+    </tr>
+    <tr>
+      <th id="T_96f1f_level0_row4" class="row_heading level0 row4" >SARIMA(1,1,1)(0,1,1)12</th>
+      <td id="T_96f1f_row4_col0" class="data row4 col0" >36,596.6</td>
+      <td id="T_96f1f_row4_col1" class="data row4 col1" >50,535.9</td>
+      <td id="T_96f1f_row4_col2" class="data row4 col2" >38.6</td>
+    </tr>
+    <tr>
+      <th id="T_96f1f_level0_row5" class="row_heading level0 row5" >Gradient boosting on lags</th>
+      <td id="T_96f1f_row5_col0" class="data row5 col0" >35,164.0</td>
+      <td id="T_96f1f_row5_col1" class="data row5 col1" >47,011.5</td>
+      <td id="T_96f1f_row5_col2" class="data row5 col2" >34.9</td>
+    </tr>
+  </tbody>
+</table>
+</div><pre class="nb-stream">/Users/smohanty13/Downloads/Temp/878_proj/.venv/lib/python3.14/site-packages/statsmodels/tsa/statespace/mlemodel.py:679: EstimationWarning: Non-stationary starting autoregressive parameters found. Using zeros as starting parameters.
+  start_params = self.start_params
+/Users/smohanty13/Downloads/Temp/878_proj/.venv/lib/python3.14/site-packages/statsmodels/tsa/statespace/mlemodel.py:679: EstimationWarning: Non-invertible starting MA parameters found. Using zeros as starting parameters.
+  start_params = self.start_params
+</pre><figure class="nb-figure"><img src="/assets/notebook/fig-36.png" alt="Figure 36: 11. Time series — monthly US crash counts" loading="lazy"><figcaption>Figure 36</figcaption></figure><figure class="nb-figure"><img src="/assets/notebook/fig-37.png" alt="Figure 37: 11. Time series — monthly US crash counts" loading="lazy"><figcaption>Figure 37</figcaption></figure></div>
+<div class="nb-markdown"><h2 id="clustering-what-types-of-crashes-are-there">12. Clustering — what types of crashes are there?</h2>
+<p>Features: time of day, light, weekend, weather, road features, severity and delay. Imputed, winsorized and <strong>standardized</strong> (essential: k-means uses Euclidean distance). 6,000 crashes sampled.</p></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 16 lines</summary><pre><code>CL_FEATS = [&quot;hour_sin&quot;, &quot;hour_cos&quot;, &quot;is_night&quot;, &quot;is_weekend&quot;, &quot;Temperature(F)&quot;, &quot;Visibility(mi)&quot;, &quot;Precipitation(in)&quot;, &quot;Wind_Speed(mph)&quot;,
+            &quot;Junction&quot;, &quot;Traffic_Signal&quot;, &quot;Crossing&quot;, &quot;Stop&quot;, &quot;log_duration&quot;, &quot;Severity&quot;]
+wx = pd.get_dummies(df.weather_group, prefix=&quot;wx&quot;).astype(int)[[&quot;wx_rain&quot;, &quot;wx_snow&quot;, &quot;wx_fog&quot;, &quot;wx_clear&quot;, &quot;wx_cloudy&quot;]]
+Craw = pd.concat([df[CL_FEATS], wx], axis=1).sample(6000, random_state=SEED)
+Craw = Craw.fillna(Craw.median())
+Zc = StandardScaler().fit_transform(Clipper().fit_transform(Craw))
+ks = range(2, 11)
+km_fits = {k: KMeans(k, n_init=10, random_state=SEED).fit(Zc) for k in ks}
+el = pd.DataFrame({&quot;inertia&quot;: [km_fits[k].inertia_ for k in ks], &quot;silhouette&quot;: [M.silhouette_score(Zc, km_fits[k].labels_) for k in ks],
+                   &quot;davies_bouldin&quot;: [M.davies_bouldin_score(Zc, km_fits[k].labels_) for k in ks]}, index=ks)
+K_BEST = int(el.loc[3:8, &quot;silhouette&quot;].idxmax())
+fig, ax = plt.subplots(1, 3, figsize=(17, 3.8))
+el.inertia.plot(ax=ax[0], marker=&quot;o&quot;, title=&quot;Elbow: inertia vs k&quot;); el.silhouette.plot(ax=ax[1], marker=&quot;o&quot;, color=RED, title=&quot;Silhouette vs k (higher better)&quot;)
+el.davies_bouldin.plot(ax=ax[2], marker=&quot;o&quot;, color=GREY, title=&quot;Davies–Bouldin vs k (lower better)&quot;)
+for a in ax: a.axvline(K_BEST, ls=&quot;--&quot;, color=&quot;k&quot;)
+plt.tight_layout(); plt.show(); print(&quot;chosen k =&quot;, K_BEST)</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-38.png" alt="Figure 38: 12. Clustering — what types of crashes are there?" loading="lazy"><figcaption>Figure 38</figcaption></figure><pre class="nb-stream">chosen k = 8
+</pre></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 18 lines</summary><pre><code>knn_d = np.sort(NearestNeighbors(n_neighbors=20).fit(Zc).kneighbors(Zc)[0][:, -1])
+EPS = float(np.quantile(knn_d, 0.90))
+plt.figure(figsize=(8, 3)); plt.plot(knn_d, color=BLUE); plt.axhline(EPS, ls=&quot;--&quot;, color=&quot;k&quot;, label=f&quot;eps = {EPS:.2f} (90th pct)&quot;)
+plt.title(&quot;DBSCAN k-distance plot (k=20)&quot;); plt.ylabel(&quot;distance to 20th neighbour&quot;); plt.legend(); plt.show()
+ALGOS = {&quot;K-means&quot;: KMeans(K_BEST, n_init=10, random_state=SEED), &quot;Mini-batch k-means&quot;: MiniBatchKMeans(K_BEST, n_init=10, random_state=SEED),
+         &quot;Gaussian mixture&quot;: GaussianMixture(K_BEST, covariance_type=&quot;full&quot;, random_state=SEED), &quot;Agglomerative (Ward)&quot;: AgglomerativeClustering(K_BEST),
+         &quot;BIRCH&quot;: Birch(n_clusters=K_BEST), &quot;DBSCAN&quot;: DBSCAN(eps=EPS, min_samples=20)}
+labels, rows = {}, {}
+for n, a in ALGOS.items():
+    lab = a.fit_predict(Zc); labels[n] = lab; keep = lab != -1
+    ok = len(set(lab[keep])) &gt; 1
+    rows[n] = {&quot;clusters&quot;: len(set(lab[keep])), &quot;noise_%&quot;: 100 * (~keep).mean(),
+               &quot;silhouette&quot;: M.silhouette_score(Zc[keep], lab[keep]) if ok else np.nan,
+               &quot;davies_bouldin&quot;: M.davies_bouldin_score(Zc[keep], lab[keep]) if ok else np.nan,
+               &quot;calinski_harabasz&quot;: M.calinski_harabasz_score(Zc[keep], lab[keep]) if ok else np.nan}
+cl_tbl = pd.DataFrame(rows).T
+display(cl_tbl.round(3))
+print(&quot;Agreement with k-means (adjusted Rand index):&quot;, {n: round(M.adjusted_rand_score(labels[&quot;K-means&quot;], l), 3) for n, l in labels.items() if n != &quot;K-means&quot;})</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-39.png" alt="Figure 39: 12. Clustering — what types of crashes are there?" loading="lazy"><figcaption>Figure 39</figcaption></figure><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>clusters</th>
+      <th>noise_%</th>
+      <th>silhouette</th>
+      <th>davies_bouldin</th>
+      <th>calinski_harabasz</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>K-means</th>
+      <td>8.0</td>
+      <td>0.000</td>
+      <td>0.177</td>
+      <td>1.499</td>
+      <td>695.248</td>
+    </tr>
+    <tr>
+      <th>Mini-batch k-means</th>
+      <td>8.0</td>
+      <td>0.000</td>
+      <td>0.152</td>
+      <td>1.765</td>
+      <td>590.125</td>
+    </tr>
+    <tr>
+      <th>Gaussian mixture</th>
+      <td>8.0</td>
+      <td>0.000</td>
+      <td>0.134</td>
+      <td>2.224</td>
+      <td>560.577</td>
+    </tr>
+    <tr>
+      <th>Agglomerative (Ward)</th>
+      <td>8.0</td>
+      <td>0.000</td>
+      <td>0.183</td>
+      <td>1.520</td>
+      <td>658.096</td>
+    </tr>
+    <tr>
+      <th>BIRCH</th>
+      <td>8.0</td>
+      <td>0.000</td>
+      <td>0.174</td>
+      <td>1.539</td>
+      <td>587.551</td>
+    </tr>
+    <tr>
+      <th>DBSCAN</th>
+      <td>6.0</td>
+      <td>3.033</td>
+      <td>0.245</td>
+      <td>1.269</td>
+      <td>500.351</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><pre class="nb-stream">Agreement with k-means (adjusted Rand index): {&#x27;Mini-batch k-means&#x27;: 0.596, &#x27;Gaussian mixture&#x27;: 0.712, &#x27;Agglomerative (Ward)&#x27;: 0.557, &#x27;BIRCH&#x27;: 0.303, &#x27;DBSCAN&#x27;: 0.198}
+</pre></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 12 lines</summary><pre><code>pca = PCA(random_state=SEED).fit(Zc); P2 = pca.transform(Zc)[:, :2]
+ts_idx = rng.choice(len(Zc), 3000, replace=False)
+T2 = TSNE(2, perplexity=40, random_state=SEED, init=&quot;pca&quot;).fit_transform(Zc[ts_idx])
+lab = labels[&quot;K-means&quot;]; cmap = plt.get_cmap(&quot;tab10&quot;)
+fig, ax = plt.subplots(1, 3, figsize=(18, 5))
+ax[0].plot(range(1, len(pca.explained_variance_ratio_) + 1), np.cumsum(pca.explained_variance_ratio_), &quot;o-&quot;); ax[0].axhline(0.8, ls=&quot;--&quot;, color=GREY)
+ax[0].set(title=&quot;PCA cumulative explained variance&quot;, xlabel=&quot;components&quot;, ylabel=&quot;variance explained&quot;)
+for c in range(K_BEST):
+    ax[1].scatter(P2[lab == c, 0], P2[lab == c, 1], s=3, alpha=0.5, color=cmap(c), label=f&quot;cluster {c}&quot;)
+    ax[2].scatter(T2[lab[ts_idx] == c, 0], T2[lab[ts_idx] == c, 1], s=3, alpha=0.6, color=cmap(c))
+ax[1].set(title=f&quot;K-means clusters in PCA space ({pca.explained_variance_ratio_[:2].sum():.0%} variance)&quot;, xlabel=&quot;PC1&quot;, ylabel=&quot;PC2&quot;); ax[1].legend(markerscale=4, fontsize=7)
+ax[2].set(title=&quot;Same clusters in t-SNE space (3,000 crashes)&quot;); plt.tight_layout(); plt.show()</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-40.png" alt="Figure 40: 12. Clustering — what types of crashes are there?" loading="lazy"><figcaption>Figure 40</figcaption></figure></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 18 lines</summary><pre><code>from scipy.cluster.hierarchy import linkage, dendrogram
+plt.figure(figsize=(13, 3.8)); dendrogram(linkage(Zc[rng.choice(len(Zc), 400, replace=False)], &quot;ward&quot;), truncate_mode=&quot;lastp&quot;, p=30, color_threshold=None)
+plt.title(&quot;Hierarchical clustering dendrogram (Ward, 400 crashes, last 30 merges)&quot;); plt.ylabel(&quot;distance&quot;); plt.show()
+prof_z = pd.DataFrame(Zc, columns=Craw.columns).groupby(lab).mean()
+prof = Craw.assign(cluster=lab).groupby(&quot;cluster&quot;).agg(size=(&quot;Severity&quot;, &quot;size&quot;), severe_rate=(&quot;Severity&quot;, lambda s: (s &gt;= 3).mean()),
+                                                         median_delay_min=(&quot;log_duration&quot;, lambda s: np.expm1(s.median())), night_share=(&quot;is_night&quot;, &quot;mean&quot;))
+prof[&quot;share&quot;] = prof[&quot;size&quot;] / prof[&quot;size&quot;].sum()
+prof[&quot;name&quot;] = [&quot; + &quot;.join(f&quot;{&#x27;high&#x27; if prof_z.loc[c, f] &gt; 0 else &#x27;low&#x27;} {f.split(&#x27;(&#x27;)[0].replace(&#x27;wx_&#x27;, &#x27;&#x27;)}&quot; for f in prof_z.loc[c].abs().nlargest(2).index) for c in prof.index]
+display(prof.round(3))
+fig, ax = plt.subplots(figsize=(15, 4.2))
+im = ax.imshow(prof_z, cmap=&quot;RdBu_r&quot;, vmin=-2, vmax=2, aspect=&quot;auto&quot;)
+ax.set_xticks(range(prof_z.shape[1]), [c.split(&quot;(&quot;)[0] for c in prof_z.columns], rotation=45, ha=&quot;right&quot;); ax.set_yticks(range(K_BEST), [f&quot;cluster {c}&quot; for c in prof_z.index])
+for i in range(prof_z.shape[0]):
+    for j in range(prof_z.shape[1]):
+        ax.text(j, i, f&quot;{prof_z.iat[i, j]:.1f}&quot;, ha=&quot;center&quot;, va=&quot;center&quot;, fontsize=7)
+plt.colorbar(im, label=&quot;standardized mean&quot;); ax.set_title(&quot;Cluster profiles (red = above average)&quot;); ax.grid(False); plt.tight_layout(); plt.show()
+SUMMARY.append({&quot;task&quot;: &quot;Clustering (crash types)&quot;, &quot;best model&quot;: cl_tbl.silhouette.idxmax(), &quot;key metric&quot;: &quot;silhouette&quot;, &quot;value&quot;: cl_tbl.silhouette.max(),
+                &quot;baseline&quot;: np.nan, &quot;other&quot;: f&quot;k = {K_BEST}; k-means silhouette {cl_tbl.loc[&#x27;K-means&#x27;, &#x27;silhouette&#x27;]:.3f}&quot;})</code></pre></details><figure class="nb-figure"><img src="/assets/notebook/fig-41.png" alt="Figure 41: 12. Clustering — what types of crashes are there?" loading="lazy"><figcaption>Figure 41</figcaption></figure><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>size</th>
+      <th>severe_rate</th>
+      <th>median_delay_min</th>
+      <th>night_share</th>
+      <th>share</th>
+      <th>name</th>
+    </tr>
+    <tr>
+      <th>cluster</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1425</td>
+      <td>0.243</td>
+      <td>60.000</td>
+      <td>0.005</td>
+      <td>0.238</td>
+      <td>high cloudy + low clear</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>630</td>
+      <td>0.051</td>
+      <td>60.042</td>
+      <td>0.227</td>
+      <td>0.105</td>
+      <td>high Crossing + high Traffic_Signal</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1562</td>
+      <td>0.157</td>
+      <td>75.075</td>
+      <td>0.001</td>
+      <td>0.260</td>
+      <td>high clear + low cloudy</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>434</td>
+      <td>0.217</td>
+      <td>59.950</td>
+      <td>0.281</td>
+      <td>0.072</td>
+      <td>high rain + high Precipitation</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>126</td>
+      <td>0.190</td>
+      <td>79.258</td>
+      <td>0.437</td>
+      <td>0.021</td>
+      <td>high snow + low Visibility</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>367</td>
+      <td>0.248</td>
+      <td>78.000</td>
+      <td>0.376</td>
+      <td>0.061</td>
+      <td>high Junction + low Traffic_Signal</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>155</td>
+      <td>0.174</td>
+      <td>76.833</td>
+      <td>0.400</td>
+      <td>0.026</td>
+      <td>high fog + low Visibility</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1301</td>
+      <td>0.210</td>
+      <td>77.950</td>
+      <td>1.000</td>
+      <td>0.217</td>
+      <td>high is_night + high hour_cos</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-42.png" alt="Figure 42: 12. Clustering — what types of crashes are there?" loading="lazy"><figcaption>Figure 42</figcaption></figure></div>
+<div class="nb-markdown"><h3 id="spatial-clustering-crash-hotspots-in-the-omaha-metro-dbscan-haversine-distance-150-m-radius">12.1 Spatial clustering — crash hotspots in the Omaha metro (DBSCAN, haversine distance, 150 m radius)</h3></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 17 lines</summary><pre><code>metro = pd.read_parquet(&quot;data/processed/metro.parquet&quot;)
+om = clean(metro[metro.City.isin([&quot;Omaha&quot;, &quot;Bellevue&quot;, &quot;Papillion&quot;, &quot;La Vista&quot;, &quot;Council Bluffs&quot;])])
+db = DBSCAN(eps=0.15 / 6371.0, min_samples=30, metric=&quot;haversine&quot;, algorithm=&quot;ball_tree&quot;).fit(np.radians(om[[&quot;Start_Lat&quot;, &quot;Start_Lng&quot;]]))
+om = om.assign(hotspot=db.labels_)
+hs = (om[om.hotspot &gt;= 0].groupby(&quot;hotspot&quot;).agg(crashes=(&quot;Severity&quot;, &quot;size&quot;), lat=(&quot;Start_Lat&quot;, &quot;mean&quot;), lng=(&quot;Start_Lng&quot;, &quot;mean&quot;),
+                                                 severe_rate=(&quot;is_severe&quot;, &quot;mean&quot;), median_delay_min=(&quot;duration_min&quot;, &quot;median&quot;))
+      .sort_values(&quot;crashes&quot;, ascending=False))
+print(f&quot;{len(om):,} Omaha-area crashes -&gt; {len(hs)} hotspots holding {(om.hotspot &gt;= 0).mean():.1%} of crashes&quot;)
+display(hs.head(10).round(4))
+fig, ax = plt.subplots(figsize=(10, 8))
+ax.scatter(om.Start_Lng, om.Start_Lat, s=1, color=&quot;#dddddd&quot;, label=&quot;crash (not in hotspot)&quot;)
+big = hs.head(25).index
+inh = om[om.hotspot.isin(big)]
+sc = ax.scatter(inh.Start_Lng, inh.Start_Lat, s=3, c=inh.hotspot.map(hs.severe_rate), cmap=&quot;RdYlBu_r&quot;)
+for r, (h, row) in enumerate(hs.head(10).iterrows()):
+    ax.annotate(str(r + 1), (row.lng, row.lat), fontsize=9, weight=&quot;bold&quot;)
+plt.colorbar(sc, label=&quot;hotspot severe rate&quot;); ax.set(title=&quot;Top 25 DBSCAN hotspots (numbers = top 10 by volume)&quot;, xlabel=&quot;longitude&quot;, ylabel=&quot;latitude&quot;); plt.show()</code></pre></details><pre class="nb-stream">26,192 Omaha-area crashes -&gt; 179 hotspots holding 50.8% of crashes
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crashes</th>
+      <th>lat</th>
+      <th>lng</th>
+      <th>severe_rate</th>
+      <th>median_delay_min</th>
+    </tr>
+    <tr>
+      <th>hotspot</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>627</td>
+      <td>41.2267</td>
+      <td>-95.9570</td>
+      <td>0.4848</td>
+      <td>59.1000</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>480</td>
+      <td>41.2240</td>
+      <td>-96.0429</td>
+      <td>0.8312</td>
+      <td>44.5500</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>419</td>
+      <td>41.2245</td>
+      <td>-95.9763</td>
+      <td>0.7709</td>
+      <td>44.3167</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>418</td>
+      <td>41.2238</td>
+      <td>-96.0044</td>
+      <td>0.8206</td>
+      <td>44.5083</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>328</td>
+      <td>41.2239</td>
+      <td>-96.0240</td>
+      <td>0.7470</td>
+      <td>44.3583</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>327</td>
+      <td>41.2585</td>
+      <td>-95.9555</td>
+      <td>0.1315</td>
+      <td>44.3500</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>257</td>
+      <td>41.2386</td>
+      <td>-95.9539</td>
+      <td>0.6265</td>
+      <td>44.6000</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>255</td>
+      <td>41.2634</td>
+      <td>-96.0762</td>
+      <td>0.6157</td>
+      <td>44.4667</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>210</td>
+      <td>41.2118</td>
+      <td>-95.9495</td>
+      <td>0.0429</td>
+      <td>44.5250</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>186</td>
+      <td>41.2488</td>
+      <td>-96.0846</td>
+      <td>0.7957</td>
+      <td>44.5833</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><figure class="nb-figure"><img src="/assets/notebook/fig-43.png" alt="Figure 43: 12.1 Spatial clustering — crash hotspots in the Omaha metro (DBSCAN, haversine distance, 150 m radius)" loading="lazy"><figcaption>Figure 43</figcaption></figure></div>
+<div class="nb-markdown"><h2 id="final-summary">13. Final summary</h2></div>
+<div class="nb-cell"><details class="nb-code"><summary>Code · 5 lines</summary><pre><code>display(pd.DataFrame(SUMMARY).set_index(&quot;task&quot;).round(3))
+print(&quot;Classification test table:&quot;); display(test_cls[[&quot;balanced_acc&quot;, &quot;f1_macro&quot;, &quot;roc_auc&quot;, &quot;pr_auc&quot;, &quot;log_loss&quot;]].round(3))
+print(&quot;Regression test table:&quot;); display(test_reg.round(3))
+print(&quot;Forecasting test table:&quot;); display(test_ts_tbl.round(1))
+print(&quot;Clustering table:&quot;); display(cl_tbl.round(3))</code></pre></details><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>best model</th>
+      <th>key metric</th>
+      <th>value</th>
+      <th>baseline</th>
+      <th>other</th>
+    </tr>
+    <tr>
+      <th>task</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Classification (severe vs not)</th>
+      <td>HGB tuned</td>
+      <td>ROC-AUC (future test)</td>
+      <td>0.856</td>
+      <td>0.500</td>
+      <td>macro F1 0.730 @thr 0.28</td>
+    </tr>
+    <tr>
+      <th>Regression (delay)</th>
+      <td>Gradient boosting (HGB)</td>
+      <td>R² log (future test)</td>
+      <td>0.112</td>
+      <td>-0.087</td>
+      <td>MAE 61.6 min vs 67.5; 80% PI coverage 79.0%</td>
+    </tr>
+    <tr>
+      <th>Time series (monthly count)</th>
+      <td>Holt-Winters (damped)</td>
+      <td>MAE (12-month test)</td>
+      <td>30244.781</td>
+      <td>39830.833</td>
+      <td>MAPE 34.4% (seasonal naive 37.4%)</td>
+    </tr>
+    <tr>
+      <th>Clustering (crash types)</th>
+      <td>DBSCAN</td>
+      <td>silhouette</td>
+      <td>0.245</td>
+      <td>NaN</td>
+      <td>k = 8; k-means silhouette 0.177</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><pre class="nb-stream">Classification test table:
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>balanced_acc</th>
+      <th>f1_macro</th>
+      <th>roc_auc</th>
+      <th>pr_auc</th>
+      <th>log_loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Dummy (majority class)</th>
+      <td>0.500</td>
+      <td>0.485</td>
+      <td>0.500</td>
+      <td>0.058</td>
+      <td>0.807</td>
+    </tr>
+    <tr>
+      <th>Logistic regression</th>
+      <td>0.504</td>
+      <td>0.493</td>
+      <td>0.755</td>
+      <td>0.335</td>
+      <td>0.195</td>
+    </tr>
+    <tr>
+      <th>Gaussian naive Bayes</th>
+      <td>0.590</td>
+      <td>0.384</td>
+      <td>0.646</td>
+      <td>0.133</td>
+      <td>2.357</td>
+    </tr>
+    <tr>
+      <th>k-nearest neighbours (k=25)</th>
+      <td>0.519</td>
+      <td>0.523</td>
+      <td>0.751</td>
+      <td>0.236</td>
+      <td>0.238</td>
+    </tr>
+    <tr>
+      <th>Decision tree</th>
+      <td>0.626</td>
+      <td>0.668</td>
+      <td>0.832</td>
+      <td>0.393</td>
+      <td>0.183</td>
+    </tr>
+    <tr>
+      <th>Random forest</th>
+      <td>0.606</td>
+      <td>0.652</td>
+      <td>0.838</td>
+      <td>0.430</td>
+      <td>0.165</td>
+    </tr>
+    <tr>
+      <th>Gradient boosting (HGB)</th>
+      <td>0.632</td>
+      <td>0.683</td>
+      <td>0.854</td>
+      <td>0.469</td>
+      <td>0.156</td>
+    </tr>
+    <tr>
+      <th>Neural network (MLP)</th>
+      <td>0.617</td>
+      <td>0.659</td>
+      <td>0.826</td>
+      <td>0.383</td>
+      <td>0.177</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><pre class="nb-stream">Regression test table:
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MAE_log</th>
+      <th>RMSE_log</th>
+      <th>R2_log</th>
+      <th>MAE_min</th>
+      <th>MedAE_min</th>
+      <th>RMSE_min</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Dummy (mean)</th>
+      <td>0.564</td>
+      <td>0.765</td>
+      <td>-0.087</td>
+      <td>67.508</td>
+      <td>38.576</td>
+      <td>195.060</td>
+    </tr>
+    <tr>
+      <th>Linear regression</th>
+      <td>0.501</td>
+      <td>0.708</td>
+      <td>0.069</td>
+      <td>63.336</td>
+      <td>30.373</td>
+      <td>188.056</td>
+    </tr>
+    <tr>
+      <th>Ridge (L2, α=10)</th>
+      <td>0.501</td>
+      <td>0.708</td>
+      <td>0.069</td>
+      <td>63.337</td>
+      <td>30.376</td>
+      <td>188.054</td>
+    </tr>
+    <tr>
+      <th>Lasso (L1, α=0.002)</th>
+      <td>0.504</td>
+      <td>0.710</td>
+      <td>0.064</td>
+      <td>63.598</td>
+      <td>30.793</td>
+      <td>187.733</td>
+    </tr>
+    <tr>
+      <th>k-nearest neighbours (k=25)</th>
+      <td>0.535</td>
+      <td>0.738</td>
+      <td>-0.012</td>
+      <td>66.293</td>
+      <td>34.573</td>
+      <td>189.744</td>
+    </tr>
+    <tr>
+      <th>Decision tree</th>
+      <td>0.499</td>
+      <td>0.709</td>
+      <td>0.066</td>
+      <td>63.379</td>
+      <td>28.835</td>
+      <td>188.709</td>
+    </tr>
+    <tr>
+      <th>Random forest</th>
+      <td>0.488</td>
+      <td>0.696</td>
+      <td>0.099</td>
+      <td>61.974</td>
+      <td>28.184</td>
+      <td>188.040</td>
+    </tr>
+    <tr>
+      <th>Gradient boosting (HGB)</th>
+      <td>0.484</td>
+      <td>0.691</td>
+      <td>0.112</td>
+      <td>61.564</td>
+      <td>28.306</td>
+      <td>187.206</td>
+    </tr>
+    <tr>
+      <th>Neural network (MLP)</th>
+      <td>0.537</td>
+      <td>0.743</td>
+      <td>-0.027</td>
+      <td>65.574</td>
+      <td>31.099</td>
+      <td>191.718</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><pre class="nb-stream">Forecasting test table:
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MAE</th>
+      <th>RMSE</th>
+      <th>MAPE_%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Naive (last value)</th>
+      <td>33715.8</td>
+      <td>44578.6</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>Seasonal naive</th>
+      <td>39830.8</td>
+      <td>52468.5</td>
+      <td>37.4</td>
+    </tr>
+    <tr>
+      <th>Moving average (3)</th>
+      <td>31342.5</td>
+      <td>42662.7</td>
+      <td>33.8</td>
+    </tr>
+    <tr>
+      <th>Holt-Winters (damped)</th>
+      <td>30244.8</td>
+      <td>46114.3</td>
+      <td>34.4</td>
+    </tr>
+    <tr>
+      <th>SARIMA(1,1,1)(0,1,1)12</th>
+      <td>36596.6</td>
+      <td>50535.9</td>
+      <td>38.6</td>
+    </tr>
+    <tr>
+      <th>Gradient boosting on lags</th>
+      <td>35164.0</td>
+      <td>47011.5</td>
+      <td>34.9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><pre class="nb-stream">Clustering table:
+</pre><div class="nb-table"><div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>clusters</th>
+      <th>noise_%</th>
+      <th>silhouette</th>
+      <th>davies_bouldin</th>
+      <th>calinski_harabasz</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>K-means</th>
+      <td>8.0</td>
+      <td>0.000</td>
+      <td>0.177</td>
+      <td>1.499</td>
+      <td>695.248</td>
+    </tr>
+    <tr>
+      <th>Mini-batch k-means</th>
+      <td>8.0</td>
+      <td>0.000</td>
+      <td>0.152</td>
+      <td>1.765</td>
+      <td>590.125</td>
+    </tr>
+    <tr>
+      <th>Gaussian mixture</th>
+      <td>8.0</td>
+      <td>0.000</td>
+      <td>0.134</td>
+      <td>2.224</td>
+      <td>560.577</td>
+    </tr>
+    <tr>
+      <th>Agglomerative (Ward)</th>
+      <td>8.0</td>
+      <td>0.000</td>
+      <td>0.183</td>
+      <td>1.520</td>
+      <td>658.096</td>
+    </tr>
+    <tr>
+      <th>BIRCH</th>
+      <td>8.0</td>
+      <td>0.000</td>
+      <td>0.174</td>
+      <td>1.539</td>
+      <td>587.551</td>
+    </tr>
+    <tr>
+      <th>DBSCAN</th>
+      <td>6.0</td>
+      <td>3.033</td>
+      <td>0.245</td>
+      <td>1.269</td>
+      <td>500.351</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+<div class="nb-markdown"><p><strong>Takeaways</strong>
+- <strong>Severity</strong> is predictable well above chance from time, weather, road features, location and reporting source; gradient boosting is the strongest family, and tuning + a CV-chosen threshold improve the severe-class F1. The temporal test is clearly harder than a random split because severity labelling and coverage drift over time.
+- <strong>Delay duration</strong> is only partly predictable (heavy-tailed, driven by unrecorded incident details); tree ensembles beat linear models, and quantile boosting gives calibrated 80% intervals.
+- <strong>Monthly volume</strong> has strong trend/coverage shifts; classical seasonal models (Holt-Winters / SARIMA) are compared against naive baselines with rolling-origin CV.
+- <strong>Clustering</strong> finds interpretable crash types (night, weather, intersection, long-delay groups); separation is modest (silhouette ≈ 0.1–0.25), typical for mixed tabular data.
+- <strong>Outliers</strong> were investigated, not deleted: impossible sensor values set to missing, extremes winsorized inside the pipeline only.</p></div></article></div>
+</main>
+<footer class="nb-footer"><a class="brand" href="/">GeoCrash</a><a href="/docs">API docs</a><p>Research notebook rendered from <a href="/assets/GeoCrashAI_Complete_Analysis.ipynb" download>GeoCrashAI_Complete_Analysis.ipynb</a>. Code cells are collapsed; open any “Code” row to read it.</p></footer>
+</body></html>

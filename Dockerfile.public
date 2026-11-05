@@ -8,6 +8,7 @@ COPY --chown=publicapp:publicapp web/public/ ./web/public/
 COPY --chown=publicapp:publicapp web/static/safety* ./web/static/
 COPY --chown=publicapp:publicapp web/static/tokens.css ./web/static/tokens.css
 COPY --chown=publicapp:publicapp data/public/snapshot.json ./data/public/snapshot.json
+COPY --chown=publicapp:publicapp data/public/crashes.jsonl.gz ./data/public/crashes.jsonl.gz
 COPY --chown=publicapp:publicapp data/safety/snapshot.json data/safety/advanced-benchmark.json data/safety/behavior.json ./data/safety/
 COPY --chown=publicapp:publicapp data/safety/road-geometry.json.gz ./data/safety/road-geometry.json.gz
 USER publicapp

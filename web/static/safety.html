@@ -3,88 +3,80 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Rank Nebraska road segments by fatal-crash history against traffic exposure, project future traffic and compare treatments within a budget.">
   <title>Road safety screening · GeoCrash</title>
   <link rel="stylesheet" href="safety.css">
   <script src="safety.js" defer></script>
-  <script src="safety-evidence.js" defer></script>
 </head>
 <body>
-<!-- THESIS: An analyst workbench that places exposure quality beside every screening decision.
-OWN-WORLD: Inherit GeoCrash Cobalt tokens, restrained cool paper, flush rules, compact controls.
-STORY: Choose a study area, compare segments, inspect evidence, then model an applicable treatment.
-FIRST VIEWPORT: Navigation above area controls and an exposure warning; ranked table left and inspection right.
-FORM: Precisely specified operating workflow; inherited workbench, no new visual-world seed.
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
 <a class="skip" href="#main">Skip to screening</a>
 <header class="app-header">
   <a class="wordmark" href="/">GeoCrash</a>
-  <nav aria-label="Main navigation"><a href="/">Crash explorer</a><a href="safety.html" aria-current="page">Safety screening</a><a href="models.html">Research models</a></nav>
+  <nav aria-label="Main navigation"><a href="/">Map</a><a href="/explore/">Data</a><a href="/screening/" aria-current="page">Road screening</a><a href="/notebook/">Analysis</a></nav>
 </header>
 <main id="main">
-  <div class="page-heading"><div><h1>Road safety screening</h1><p>Compare fatal-crash history against traffic exposure. Inspect the evidence before prioritizing a road.</p></div><div class="evidence-links"><a href="/planning/">Agency planning</a><a href="#model-evidence">Compare models</a><a href="#behavior">Recorded behavior factors</a><a href="#evidence">Sources &amp; readiness</a></div></div>
+  <div class="page-heading"><h1>Road safety screening</h1><p>Rank road segments by fatal-crash history against traffic exposure, check future traffic, and compare treatments within a budget.</p></div>
   <form id="area-form" class="area-bar">
     <label for="area">Study area</label>
-    <select id="area" name="area"><option value="omaha">Omaha metro</option><option value="lincoln">Lincoln metro</option><option value="nebraska">Nebraska statewide</option></select>
+    <select id="area"><option value="omaha">Omaha metro</option><option value="lincoln">Lincoln metro</option><option value="nebraska">Nebraska statewide</option></select>
     <label for="limit">Segments</label><select id="limit"><option value="100">100</option><option value="250">250</option><option value="500">500</option></select>
     <button class="primary" type="submit" id="load">Load screening</button>
-    <span class="area-note">FARS fatal crashes · experimental screening</span>
   </form>
-  <div id="dataset-notice" class="notice" role="note"><strong>Exposure vintage matters.</strong> <span id="crash-window">FARS observation years are loading.</span> AADT from a different year is a traffic-exposure proxy. Rates and expected counts inherit that uncertainty. This is not an agency-validated safety ranking.</div>
-  <p id="linkage-summary" class="coverage-note" aria-live="polite">Loading statewide crash-to-road linkage coverage…</p>
-  <div id="load-state" class="load-state" role="status" aria-live="polite">Loading the safety dataset…</div>
+  <div id="dataset-notice" class="notice" role="note">
+    <p id="notice-text"><strong>Experimental screening, not an agency-validated ranking.</strong> Loading crash years and road-matching coverage…</p>
+    <details><summary>Data caveats</summary><ul id="caveats"><li>Loading…</li></ul></details>
+  </div>
+  <div id="load-state" class="load-state" role="status" aria-live="polite">Loading road segments…</div>
   <div class="workspace">
     <section class="screening" aria-labelledby="segments-title">
       <div class="section-heading"><div><h2 id="segments-title">Road segments</h2><p id="segment-summary">Waiting for data.</p></div><button id="export" type="button" disabled>Export CSV</button></div>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Sortable road segment results">
-        <table><caption class="sr-only">Select a route to inspect its crash history and exposure. Column headings sort the results.</caption><thead><tr>
-          <th scope="col" aria-sort="none"><button data-sort="route">Road</button></th>
-          <th scope="col" aria-sort="none"><button data-sort="aadt">AADT</button></th>
-          <th scope="col" aria-sort="none"><button data-sort="observed">Fatal crashes</button></th>
-          <th scope="col" aria-sort="none"><button data-sort="rate_per_100m_vmt">Rate / 100M VMT</button></th>
-          <th scope="col" aria-sort="descending"><button data-sort="excess_annual">Excess / year</button></th>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Road segment results">
+        <table><caption class="sr-only">Select a road to inspect it. Sortable column headings reload the highest-ranked segments by that column.</caption><thead><tr>
+          <th scope="col">Road</th>
+          <th scope="col">AADT</th>
+          <th scope="col" aria-sort="none"><button type="button" data-sort="observed">Fatal crashes</button></th>
+          <th scope="col" aria-sort="none"><button type="button" data-sort="rate_per_100m_vmt">Rate / 100M VMT</button></th>
+          <th scope="col" aria-sort="descending"><button type="button" data-sort="excess_annual">Excess / year</button></th>
         </tr></thead><tbody id="segments"><tr><td colspan="5" class="empty">Loading road segments…</td></tr></tbody></table>
       </div>
-      <p class="table-note">Excess = empirical Bayes expected crashes minus the model baseline. It is a screening signal, not a causal estimate. AADT = annual average daily traffic; VMT = vehicle-miles traveled.</p>
+      <p class="table-note">Sorting loads the highest values in the whole study area, not just the rows shown. Excess = empirical Bayes expected crashes minus the model baseline, a screening signal rather than a causal estimate. AADT = annual average daily traffic; VMT = vehicle-miles traveled.</p>
     </section>
-    <aside class="inspector" aria-labelledby="detail-title"><h2 id="detail-title">Inspect a segment</h2><div id="segment-detail"><p class="muted">Select a road from the table to review its exposure, uncertainty and treatment scenario.</p></div></aside>
-  </div>
-  <section class="economics" aria-labelledby="economics-title">
-    <div class="section-heading"><div><h2 id="economics-title">Countermeasure scenario</h2><p>Estimate a treatment’s economic benefit with explicit cost and applicability assumptions.</p></div></div>
-    <form id="cost-form">
-      <div class="cost-fields">
-        <label class="treatment">Countermeasure<select id="countermeasure" required disabled><option value="">Loading catalog…</option></select></label>
-        <label>Installation cost ($)<input id="implementation-cost" type="number" min="1" step="1" value="100000" required></label>
-        <label>Annual maintenance ($)<input id="maintenance-cost" type="number" min="0" step="100" value="1000" required></label>
-        <label>Service life (years)<input id="service-life" type="number" min="1" max="100" value="10" required></label>
-        <label>Discount rate (%)<input id="discount-rate" type="number" min="0" max="25" step="0.1" value="3" required></label>
-        <label>Fatalities per fatal crash<input id="fatalities-per-crash" type="number" min="1" max="100" step="0.01" value="1" required></label>
-        <label>Eligible share of baseline (%)<input id="eligible-fraction" type="number" min="0.01" max="100" step="0.01" placeholder="Enter reviewed share" required></label>
+    <aside class="inspector" aria-labelledby="detail-title">
+      <h2 id="detail-title">Inspect a segment</h2>
+      <div id="segment-detail"><p class="muted">Select a road from the table to review its exposure and uncertainty.</p></div>
+      <div id="segment-tools" hidden>
+        <form id="projection-form" class="tool">
+          <h3>Future traffic</h3>
+          <div class="fields"><label>Target year<input id="projection-year" type="number" min="2025" max="2035" step="1" required></label><label>Future AADT<input id="projection-aadt" type="number" min="1" max="1000000" step="any" required></label></div>
+          <label>Source of the traffic assumption<textarea id="projection-note" rows="2" maxlength="1000" required placeholder="e.g. MPO 2030 travel-demand model"></textarea></label>
+          <button type="submit">Project fatal crashes</button>
+          <div id="projection-result" aria-live="polite"></div>
+        </form>
+        <form id="candidate-form" class="tool">
+          <h3>Add to budget</h3>
+          <label>Countermeasure<select id="countermeasure" required disabled><option value="">Loading catalog…</option></select></label>
+          <div id="catalog-state" class="small"></div>
+          <div class="fields"><label>Installation cost ($)<input id="install" type="number" min="0.01" step="0.01" required></label><label>Annual maintenance ($)<input id="maintenance" type="number" min="0" step="any" value="0" required></label><label>Eligible crash share (%)<input id="eligible" type="number" min="0.01" max="100" step="any" required></label><label>Fatalities per fatal crash<input id="fatalities" type="number" min="1" max="100" step="any" value="1" required></label></div>
+          <p class="small">Eligible share: the percent of this road's fatal crashes that meet the study conditions (for example, excluding intersection and winter crashes). Costs in constant 2025 dollars.</p>
+          <label class="checkbox"><input id="applicability" type="checkbox" required> I reviewed the source study and judge its facility, crash-type and severity conditions to apply to this road.</label>
+          <label class="checkbox"><input id="transfer" type="checkbox" required> I assume the study's fatal-and-injury effect transfers to fatal crashes. This is not locally validated.</label>
+          <button type="submit" id="add-candidate" disabled>Add to budget</button>
+          <p id="candidate-status" class="small" aria-live="polite"></p>
+        </form>
       </div>
-      <p id="treatment-note" class="muted">Select a catalog entry to read its applicability and evidence.</p>
-      <label class="checkbox"><input type="checkbox" id="applicability" required> I have checked the treatment’s facility, crash-type and severity applicability for this segment.</label>
-      <label class="checkbox"><input type="checkbox" id="fatal-transfer" required> For this scenario, I assume the study’s fatal-and-injury CMF applies to the fatal-crash subset. This transfer has not been locally validated.</label>
-      <p class="table-note">Enter the share of baseline crashes that meets the study conditions, excluding ineligible intersections, interchanges, winter crashes or other exclusions in the source. Enter all costs in constant 2025 dollars.</p>
-      <div class="calculate-row"><button class="primary" id="calculate" disabled>Calculate scenario</button><span id="scenario-selection" class="muted">Select a road segment first.</span></div>
+    </aside>
+  </div>
+  <section class="budget" aria-labelledby="budget-title">
+    <div class="section-heading"><div><h2 id="budget-title" tabindex="-1">Treatment budget</h2><p>Shortlist treated roads from the inspector, then find the set with the greatest societal net value within an installation budget.</p></div><span id="candidate-count" class="count">0 roads</span></div>
+    <p class="inline-note"><strong>Applicability is your judgment.</strong> The only catalog countermeasure (CMF 4737, widen edgelines from 4 to 6 inches) was studied on rural two-lane roads, and facility type is unknown for every segment here. The tool cannot check whether a road qualifies.</p>
+    <ul id="candidate-list" class="candidates"><li class="muted">No roads yet. Select a road and use Add to budget.</li></ul>
+    <form id="portfolio-form">
+      <div class="fields budget-fields"><label>Installation budget ($)<input id="budget" type="number" min="0" step="0.01" required></label><label>Service life (years)<input id="life" type="number" min="1" max="100" step="1" value="10" required></label><label>Discount rate (%)<input id="discount" type="number" min="0" max="25" step="any" value="3" required></label></div>
+      <button class="primary" type="submit" id="run-portfolio" disabled>Compare within budget</button>
     </form>
-    <div id="cost-result" aria-live="polite"></div>
-    <p class="table-note">CMFs describe study-level effects, not guaranteed local outcomes. Fatal crashes and fatalities are different units. This workspace does not automatically recommend treatments or claim cost savings.</p>
+    <div id="portfolio-result" aria-live="polite"></div>
   </section>
-  <section id="model-evidence" class="evidence analysis-section" aria-labelledby="model-evidence-title">
-    <div class="section-heading"><div><h2 id="model-evidence-title">Model comparison</h2><p>Measured results for exposure baselines, boosted trees, a learned expert mixture and historical screening.</p></div><label>Evaluation<select id="benchmark-protocol"><option value="temporal">Later year · known roads</option><option value="spatial">Unseen geographic areas</option></select></label></div>
-    <p id="benchmark-summary" class="muted" aria-live="polite">Loading the development benchmark…</p>
-    <div id="benchmark-results"></div>
-    <p class="table-note">Lower Poisson deviance is better. A low absolute error alone can reward predicting almost zero on every road. These development comparisons do not establish performance on a new agency dataset.</p>
-    <details><summary>Model inputs, uncertainty and selection rules</summary><div id="benchmark-methods"></div></details>
-  </section>
-  <section id="behavior" class="evidence analysis-section" aria-labelledby="behavior-title">
-    <div class="section-heading"><div><h2 id="behavior-title">Recorded behavior factors</h2><p>Speeding, reported alcohol involvement and distraction among fatal crashes in FARS.</p></div></div>
-    <div class="analysis-controls"><label>Geography<select id="behavior-scope"><option value="31">Nebraska statewide</option><option value="national">United States</option></select></label><label>Crash year<select id="behavior-year"><option value="all">All available years</option></select></label></div>
-    <p id="behavior-summary" class="muted" aria-live="polite">Loading the official crash-factor analysis…</p><div id="behavior-results"></div>
-    <p class="table-note">These are recorded findings after a fatal crash, not predictions of driver intent, individual behavior or the risk of all road users. Unknown and unreported findings remain visible; they are never counted as confirmed negatives.</p>
-    <details><summary>Factor definitions, missingness and source evidence</summary><div id="behavior-methods"></div></details>
-  </section>
-  <section id="evidence" class="evidence" aria-labelledby="evidence-title"><div class="section-heading"><div><h2 id="evidence-title">Sources &amp; operational readiness</h2><p>Data lineage, validation gaps and pipeline status.</p></div></div><div id="readiness" aria-live="polite">Loading source status…</div></section>
-  <footer>Research screening workspace. No agency partnership or validated intervention outcome is implied. <a href="/">Return to the crash explorer</a></footer>
+  <footer><p><a href="/docs">API docs</a> · Research screening; no agency partnership or validated treatment outcome is implied.</p><p>Sources: <a href="https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars" rel="noopener noreferrer">NHTSA FARS</a> fatal crashes 2021–2024 (public domain) · <a href="https://giscat.ne.gov/dot/rest/services/AnnualAverageDailyTrafficSegmentsDOT/MapServer/0" rel="noopener noreferrer">Nebraska DOT AADT segments</a> (2025 traffic counts).</p></footer>
 </main>
 </body>
 </html>

@@ -20,6 +20,9 @@ web/public/*
 !web/public/*.json
 !web/public/*.svg
 !web/public/*LICENSE*.txt
+!web/public/*.ipynb
+!web/public/notebook/
+!web/public/notebook/*.png
 !web/static/
 web/static/*
 !web/static/safety*
@@ -29,6 +32,7 @@ data/*
 !data/public/
 data/public/*
 !data/public/snapshot.json
+!data/public/crashes.jsonl.gz
 !data/safety/
 data/safety/*
 !data/safety/snapshot.json

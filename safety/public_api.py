@@ -5,8 +5,10 @@ no pickle, user-selected file paths, database credentials or external fetches.
 """
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
+import logging
 import os
 import threading
 import time
@@ -14,14 +16,19 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
+from safety import crash_points
 from safety.api import strict_json, validation_error_response
 from safety.public_data import predict_count, validate_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
+# Screening routes copied to the portal root that the public schema advertises. The
+# rest (planning, projection, routing, linkage, export, ...) keep working for the
+# screening page but stay out of /docs.
+ADVERTISED_SCREENING = {'/api/safety/status','/api/safety/segments','/api/safety/countermeasures','/api/safety/benefit-cost'}
 
 
 class BoundedRequests:
@@ -102,6 +109,11 @@ def create_app(root=None, screening_root=None, static_root=None, enable_screenin
     except (OSError,ValueError,KeyError,TypeError,OverflowError) as exc:
         load_error = type(exc).__name__
     app.state.public_artifact_sha256 = artifact_hash
+    try:
+        crash_index = crash_points.load(path.parent/'crashes.jsonl.gz')
+    except (OSError,EOFError,ValueError,TypeError,KeyError) as exc:
+        crash_index = None  # detail stays in server logs, not the public 503 body
+        logging.getLogger(__name__).warning('Crash point artifact failed to load: %s',type(exc).__name__)
     screening_store = None
 
     @app.middleware('http')
@@ -146,14 +158,21 @@ def create_app(root=None, screening_root=None, static_root=None, enable_screenin
         return {**required()['meta'],'artifact_sha256':artifact_hash,
                 'engines':[
                     {'id':'fars-state-poisson-v1','status':'serving','scope':'51 jurisdictions, annual fatal-crash count projection','endpoint':'/api/public/forecast'},
+                    {'id':'fars-crash-points','status':'serving' if crash_index else 'unavailable','scope':'Individual located FARS fatal crashes within a radius of a place','endpoint':'/api/public/crashes'},
                     *([{'id':'nebraska-nb-eb','status':'serving','scope':'Experimental Nebraska segment screening with 2025 AADT proxies','endpoint':'/api/safety/segments'},
                        {'id':'countermeasure-economics','status':'serving','scope':'Guarded sourced CMF cost-benefit scenarios','endpoint':'/api/safety/benefit-cost'}] if enable_screening else []),
-                    *([{'id':'agency-planning','status':'serving','scope':'Budget portfolios, workflow economics, descriptive outcomes and traceable evidence','endpoint':'/api/safety/planning/portfolio'},
-                       {'id':'conditional-road-projection','status':'serving','scope':'Future-year traffic-exposure scenarios; not validated forecasts','endpoint':'/api/safety/projection'},
-                       {'id':'route-comparison','status':'serving','scope':'Baseline route generation when configured; bounded personalized candidate comparison','endpoint':'/api/safety/routing/status'},
-                       {'id':'road-linkage-audit','status':'serving','scope':'Conservative coordinate matching and user-supplied independent label reviews','endpoint':'/api/safety/linkage/summary'}] if enable_screening else []),
                     {'id':'roadworld-foundation','status':'architecture_only_not_trained','scope':'Research design; no inference endpoint'}],
                 'screening_source_policy':'https://dot.nebraska.gov/policies-and-disclaimers/' if enable_screening else None}
+
+    @app.get('/api/public/crashes')
+    def crashes(lat: float = Query(ge=-90,le=90,allow_inf_nan=False), lng: float = Query(ge=-180,le=180,allow_inf_nan=False), r: float = Query(default=3,allow_inf_nan=False)):
+        if crash_index is None:
+            raise HTTPException(503,'Crash point artifact is unavailable')
+        return crash_points.query(crash_index,lat,lng,min(max(r,0.1),25.0))
+
+    @app.get('/api/public/config',include_in_schema=False)
+    def config():
+        return {'googleMapsKey':os.getenv('GOOGLE_MAPS_API_KEY','')}
 
     @app.get('/api/public/states')
     def states():
@@ -214,7 +233,7 @@ def create_app(root=None, screening_root=None, static_root=None, enable_screenin
     def forecast(state: int=Query(ge=1,le=56)):
         return forecast_result(state)
 
-    @app.post('/api/public/forecast')
+    @app.post('/api/public/forecast',include_in_schema=False)
     def forecast_post(request:ForecastRequest):
         return forecast_result(request.state,request.year)
 
@@ -226,7 +245,7 @@ def create_app(root=None, screening_root=None, static_root=None, enable_screenin
         if cohort is None: raise HTTPException(503,'Requested evidence cohort is unavailable')
         return {'cohort':cohort,'definitions':evidence['definitions'],'limitations':evidence['limitations']}
 
-    @app.get('/api/public/export')
+    @app.get('/api/public/export',include_in_schema=False)
     def export(state: int|None=Query(default=None,ge=1,le=56),year: int|None=Query(default=None,ge=2000,le=2100)):
         rows = select(state,year)
         result = {'meta':required()['meta'],'summary_rows':rows,'filters':{'state_fips':state,'year':year},
@@ -241,7 +260,11 @@ def create_app(root=None, screening_root=None, static_root=None, enable_screenin
         screening = create_screening(root=active_screening_root)
         # The established workbench uses absolute API URLs. Expose only its safety
         # endpoints at the portal root; its static allowlist stays under /screening/.
-        app.router.routes.extend(route for route in screening.router.routes if getattr(route,'path','').startswith('/api/safety/'))
+        for route in screening.router.routes:
+            if not getattr(route,'path','').startswith('/api/safety/'): continue
+            exposed = copy.copy(route)  # shallow copy: leave the mounted app's own schema untouched
+            exposed.include_in_schema = route.path in ADVERTISED_SCREENING
+            app.router.routes.append(exposed)
         app.mount('/screening',screening,name='screening')
 
     static = Path(static_root) if static_root else ROOT/'web/public'
@@ -258,10 +281,14 @@ def create_app(root=None, screening_root=None, static_root=None, enable_screenin
         return FileResponse(static/'index.html')
 
     @app.get('/planning/',include_in_schema=False)
-    def planning():
-        if not (static/'planning.html').is_file():
-            raise HTTPException(503,'Agency planning workspace is not installed')
-        return FileResponse(static/'planning.html')
+    def planning():  # retired page: budget and scenario tools now live in road screening
+        return RedirectResponse('/screening/',status_code=308)
+
+    @app.get('/notebook/',include_in_schema=False)
+    def notebook():
+        if not (static/'notebook.html').is_file():
+            raise HTTPException(503,'Analysis notebook page is not installed')
+        return FileResponse(static/'notebook.html')
     if static.is_dir():
         app.mount('/assets',StaticFiles(directory=static),name='public-assets')
     return app
