@@ -1,6 +1,10 @@
 # Memory
 
-## Consolidation + place search — 2026-11-05 (DEPLOYED: revision geocrash-00004-xag, image public:place-search-20261105)
+## Google Places live — 2026-11-05 (revision geocrash-00008-gas, image public:places-nocache-20261105)
+- API key "GeoCrash public site (Places search)" (uid b10990ef-abbd-4957-8214-94fd689e8f81) set as GOOGLE_MAPS_API_KEY on Cloud Run; referrer-restricted to the run.app URLs, API-restricted to maps-backend, places, geocoding-backend. Never commit the key string.
+- /api/public/config is no-store (was cached 5 min, which hid key changes). Thumbnails always Esri (Google Static Maps is billed per image).
+
+## Consolidation + place search — 2026-11-05 (first deployed as geocrash-00004-xag)
 - Nav is 4 links everywhere: Map · Data · Road screening · Analysis; API docs in footers. /planning/ 308 → /screening/ (planning page deleted; its Treatment budget + Future scenario now live in the screening inspector/budget section).
 - Place search on homepage (place.js): Google Places if GOOGLE_MAPS_API_KEY env is set on Cloud Run (not set yet → Nominatim fallback), per-crash FARS pins from GET /api/public/crashes (safety/crash_points.py, data/public/crashes.jsonl.gz built by scripts/build_crash_points.py from NHTSA FARS zips; contract docs/CRASH_POINTS.md).
 - Data page slimmed (filters, totals + 2025 projection, ranking, trend, factors, one About details keeping #methods/#models). Screening cut model comparison/behavior/raw JSON; server-side sort.

@@ -41,7 +41,7 @@
 
   // ---------------------------------------------------------------- satellite thumbnails
   function satelliteUrl(lat, lng, width, height, metersTall) {
-    if (key) return `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=${metersTall > 250 ? 18 : 19}&size=${width}x${height}&scale=2&maptype=satellite&key=${encodeURIComponent(key)}`;
+    // ponytail: thumbnails stay on free Esri imagery; Google (billed per image) is used for search only.
     const dLat = metersTall / 2 / 110574, dLng = dLat * (width / height) / Math.cos(lat * Math.PI / 180);
     return `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=${lng - dLng},${lat - dLat},${lng + dLng},${lat + dLat}&bboxSR=4326&imageSR=3857&size=${width * 2},${height * 2}&format=jpg&f=image`;
   }
@@ -80,7 +80,7 @@
   async function checkPlace(lat, lng, name, radius = current?.r || DEFAULT_RADIUS) {
     const mine = ++ticket;
     current = {lat, lng, name, r: radius}; result = null; selected = null;
-    M.enterPlace({layers, tooltip, onExit: resetPlace, credit: key ? 'Thumbnails © Google' : '',
+    M.enterPlace({layers, tooltip, onExit: resetPlace, credit: '',
       onMapClick: (la, ln) => { clearChips(); checkPlace(la, ln, `Dropped pin · ${la.toFixed(4)}, ${ln.toFixed(4)}`); }});
     M.fly({longitude: lng, latitude: lat, zoom: zoomFor(radius, lat), pitch: 40, bearing: 0, maxZoom: 18});
     showView(`<p class="place-loading" role="status">Finding fatal crashes near ${esc(name)}…</p>`);

@@ -142,3 +142,11 @@ def test_by_year_lists_every_covered_year_including_zero_years(tmp_path):
 
     # Assert: per-year rates divide by four years, not one
     assert by_year == {'2021': 0, '2022': 3, '2023': 0, '2024': 0}
+
+
+def test_config_is_never_cached_so_key_changes_apply_immediately(client):
+    # Act
+    response = client.get('/api/public/config')
+
+    # Assert
+    assert response.headers['cache-control'] == 'no-store'

@@ -123,7 +123,7 @@ def create_app(root=None, screening_root=None, static_root=None, enable_screenin
         response.headers['Referrer-Policy']='strict-origin-when-cross-origin'
         response.headers['X-Frame-Options']='DENY'
         response.headers['Permissions-Policy']='camera=(), microphone=(), geolocation=()'
-        response.headers['Cache-Control']='public, max-age=300' if request.method=='GET' and response.status_code==200 and request.url.path.startswith('/api/public/') else 'no-store'
+        response.headers['Cache-Control']='public, max-age=300' if request.method=='GET' and response.status_code==200 and request.url.path.startswith('/api/public/') and request.url.path!='/api/public/config' else 'no-store'
         if artifact_hash and request.url.path.startswith('/api/public/'):
             response.headers['X-Data-Release']=artifact_hash
         return response
