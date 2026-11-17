@@ -11,6 +11,9 @@
 <script defer src="/assets/deckgl.js"></script>
 <script defer src="/assets/home.js"></script>
 <script defer src="/assets/place.js"></script>
+<script defer src="/assets/roads.js"></script>
+<script defer src="/assets/vehicles.js"></script>
+<script defer src="/assets/fx.js"></script>
 </head>
 <body>
 <a class="skip" href="/explore/">Skip the 3D map and explore accessible data tables</a>
@@ -32,6 +35,7 @@
     <h1 id="headline">See the <br>road ahead.</h1>
     <p class="intro">Real crash history. Visible patterns. <br>Evidence for the next safety decision.</p>
     <div class="hero-actions"><a class="primary" href="/screening/">Open road screening <span aria-hidden="true">↗</span></a><a class="secondary" href="/explore/">Explore the evidence</a><a class="secondary" href="/notebook/">Read the analysis</a></div>
+    <button class="lab" id="crash-lab" type="button"><span aria-hidden="true">▶</span> Run the 3D crash simulator</button>
     <form class="place-search" id="place-search" role="search" autocomplete="off" novalidate>
       <label for="place-q">Check any place <span>· every fatal crash nearby, 2021–2024</span></label>
       <div class="search-row"><input id="place-q" type="text" placeholder="Type any US address or place" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="place-suggestions"><button type="submit">Check</button></div>
@@ -46,6 +50,9 @@
     <h2 id="scope-name">United States</h2>
     <div class="count" id="crashes">—</div><p class="count-caption">recorded fatal crashes</p>
     <div class="stats"><div><strong id="fatalities">—</strong><span>people killed</span></div><div><strong id="cells">—</strong><span>visible map cells</span></div></div>
+    <p class="pace" id="pace"></p>
+    <div class="trend" id="trend" role="img" aria-label="Fatal crashes by year"></div>
+    <ol class="leaders" id="leaders" aria-label="States with the most recorded fatal crashes"></ol>
     <p class="panel-note" id="summary-note">NHTSA FARS · historical observations.<br>Counts are not traffic-adjusted risk.</p>
     <p class="cell-detail" id="cell-detail" hidden></p>
     <a class="panel-link" id="details" href="/explore/">Open data and model evidence <span aria-hidden="true">→</span></a>
@@ -53,7 +60,8 @@
   </div>
   <div id="place-view" hidden></div>
   </aside>
-  <div class="map-controls" aria-label="Map controls"><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="tilt" type="button" aria-pressed="true">3D</button><button id="satellite" type="button" aria-pressed="false">Satellite</button><button id="reset" type="button">Reset view</button></div>
+  <div class="map-controls" aria-label="Map controls"><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="tilt" type="button" aria-pressed="true">3D</button><button id="satellite" type="button" aria-pressed="false">Satellite</button><button id="timelapse" type="button" aria-pressed="false">▶ Years</button><button id="reset" type="button">Reset view</button></div>
+  <div class="fx-year" id="fx-year" aria-live="polite" hidden></div><div class="fx-flash" id="fx-flash" aria-hidden="true"></div>
   <div class="map-help">Drag to move · Shift + drag to tilt · Scroll to zoom</div>
   <section class="error-card" id="error" hidden aria-live="polite"><h2 id="error-title">The map could not load</h2><p id="error-message"></p><div><button id="retry" type="button">Try again</button><a href="/explore/">Open the data explorer →</a></div></section>
 </main>

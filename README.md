@@ -4,7 +4,7 @@ An auditable road-safety screening workspace, with an independent research explo
 
 ## Public real-data website
 
-**Live: https://geocrash-666321636483.us-central1.run.app** (Cloud Run revision `geocrash-00008-gas`, deployed 2026-11-05)
+**Live: https://geocrash-666321636483.us-central1.run.app** (Cloud Run revision `geocrash-00010-kug`, deployed 2026-11-17)
 
 | Page | What it does |
 |---|---|
@@ -14,7 +14,7 @@ An auditable road-safety screening workspace, with an independent research explo
 | [Analysis](https://geocrash-666321636483.us-central1.run.app/notebook/) | The complete course notebook (EDA, classification, regression, time series, clustering) with a .ipynb download. |
 | [API docs](https://geocrash-666321636483.us-central1.run.app/docs) | OpenAPI for the public endpoints, including `GET /api/public/crashes?lat=&lng=&r=` ([contract](docs/CRASH_POINTS.md)). |
 
-Per-crash points come from NHTSA FARS (`scripts/build_crash_points.py` → `data/public/crashes.jsonl.gz`); the Analysis page is rebuilt with `uv run --no-project --with markdown python scripts/build_notebook_page.py`. Place search uses Google Places via the `GOOGLE_MAPS_API_KEY` env var on the Cloud Run service (key restricted to the site's referrers and to the Maps JavaScript, Places and Geocoding APIs), falling back to OpenStreetMap Nominatim when unset. Crash thumbnails use free Esri imagery. See the [public deployment guide](docs/PUBLIC_DEPLOYMENT.md) for release evidence and operating limits. The 2025 projection is frozen historical inference, not a current forecast.
+Per-crash points come from NHTSA FARS (`scripts/build_crash_points.py` → `data/public/crashes.jsonl.gz`); the Analysis page is rebuilt with `uv run --no-project --with markdown python scripts/build_notebook_page.py`. Place search uses Google Places via the `GOOGLE_MAPS_API_KEY` env var on the Cloud Run service (key restricted to the site's referrers and to the Maps JavaScript, Places and Geocoding APIs), falling back to OpenStreetMap Nominatim when unset. Crash thumbnails use free Esri imagery. The homepage 3D crash simulator (`fx.js`, `roads.js`, `vehicles.js`) is an illustrative physics sketch driven by each FARS record's collision type, vehicle bodies and recorded speeds; its street shapes come from OpenStreetMap via OpenFreeMap vector tiles, because the Google APIs enabled on the key do not expose road geometry. See the [public deployment guide](docs/PUBLIC_DEPLOYMENT.md) for release evidence and operating limits. The 2025 projection is frozen historical inference, not a current forecast.
 
 ## Demonstrate and evaluate
 
