@@ -140,6 +140,7 @@
       <p class="panel-kicker">FATAL CRASH${c.state ? ' · ' + esc(c.state.toUpperCase()) : ''}</p><h2>${esc(when(c))}</h2>
       <p class="detail-lead">${esc(killed(c))} · ${esc(roadOf(c))}${place ? ' · ' + esc(place) : ''}</p>
       <button type="button" class="place-button" data-action="fly">Fly here</button>
+      ${window.GeoCrashFx ? '<button type="button" class="place-button replay" data-action="replay">▶ Simulate in 3D</button>' : ''}
       <dl class="crash-facts">${facts.map(([label, value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>
       ${vehicles(c)}
       <p class="panel-note">FARS case ${esc(c.id)}. Location as recorded by police; imagery is current, not from the crash date.</p>`);
@@ -159,6 +160,7 @@
     const action = button.dataset.action;
     if (action === 'exit') M.exitPlace();
     else if (action === 'retry') checkPlace(current.lat, current.lng, current.name);
+    else if (action === 'replay') window.GeoCrashFx.replay(selected);
     else if (action === 'fly') M.fly({longitude: selected.lng, latitude: selected.lat, zoom: 17.5, pitch: 55, maxZoom: 18});
     else if (action === 'back') { const id = selected?.id; selected = null; M.redraw(); renderList();
       $('place-view').querySelector(`[data-id="${CSS.escape(id)}"]`)?.focus(); }

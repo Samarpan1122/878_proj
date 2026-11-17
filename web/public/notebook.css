@@ -38,3 +38,9 @@
 .nb-toc{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--rule);padding:0 0 14px}
 .nb-footer{flex-direction:column;align-items:flex-start;padding:20px}
 }
+
+/* Sections ease in as they scroll into view. Native scroll-driven animation: no script, ignored where unsupported. */
+@supports (animation-timeline:view()){@media(prefers-reduced-motion:no-preference){
+@keyframes scroll-reveal{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.nb-figure,.nb-article>h2{animation:scroll-reveal linear both;animation-timeline:view();animation-range:entry 0% entry 32%}
+}}
